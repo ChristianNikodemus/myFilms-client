@@ -25370,7 +25370,7 @@ function LoginView(props) {
     _s();
     const [username, setUsername] = _react.useState('');
     const [password, setPassword] = _react.useState('');
-    const handleSubmit = ()=>{
+    const handleSubmit = (e)=>{
         e.preventDefault();
         console.log(username, password);
         /* Send a request to the server for authentication */ /* then call props.onLoggedIn(username) */ props.onLoggedIn(username);
