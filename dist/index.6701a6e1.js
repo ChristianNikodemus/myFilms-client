@@ -23217,13 +23217,38 @@ class MovieView extends _reactDefault.default.Component {
                         )
                     ]
                 }),
+                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                    className: "movie-featured",
+                    __source: {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 47
+                    },
+                    __self: this,
+                    children: movie.Featured ? /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                        className: "label",
+                        __source: {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 49
+                        },
+                        __self: this,
+                        children: "This movie is Featured!"
+                    }) : /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                        className: "label",
+                        __source: {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 50
+                        },
+                        __self: this,
+                        children: "This movie is not Featured."
+                    })
+                }),
                 /*#__PURE__*/ _jsxRuntime.jsx("button", {
                     onClick: ()=>{
                         onBackClick(null);
                     },
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 47
+                        lineNumber: 53
                     },
                     __self: this,
                     children: "Back"

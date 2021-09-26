@@ -44,6 +44,12 @@ export class MovieView extends React.Component {
             //.join(", ")
             }
         </div>
+        <div className="movie-featured">
+          {movie.Featured
+          ? <span className="label">This movie is Featured!</span>
+          : <span className="label">This movie is not Featured.</span>
+          }
+        </div>
         <button onClick={() => { onBackClick(null); }}>Back</button>
 
       </div>
