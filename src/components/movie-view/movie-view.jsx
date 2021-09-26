@@ -34,6 +34,16 @@ export class MovieView extends React.Component {
             //.join(", ")
             }
         </div>
+        <div className="movie-director">
+          <span className="label">Director(s): </span>
+          {movie.Director.map((Director) => (
+              <span key={Director._id} className="value">
+                {Director.Name}
+              </span>
+            ))
+            //.join(", ")
+            }
+        </div>
         <button onClick={() => { onBackClick(null); }}>Back</button>
 
       </div>
