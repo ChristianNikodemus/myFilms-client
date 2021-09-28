@@ -23876,7 +23876,7 @@ class MovieView extends _reactDefault.default.Component {
                     className: "movie-director",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 37
+                        lineNumber: 36
                     },
                     __self: this,
                     children: [
@@ -23884,7 +23884,7 @@ class MovieView extends _reactDefault.default.Component {
                             className: "label",
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 38
+                                lineNumber: 37
                             },
                             __self: this,
                             children: "Director(s): "
@@ -23893,7 +23893,7 @@ class MovieView extends _reactDefault.default.Component {
                                 className: "value",
                                 __source: {
                                     fileName: "src/components/movie-view/movie-view.jsx",
-                                    lineNumber: 40
+                                    lineNumber: 39
                                 },
                                 __self: this,
                                 children: Director.Name
@@ -23905,14 +23905,14 @@ class MovieView extends _reactDefault.default.Component {
                     className: "movie-featured",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 47
+                        lineNumber: 45
                     },
                     __self: this,
                     children: movie.Featured ? /*#__PURE__*/ _jsxRuntime.jsx("span", {
                         className: "label",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 49
+                            lineNumber: 47
                         },
                         __self: this,
                         children: "This movie is Featured!"
@@ -23920,7 +23920,7 @@ class MovieView extends _reactDefault.default.Component {
                         className: "label",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 50
+                            lineNumber: 48
                         },
                         __self: this,
                         children: "This movie is not Featured."
@@ -23932,7 +23932,7 @@ class MovieView extends _reactDefault.default.Component {
                     },
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 53
+                        lineNumber: 51
                     },
                     __self: this,
                     children: "Back"

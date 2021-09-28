@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './movie-view.scss';
+import "./movie-view.scss";
 
 export class MovieView extends React.Component {
-
   render() {
     const { movie, onBackClick } = this.props;
 
@@ -27,32 +27,47 @@ export class MovieView extends React.Component {
         <div className="movie-genre">
           <span className="label">Genre: </span>
           {movie.Genre.map((Genre) => (
-              <span key={Genre._id} className="value">
-                {Genre.Title}
-              </span>
-            ))
-            //.join(", ")
-            }
+            <span key={Genre._id} className="value">
+              {Genre.Title}
+            </span>
+          ))}
         </div>
         <div className="movie-director">
           <span className="label">Director(s): </span>
           {movie.Director.map((Director) => (
-              <span key={Director._id} className="value">
-                {Director.Name}
-              </span>
-            ))
-            //.join(", ")
-            }
+            <span key={Director._id} className="value">
+              {Director.Name}
+            </span>
+          ))}
         </div>
         <div className="movie-featured">
-          {movie.Featured
-          ? <span className="label">This movie is Featured!</span>
-          : <span className="label">This movie is not Featured.</span>
-          }
+          {movie.Featured ? (
+            <span className="label">This movie is Featured!</span>
+          ) : (
+            <span className="label">This movie is not Featured.</span>
+          )}
         </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
-
+        <button
+          onClick={() => {
+            onBackClick(null);
+          }}
+        >
+          Back
+        </button>
       </div>
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    ImagePath: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Year: PropTypes.string.isRequired,
+    Genre: PropTypes.array.isRequired,
+    Director: PropTypes.array.isRequired,
+    Featured: PropTypes.bool.isRequired,
+  }).isRequired,
+  onMovieClick: PropTypes.func.isRequired,
+};

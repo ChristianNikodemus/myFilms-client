@@ -1,7 +1,10 @@
 .my-films {
   color: steelblue;
 }
-
+.movie-genre span.value:not(:last-child):after,
+.movie-director span.value:not(:last-child):after {
+  content: ", ";
+}
 
 
 /*# sourceMappingURL=index.caa67093.css.map */
