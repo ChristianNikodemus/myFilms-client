@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 
 import "./registration-view.scss";
 
@@ -26,6 +25,7 @@ export function RegistrationView(props) {
           onChange={(e) => setName(e.target.value)}
         />
       </label>
+      <br />
       <label className="username">
         Username:
         <input
@@ -34,6 +34,7 @@ export function RegistrationView(props) {
           onChange={(e) => setUsername(e.target.value)}
         />
       </label>
+      <br />
       <label className="email">
         E-mail:
         <input
@@ -42,6 +43,7 @@ export function RegistrationView(props) {
           onChange={(e) => setEmail(e.target.value)}
         />
       </label>
+      <br />
       <label className="password">
         Password:
         <input
@@ -50,6 +52,7 @@ export function RegistrationView(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>
+      <br />
       <label className="birthdate">
         Birth date:
         <input
@@ -58,19 +61,10 @@ export function RegistrationView(props) {
           onChange={(e) => setBirthdate(e.target.value)}
         />
       </label>
+      <br />
       <button className="registerBtn" type="submit" onClick={handleSubmit}>
         Register
       </button>
     </form>
   );
 }
-
-RegistrationView.propTypes = {
-  register: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthdate: PropTypes.string.isRequired,
-  }),
-  onRegistration: PropTypes.func.isRequired,
-};

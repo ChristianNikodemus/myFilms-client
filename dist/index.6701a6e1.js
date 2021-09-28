@@ -25607,8 +25607,6 @@ parcelHelpers.export(exports, "RegistrationView", ()=>RegistrationView
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _registrationViewScss = require("./registration-view.scss");
 var _s = $RefreshSig$();
 function RegistrationView(props) {
@@ -25626,7 +25624,7 @@ function RegistrationView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs("form", {
         __source: {
             fileName: "src/components/registration-view/registration-view.jsx",
-            lineNumber: 20
+            lineNumber: 19
         },
         __self: this,
         children: [
@@ -25634,7 +25632,7 @@ function RegistrationView(props) {
                 className: "name",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 21
+                    lineNumber: 20
                 },
                 __self: this,
                 children: [
@@ -25646,11 +25644,18 @@ function RegistrationView(props) {
                         ,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 23
+                            lineNumber: 22
                         },
                         __self: this
                     })
                 ]
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                __source: {
+                    fileName: "src/components/registration-view/registration-view.jsx",
+                    lineNumber: 28
+                },
+                __self: this
             }),
             /*#__PURE__*/ _jsxRuntime.jsxs("label", {
                 className: "username",
@@ -25674,11 +25679,18 @@ function RegistrationView(props) {
                     })
                 ]
             }),
+            /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                __source: {
+                    fileName: "src/components/registration-view/registration-view.jsx",
+                    lineNumber: 37
+                },
+                __self: this
+            }),
             /*#__PURE__*/ _jsxRuntime.jsxs("label", {
                 className: "email",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 37
+                    lineNumber: 38
                 },
                 __self: this,
                 children: [
@@ -25690,17 +25702,24 @@ function RegistrationView(props) {
                         ,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 39
+                            lineNumber: 40
                         },
                         __self: this
                     })
                 ]
             }),
+            /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                __source: {
+                    fileName: "src/components/registration-view/registration-view.jsx",
+                    lineNumber: 46
+                },
+                __self: this
+            }),
             /*#__PURE__*/ _jsxRuntime.jsxs("label", {
                 className: "password",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 45
+                    lineNumber: 47
                 },
                 __self: this,
                 children: [
@@ -25712,17 +25731,24 @@ function RegistrationView(props) {
                         ,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 47
+                            lineNumber: 49
                         },
                         __self: this
                     })
                 ]
             }),
+            /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                __source: {
+                    fileName: "src/components/registration-view/registration-view.jsx",
+                    lineNumber: 55
+                },
+                __self: this
+            }),
             /*#__PURE__*/ _jsxRuntime.jsxs("label", {
                 className: "birthdate",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 53
+                    lineNumber: 56
                 },
                 __self: this,
                 children: [
@@ -25734,11 +25760,18 @@ function RegistrationView(props) {
                         ,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 55
+                            lineNumber: 58
                         },
                         __self: this
                     })
                 ]
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                __source: {
+                    fileName: "src/components/registration-view/registration-view.jsx",
+                    lineNumber: 64
+                },
+                __self: this
             }),
             /*#__PURE__*/ _jsxRuntime.jsx("button", {
                 className: "registerBtn",
@@ -25746,7 +25779,7 @@ function RegistrationView(props) {
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 61
+                    lineNumber: 65
                 },
                 __self: this,
                 children: "Register"
@@ -25756,15 +25789,6 @@ function RegistrationView(props) {
 }
 _s(RegistrationView, "KevsRHni5VWsjx+PZF/ds8L35Q4=");
 _c = RegistrationView;
-RegistrationView.propTypes = {
-    register: _propTypesDefault.default.shape({
-        username: _propTypesDefault.default.string.isRequired,
-        password: _propTypesDefault.default.string.isRequired,
-        email: _propTypesDefault.default.string.isRequired,
-        birthdate: _propTypesDefault.default.string.isRequired
-    }),
-    onRegistration: _propTypesDefault.default.func.isRequired
-};
 var _c;
 $RefreshReg$(_c, "RegistrationView");
 
@@ -25773,6 +25797,6 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","./registration-view.scss":"fr9ZP","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi"}],"fr9ZP":[function() {},{}]},["2LXlr","4cHv3","dLPEP"], "dLPEP", "parcelRequired96c")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./registration-view.scss":"fr9ZP","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi"}],"fr9ZP":[function() {},{}]},["2LXlr","4cHv3","dLPEP"], "dLPEP", "parcelRequired96c")
 
 //# sourceMappingURL=index.6701a6e1.js.map
