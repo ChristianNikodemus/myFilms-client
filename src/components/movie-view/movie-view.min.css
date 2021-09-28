@@ -1,0 +1,1 @@
+.movie-genre span.value:not(:last-child):after,.movie-director span.value:not(:last-child):after{content:", "}

@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './movie-view.scss';
+import "./movie-view.scss";
 
 export class MovieView extends React.Component {
-
   render() {
     const { movie, onBackClick } = this.props;
 
     return (
       <div className="movie-view">
         <div className="movie-poster">
-          <img src={movie.ImagePath} />
+          <img src="https://my-films-db.herokuapp.com/{movie.ImagePath}" />
         </div>
         <div className="movie-title">
           <span className="label">Title: </span>
@@ -20,9 +20,54 @@ export class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.Description}</span>
         </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
-
+        <div className="movie-year">
+          <span className="label">Year: </span>
+          <span className="value">{movie.Year}</span>
+        </div>
+        <div className="movie-genre">
+          <span className="label">Genre: </span>
+          {movie.Genre.map((Genre) => (
+            <span key={Genre._id} className="value">
+              {Genre.Title}
+            </span>
+          ))}
+        </div>
+        <div className="movie-director">
+          <span className="label">Director(s): </span>
+          {movie.Director.map((Director) => (
+            <span key={Director._id} className="value">
+              {Director.Name}
+            </span>
+          ))}
+        </div>
+        <div className="movie-featured">
+          {movie.Featured ? (
+            <span className="label">This movie is Featured!</span>
+          ) : (
+            <span className="label">This movie is not Featured.</span>
+          )}
+        </div>
+        <button
+          onClick={() => {
+            onBackClick(null);
+          }}
+        >
+          Back
+        </button>
       </div>
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    ImagePath: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Year: PropTypes.string.isRequired,
+    Genre: PropTypes.array.isRequired,
+    Director: PropTypes.array.isRequired,
+    Featured: PropTypes.bool.isRequired,
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired,
+};
