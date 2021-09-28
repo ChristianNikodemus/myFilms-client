@@ -7,10 +7,12 @@ export class MovieView extends React.Component {
   render() {
     const { movie, onBackClick } = this.props;
 
+    const imgLink = "https://my-films-db.herokuapp.com/";
+
     return (
       <div className="movie-view">
         <div className="movie-poster">
-          <img src="https://my-films-db.herokuapp.com/{movie.ImagePath}" />
+          <img src={imgLink + movie.ImagePath} />
         </div>
         <div className="movie-title">
           <span className="label">Title: </span>
