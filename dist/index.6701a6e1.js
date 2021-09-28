@@ -23753,7 +23753,7 @@ class MovieView extends _reactDefault.default.Component {
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
-                        src: movie.ImagePath,
+                        src: "https://my-films-db.herokuapp.com/{movie.ImagePath}",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 13
@@ -23953,7 +23953,7 @@ MovieView.propTypes = {
         Director: _propTypesDefault.default.array.isRequired,
         Featured: _propTypesDefault.default.bool.isRequired
     }).isRequired,
-    onMovieClick: _propTypesDefault.default.func.isRequired
+    onBackClick: _propTypesDefault.default.func.isRequired
 };
 
   $parcel$ReactRefreshHelpers$3741.postlude(module);

@@ -10,7 +10,7 @@ export class MovieView extends React.Component {
     return (
       <div className="movie-view">
         <div className="movie-poster">
-          <img src={movie.ImagePath} />
+          <img src="https://my-films-db.herokuapp.com/{movie.ImagePath}" />
         </div>
         <div className="movie-title">
           <span className="label">Title: </span>
@@ -69,5 +69,5 @@ MovieView.propTypes = {
     Director: PropTypes.array.isRequired,
     Featured: PropTypes.bool.isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
+  onBackClick: PropTypes.func.isRequired,
 };
