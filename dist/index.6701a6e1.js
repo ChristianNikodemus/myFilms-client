@@ -947,17 +947,26 @@ var _reactDom = require("react-dom");
 var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
 var _mainView = require("./components/main-view/main-view");
 var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
+var _container = require("react-bootstrap/Container");
+var _containerDefault = parcelHelpers.interopDefault(_container);
 // Import statement to indicate that you need to bundle `./index.scss`
 var _indexScss = require("./index.scss");
 // Main component (will eventually use all the others)
 class MyFilmsApplication extends _reactDefault.default.Component {
     render() {
-        return(/*#__PURE__*/ _jsxRuntime.jsx(_mainViewDefault.default, {
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_containerDefault.default, {
             __source: {
                 fileName: "src/index.jsx",
-                lineNumber: 11
+                lineNumber: 13
             },
-            __self: this
+            __self: this,
+            children: /*#__PURE__*/ _jsxRuntime.jsx(_mainViewDefault.default, {
+                __source: {
+                    fileName: "src/index.jsx",
+                    lineNumber: 14
+                },
+                __self: this
+            })
         }));
     }
 }
@@ -971,7 +980,7 @@ _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElemen
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom":"gkWJK","./index.scss":"jUTZ8","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","./components/main-view/main-view":"2zHas"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom":"gkWJK","./index.scss":"jUTZ8","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","./components/main-view/main-view":"2zHas","react-bootstrap/Container":"2PRIq"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -26302,6 +26311,41 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./registration-view.scss":"fr9ZP","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi"}],"fr9ZP":[function() {},{}]},["2LXlr","4cHv3","dLPEP"], "dLPEP", "parcelRequired96c")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./registration-view.scss":"fr9ZP","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi"}],"fr9ZP":[function() {},{}],"2PRIq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _themeProvider = require("./ThemeProvider");
+var _excluded = [
+    "bsPrefix",
+    "fluid",
+    "as",
+    "className"
+];
+var defaultProps = {
+    fluid: false
+};
+var Container = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
+    var bsPrefix = _ref.bsPrefix, fluid = _ref.fluid, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, className = _ref.className, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
+    var prefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'container');
+    var suffix = typeof fluid === 'string' ? "-" + fluid : '-fluid';
+    return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
+        ref: ref
+    }, props, {
+        className: _classnamesDefault.default(className, fluid ? "" + prefix + suffix : prefix)
+    })));
+});
+Container.displayName = 'Container';
+Container.defaultProps = defaultProps;
+exports.default = Container;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN"}]},["2LXlr","4cHv3","dLPEP"], "dLPEP", "parcelRequired96c")
 
 //# sourceMappingURL=index.6701a6e1.js.map
