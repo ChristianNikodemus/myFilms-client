@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import "./login-view.scss";
 
@@ -32,9 +33,18 @@ export function LoginView(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>
+      <br />
       <button type="submit" onClick={handleSubmit}>
         Submit
       </button>
     </form>
   );
 }
+
+LoginView.propTypes = {
+  register: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }),
+  onLoggedIn: PropTypes.func.isRequired,
+};
