@@ -31,6 +31,7 @@ export function RegistrationView(props) {
             placeholder="Firstname Lastname"
           />
         </Form.Group>
+
         <Form.Group
           className="mb-3 username"
           controlId="exampleForm.ControlInput1"
@@ -43,6 +44,7 @@ export function RegistrationView(props) {
             placeholder="Username"
           />
         </Form.Group>
+
         <Form.Group className="mb-3 email" controlId="formBasicEmail">
           <Form.Label>Email address:</Form.Label>
           <Form.Control
@@ -55,6 +57,7 @@ export function RegistrationView(props) {
             We'll never share your email with anyone else.
           </Form.Text>
         </Form.Group>
+
         <Form.Group className="mb-3 password" controlId="formBasicPassword">
           <Form.Label>Password:</Form.Label>
           <Form.Control
@@ -64,6 +67,7 @@ export function RegistrationView(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+
         <Form.Group className="mb-3 birthdate" controlId="formBasicDate">
           <Form.Label>Birth date:</Form.Label>
           <Form.Control
@@ -73,6 +77,7 @@ export function RegistrationView(props) {
             placeholder="Birthday"
           />
         </Form.Group>
+
         <Button
           variant="outline-primary"
           className="registerBtn"
