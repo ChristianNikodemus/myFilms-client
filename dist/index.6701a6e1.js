@@ -26082,7 +26082,7 @@ function LoginView(props) {
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                     className: "mb-3 username",
-                    controlId: "exampleForm.ControlInput1",
+                    controlId: "formBasicUsername",
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
                         lineNumber: 24
@@ -26092,7 +26092,7 @@ function LoginView(props) {
                         /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 28
+                                lineNumber: 25
                             },
                             __self: this,
                             children: "Username:"
@@ -26105,7 +26105,7 @@ function LoginView(props) {
                             placeholder: "Username",
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 29
+                                lineNumber: 26
                             },
                             __self: this
                         })
@@ -26116,14 +26116,14 @@ function LoginView(props) {
                     controlId: "formBasicPassword",
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 37
+                        lineNumber: 34
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 38
+                                lineNumber: 35
                             },
                             __self: this,
                             children: "Password:"
@@ -26136,7 +26136,7 @@ function LoginView(props) {
                             ,
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 39
+                                lineNumber: 36
                             },
                             __self: this
                         })
@@ -26148,7 +26148,7 @@ function LoginView(props) {
                     onClick: handleSubmit,
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 47
+                        lineNumber: 44
                     },
                     __self: this,
                     children: "Submit"
@@ -27153,7 +27153,7 @@ function RegistrationView(props) {
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                     className: "mb-3 name",
-                    controlId: "exampleForm.ControlInput1",
+                    controlId: "formBasicName",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
                         lineNumber: 25
@@ -27184,7 +27184,7 @@ function RegistrationView(props) {
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                     className: "mb-3 username",
-                    controlId: "exampleForm.ControlInput1",
+                    controlId: "formBasicUsername",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
                         lineNumber: 35
@@ -27194,7 +27194,7 @@ function RegistrationView(props) {
                         /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 39
+                                lineNumber: 36
                             },
                             __self: this,
                             children: "Username:"
@@ -27207,7 +27207,7 @@ function RegistrationView(props) {
                             placeholder: "Username",
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 40
+                                lineNumber: 37
                             },
                             __self: this
                         })
@@ -27218,14 +27218,14 @@ function RegistrationView(props) {
                     controlId: "formBasicEmail",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 48
+                        lineNumber: 45
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 49
+                                lineNumber: 46
                             },
                             __self: this,
                             children: "Email address:"
@@ -27238,7 +27238,7 @@ function RegistrationView(props) {
                             ,
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 50
+                                lineNumber: 47
                             },
                             __self: this
                         }),
@@ -27246,7 +27246,7 @@ function RegistrationView(props) {
                             className: "text-muted",
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 56
+                                lineNumber: 53
                             },
                             __self: this,
                             children: "We'll never share your email with anyone else."
@@ -27258,14 +27258,14 @@ function RegistrationView(props) {
                     controlId: "formBasicPassword",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 61
+                        lineNumber: 58
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 62
+                                lineNumber: 59
                             },
                             __self: this,
                             children: "Password:"
@@ -27278,7 +27278,7 @@ function RegistrationView(props) {
                             ,
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 63
+                                lineNumber: 60
                             },
                             __self: this
                         })
@@ -27289,14 +27289,14 @@ function RegistrationView(props) {
                     controlId: "formBasicDate",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 71
+                        lineNumber: 68
                     },
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 72
+                                lineNumber: 69
                             },
                             __self: this,
                             children: "Birth date:"
@@ -27309,7 +27309,7 @@ function RegistrationView(props) {
                             placeholder: "Birthday",
                             __source: {
                                 fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 73
+                                lineNumber: 70
                             },
                             __self: this
                         })
@@ -27322,7 +27322,7 @@ function RegistrationView(props) {
                     onClick: handleSubmit,
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 81
+                        lineNumber: 78
                     },
                     __self: this,
                     children: "Register"

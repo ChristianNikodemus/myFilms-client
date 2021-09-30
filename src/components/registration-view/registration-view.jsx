@@ -22,7 +22,7 @@ export function RegistrationView(props) {
   return (
     <Row className="justify-content-center">
       <Form>
-        <Form.Group className="mb-3 name" controlId="exampleForm.ControlInput1">
+        <Form.Group className="mb-3 name" controlId="formBasicName">
           <Form.Label>Name:</Form.Label>
           <Form.Control
             type="text"
@@ -32,10 +32,7 @@ export function RegistrationView(props) {
           />
         </Form.Group>
 
-        <Form.Group
-          className="mb-3 username"
-          controlId="exampleForm.ControlInput1"
-        >
+        <Form.Group className="mb-3 username" controlId="formBasicUsername">
           <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"

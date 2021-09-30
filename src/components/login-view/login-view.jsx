@@ -21,10 +21,7 @@ export function LoginView(props) {
   return (
     <Row className="justify-content-center">
       <Form>
-        <Form.Group
-          className="mb-3 username"
-          controlId="exampleForm.ControlInput1"
-        >
+        <Form.Group className="mb-3 username" controlId="formBasicUsername">
           <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"
