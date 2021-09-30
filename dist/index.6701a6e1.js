@@ -26171,7 +26171,63 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","./login-view.scss":"lS4BK","prop-types":"1tgq3","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT","react-bootstrap/Row":"c0x1x"}],"lS4BK":[function() {},{}],"5ykgY":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","./login-view.scss":"lS4BK","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT"}],"lS4BK":[function() {},{}],"c0x1x":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _extends = require("@babel/runtime/helpers/esm/extends");
+var _extendsDefault = parcelHelpers.interopDefault(_extends);
+var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
+var _classnames = require("classnames");
+var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _themeProvider = require("./ThemeProvider");
+var _excluded = [
+    "bsPrefix",
+    "className",
+    "noGutters",
+    "as"
+];
+var DEVICE_SIZES = [
+    'xl',
+    'lg',
+    'md',
+    'sm',
+    'xs'
+];
+var defaultProps = {
+    noGutters: false
+};
+var Row = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
+    var bsPrefix = _ref.bsPrefix, className = _ref.className, noGutters = _ref.noGutters, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
+    var decoratedBsPrefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'row');
+    var sizePrefix = decoratedBsPrefix + "-cols";
+    var classes = [];
+    DEVICE_SIZES.forEach(function(brkPoint) {
+        var propValue = props[brkPoint];
+        delete props[brkPoint];
+        var cols;
+        if (propValue != null && typeof propValue === 'object') cols = propValue.cols;
+        else cols = propValue;
+        var infix = brkPoint !== 'xs' ? "-" + brkPoint : '';
+        if (cols != null) classes.push("" + sizePrefix + infix + "-" + cols);
+    });
+    return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
+        ref: ref
+    }, props, {
+        className: _classnamesDefault.default.apply(void 0, [
+            className,
+            decoratedBsPrefix,
+            noGutters && 'no-gutters'
+        ].concat(classes))
+    })));
+});
+Row.displayName = 'Row';
+Row.defaultProps = defaultProps;
+exports.default = Row;
+
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN"}],"5ykgY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");
@@ -27042,63 +27098,7 @@ Switch.Input = _formCheckDefault.default.Input;
 Switch.Label = _formCheckDefault.default.Label;
 exports.default = Switch;
 
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","./FormCheck":"27gi5","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN"}],"c0x1x":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _extends = require("@babel/runtime/helpers/esm/extends");
-var _extendsDefault = parcelHelpers.interopDefault(_extends);
-var _objectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
-var _objectWithoutPropertiesLooseDefault = parcelHelpers.interopDefault(_objectWithoutPropertiesLoose);
-var _classnames = require("classnames");
-var _classnamesDefault = parcelHelpers.interopDefault(_classnames);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _themeProvider = require("./ThemeProvider");
-var _excluded = [
-    "bsPrefix",
-    "className",
-    "noGutters",
-    "as"
-];
-var DEVICE_SIZES = [
-    'xl',
-    'lg',
-    'md',
-    'sm',
-    'xs'
-];
-var defaultProps = {
-    noGutters: false
-};
-var Row = /*#__PURE__*/ _reactDefault.default.forwardRef(function(_ref, ref) {
-    var bsPrefix = _ref.bsPrefix, className = _ref.className, noGutters = _ref.noGutters, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _objectWithoutPropertiesLooseDefault.default(_ref, _excluded);
-    var decoratedBsPrefix = _themeProvider.useBootstrapPrefix(bsPrefix, 'row');
-    var sizePrefix = decoratedBsPrefix + "-cols";
-    var classes = [];
-    DEVICE_SIZES.forEach(function(brkPoint) {
-        var propValue = props[brkPoint];
-        delete props[brkPoint];
-        var cols;
-        if (propValue != null && typeof propValue === 'object') cols = propValue.cols;
-        else cols = propValue;
-        var infix = brkPoint !== 'xs' ? "-" + brkPoint : '';
-        if (cols != null) classes.push("" + sizePrefix + infix + "-" + cols);
-    });
-    return(/*#__PURE__*/ _reactDefault.default.createElement(Component, _extendsDefault.default({
-        ref: ref
-    }, props, {
-        className: _classnamesDefault.default.apply(void 0, [
-            className,
-            decoratedBsPrefix,
-            noGutters && 'no-gutters'
-        ].concat(classes))
-    })));
-});
-Row.displayName = 'Row';
-Row.defaultProps = defaultProps;
-exports.default = Row;
-
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN"}],"jyMAr":[function() {},{}],"aP2YV":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","react":"6TuXu","./FormCheck":"27gi5","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN"}],"jyMAr":[function() {},{}],"aP2YV":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$8dd4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -27348,7 +27348,7 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./registration-view.scss":"fr9ZP","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Button":"9CzHT","react-bootstrap/Form":"5ykgY"}],"fr9ZP":[function() {},{}],"2PRIq":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./registration-view.scss":"fr9ZP","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Form":"5ykgY","react-bootstrap/Button":"9CzHT"}],"fr9ZP":[function() {},{}],"2PRIq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _extends = require("@babel/runtime/helpers/esm/extends");
