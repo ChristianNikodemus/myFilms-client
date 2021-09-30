@@ -5,7 +5,9 @@
 .movie-director span.value:not(:last-child):after {
   content: ", ";
 }
-
+Form {
+  margin-top: 10%;
+}
 
 Form {
   margin-top: 10%;
