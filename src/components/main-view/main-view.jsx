@@ -1,13 +1,16 @@
 import React from "react";
 import axios from "axios";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
+
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 import "./main-view.scss";
 
@@ -85,13 +88,23 @@ export class MainView extends React.Component {
 
     if (register)
       return (
-        <RegistrationView
-          onRegistration={(register) => this.onRegistration(register)}
-        />
+        <Row>
+          <Col>
+            <RegistrationView
+              onRegistration={(register) => this.onRegistration(register)}
+            />
+          </Col>
+        </Row>
       );
 
     if (!user)
-      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+      return (
+        <Row>
+          <Col>
+            <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+          </Col>
+        </Row>
+      );
 
     if (movies.length === 0) return <div className="main-view" />;
 
