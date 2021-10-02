@@ -33,7 +33,7 @@ export class MovieView extends React.Component {
           <span className="label">Genre: </span>
           {movie.Genre.map((Genre) => (
             <span key={Genre._id} className="value">
-              <Link to={`/genres/${movie.Genre.Name}`}>{Genre.Title}</Link>
+              <Link to={`/genres/${movie.Genre.Title}`}>{Genre.Title}</Link>
             </span>
           ))}
         </div>

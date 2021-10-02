@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 
 import "./director-view.scss";
@@ -40,13 +40,14 @@ export class DirectorView extends React.Component {
   }
 }
 
-DirectorView.propTypes = {
-  director: propTypes.shape({
-    Name: propTypes.string.isRequired,
-    Bio: propTypes.string.isRequired,
-    Birthyear: propTypes.string.isRequired,
-    Deathyear: propTypes.string.isRequired,
+DirectorView.PropTypes = {
+  director: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Bio: PropTypes.string.isRequired,
+    Birthyear: PropTypes.string.isRequired,
+    Deathyear: PropTypes.string.isRequired,
   }).isRequired,
+  onBackClick: PropTypes.func.isRequired,
 };
 
 export default DirectorView;
