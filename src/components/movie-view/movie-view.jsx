@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 
 import "./movie-view.scss";
 
+import { Link } from "react-router-dom";
+
 export class MovieView extends React.Component {
   render() {
     const { movie, onBackClick } = this.props;
@@ -31,7 +33,7 @@ export class MovieView extends React.Component {
           <span className="label">Genre: </span>
           {movie.Genre.map((Genre) => (
             <span key={Genre._id} className="value">
-              {Genre.Title}
+              <Link to={`/genres/${movie.Genre.Name}`}>{Genre.Title}</Link>
             </span>
           ))}
         </div>
@@ -39,7 +41,9 @@ export class MovieView extends React.Component {
           <span className="label">Director(s): </span>
           {movie.Director.map((Director) => (
             <span key={Director._id} className="value">
-              {Director.Name}
+              <Link to={`/directors/${movie.Director.Name}`}>
+                {Director.Name}
+              </Link>
             </span>
           ))}
         </div>
