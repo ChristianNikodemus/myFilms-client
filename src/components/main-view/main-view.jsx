@@ -22,7 +22,7 @@ export class MainView extends React.Component {
       movies: [],
       //selectedMovie: null,
       user: null,
-      register: null,
+      register: true,
     };
   }
 
@@ -88,22 +88,37 @@ export class MainView extends React.Component {
   render() {
     const { movies, user, register } = this.state;
 
-    if (!register)
+    if (register && !user)
+      return (
+        <Row>
+          <Col>
+            <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+            Or Register an Account! <br />
+            <Button
+              variant="outline-secondary"
+              onClick={() => this.setState({ register: false })}
+            >
+              Register
+            </Button>
+          </Col>
+        </Row>
+      );
+
+    if (!register && !user)
       return (
         <Row>
           <Col>
             <RegistrationView
               onRegistration={(register) => this.onRegistration(register)}
             />
-          </Col>
-        </Row>
-      );
-
-    if (!user)
-      return (
-        <Row>
-          <Col>
-            <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+            Already Have a User Login?
+            <br />
+            <Button
+              variant="outline-secondary"
+              onClick={() => this.setState({ register: true })}
+            >
+              Login
+            </Button>
           </Col>
         </Row>
       );

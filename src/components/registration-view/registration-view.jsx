@@ -14,8 +14,21 @@ export function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthdate);
-    props.onRegistration(username);
+    axios
+      .post("https://my-films-db.herokuapp.com/users", {
+        Name: name,
+        Username: username,
+        Email: email,
+        Password: password,
+        Birthday: birthdate,
+      })
+      .then((response) => {
+        const data = response.data;
+        props.onRegistration(true);
+      })
+      .catch((e) => {
+        console.log("no such user");
+      });
   };
 
   return (
