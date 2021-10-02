@@ -22981,7 +22981,7 @@ class MainView extends _reactDefault.default.Component {
     }
     render() {
         const { movies , user , register  } = this.state;
-        if (register) return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+        if (!register) return(/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 93

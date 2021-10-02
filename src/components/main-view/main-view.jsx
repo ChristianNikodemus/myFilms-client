@@ -88,7 +88,7 @@ export class MainView extends React.Component {
   render() {
     const { movies, user, register } = this.state;
 
-    if (register)
+    if (!register)
       return (
         <Row>
           <Col>
