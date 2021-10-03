@@ -24,7 +24,9 @@ export function RegistrationView(props) {
       })
       .then((response) => {
         const data = response.data;
-        props.onRegistration(true);
+        //props.onRegistration(true);
+        console.log(data);
+        window.open("/", "_self");
       })
       .catch((e) => {
         console.log("no such user");
@@ -106,5 +108,5 @@ RegistrationView.propTypes = {
     password: PropTypes.string.isRequired,
     birthdate: PropTypes.string.isRequired,
   }),
-  onRegistration: PropTypes.func.isRequired,
+  //onRegistration: PropTypes.func.isRequired,
 };
