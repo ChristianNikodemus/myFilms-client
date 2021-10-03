@@ -22927,6 +22927,7 @@ class MainView extends _reactDefault.default.Component {
         // Initial state is set to null
         this.state = {
             movies: [],
+            genres: [],
             //selectedMovie: null,
             user: null,
             register: true
@@ -22961,6 +22962,7 @@ class MainView extends _reactDefault.default.Component {
         localStorage.setItem("user", authData.user.Username);
         this.getMovies(authData.token);
     }
+    //   Get all movies in DB
     getMovies(token) {
         _axiosDefault.default.get("https://my-films-db.herokuapp.com/movies", {
             headers: {
@@ -22975,6 +22977,21 @@ class MainView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
+    //   Get all genres in DB
+    getGenres(token) {
+        _axiosDefault.default.get("https://my-films-db.herokuapp.com/genres", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            // Assign the result to the state
+            this.setState({
+                genres: response.data
+            });
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }
     onLoggedOut() {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
@@ -22983,7 +23000,7 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     render() {
-        const { movies , user , register  } = this.state;
+        const { movies , genres , user , register  } = this.state;
         /*
     if (register && !user)
       return (
@@ -23024,7 +23041,7 @@ class MainView extends _reactDefault.default.Component {
 */ return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 132
+                lineNumber: 151
             },
             __self: this,
             children: [
@@ -23035,7 +23052,7 @@ class MainView extends _reactDefault.default.Component {
                     },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 133
+                        lineNumber: 152
                     },
                     __self: this,
                     children: "Logout"
@@ -23044,7 +23061,7 @@ class MainView extends _reactDefault.default.Component {
                     className: "justify-content-md-center main-view",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 141
+                        lineNumber: 160
                     },
                     __self: this,
                     children: [
@@ -23070,7 +23087,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 142
+                                lineNumber: 161
                             },
                             __self: this
                         }),
@@ -23087,7 +23104,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 161
+                                lineNumber: 180
                             },
                             __self: this
                         }),
@@ -23105,7 +23122,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 173
+                                lineNumber: 192
                             },
                             __self: this
                         }),
@@ -23131,7 +23148,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 187
+                                lineNumber: 206
                             },
                             __self: this
                         }),
@@ -23149,7 +23166,7 @@ class MainView extends _reactDefault.default.Component {
                                 return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                     md: 8,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_genreView.GenreView, {
-                                        genre: movies.find((m)=>m.Genre.Title === match.params.title
+                                        genre: genres.find((g)=>g.Genre.Title === match.params.title
                                         ).Genre,
                                         onBackClick: ()=>history.goBack()
                                     })
@@ -23157,7 +23174,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 211
+                                lineNumber: 230
                             },
                             __self: this
                         }),
@@ -23176,7 +23193,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 235
+                                lineNumber: 254
                             },
                             __self: this
                         })

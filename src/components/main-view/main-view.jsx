@@ -23,6 +23,7 @@ export class MainView extends React.Component {
     // Initial state is set to null
     this.state = {
       movies: [],
+      genres: [],
       //selectedMovie: null,
       user: null,
       register: true,
@@ -64,6 +65,7 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  //   Get all movies in DB
   getMovies(token) {
     axios
       .get("https://my-films-db.herokuapp.com/movies", {
@@ -80,6 +82,23 @@ export class MainView extends React.Component {
       });
   }
 
+  //   Get all genres in DB
+  getGenres(token) {
+    axios
+      .get("https://my-films-db.herokuapp.com/genres", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.setState({
+          genres: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   onLoggedOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -89,7 +108,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, register } = this.state;
+    const { movies, genres, user, register } = this.state;
     /*
     if (register && !user)
       return (
@@ -222,7 +241,7 @@ export class MainView extends React.Component {
                 <Col md={8}>
                   <GenreView
                     genre={
-                      movies.find((m) => m.Genre.Title === match.params.title)
+                      genres.find((g) => g.Genre.Title === match.params.title)
                         .Genre
                     }
                     onBackClick={() => history.goBack()}
