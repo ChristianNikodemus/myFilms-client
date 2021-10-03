@@ -10,7 +10,7 @@ export function RegistrationView(props) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [birthdate, setBirthdate] = useState("");
+  const [birthday, setBirthday] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ export function RegistrationView(props) {
         Username: username,
         Email: email,
         Password: password,
-        Birthday: birthdate,
+        Birthday: birthday,
       })
       .then((response) => {
         const data = response.data;
@@ -78,12 +78,12 @@ export function RegistrationView(props) {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3 birthdate" controlId="formBasicDate">
+      <Form.Group className="mb-3 birthday" controlId="formBasicDate">
         <Form.Label>Birth date:</Form.Label>
         <Form.Control
           type="date"
-          value={birthdate}
-          onChange={(e) => setBirthdate(e.target.value)}
+          value={birthday}
+          onChange={(e) => setBirthday(e.target.value)}
           placeholder="Birthday"
         />
       </Form.Group>
@@ -106,7 +106,7 @@ RegistrationView.propTypes = {
     username: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
-    birthdate: PropTypes.string.isRequired,
+    birthday: PropTypes.string.isRequired,
   }),
   //onRegistration: PropTypes.func.isRequired,
 };
