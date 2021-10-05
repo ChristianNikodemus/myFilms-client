@@ -6,17 +6,17 @@ import "./genre-view.scss";
 
 export class GenreView extends React.Component {
   render() {
-    const { movie, onBackClick } = this.props;
+    const { genre, onBackClick } = this.props;
 
     return (
       <div className="genre-view">
         <div className="genre-name">
           <h1>
-            <span className="value">{movie.Genre.Title}</span>
+            <span className="value">{genre.Title}</span>
           </h1>
         </div>
         <div className="genre-description">
-          <span className="value">{movie.Genre.Description}</span>
+          <span className="value">{genre.Description}</span>
         </div>
 
         <Button

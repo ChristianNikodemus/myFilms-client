@@ -30025,7 +30025,7 @@ var _reactBootstrapDefault = parcelHelpers.interopDefault(_reactBootstrap);
 var _genreViewScss = require("./genre-view.scss");
 class GenreView extends _reactDefault.default.Component {
     render() {
-        const { movie , onBackClick  } = this.props;
+        const { genre , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "genre-view",
             __source: {
@@ -30054,7 +30054,7 @@ class GenreView extends _reactDefault.default.Component {
                                 lineNumber: 15
                             },
                             __self: this,
-                            children: movie.Genre.Title
+                            children: genre.Title
                         })
                     })
                 }),
@@ -30072,7 +30072,7 @@ class GenreView extends _reactDefault.default.Component {
                             lineNumber: 19
                         },
                         __self: this,
-                        children: movie.Genre.Description
+                        children: genre.Description
                     })
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrapDefault.default, {
