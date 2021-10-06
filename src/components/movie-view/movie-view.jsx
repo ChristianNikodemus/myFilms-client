@@ -31,9 +31,9 @@ export class MovieView extends React.Component {
         </div>
         <div className="movie-genre">
           <span className="label">Genre: </span>
-          {movie.Genre.map((Genre) => (
-            <span key={Genre._id} className="value">
-              <Link to={`/genres/${movie.Genre.Title}`}>{Genre.Title}</Link>
+          {movie.Genre.map((genre) => (
+            <span key={genre._id} className="value">
+              <Link to={`/genres/${genre._id}`}>{genre.Title}</Link>
             </span>
           ))}
         </div>

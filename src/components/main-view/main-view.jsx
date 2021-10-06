@@ -90,45 +90,8 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, genres, user, register } = this.state;
-    /*
-    if (register && !user)
-      return (
-        <Row>
-          <Col>
-            <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-            Or Register an Account! <br />
-            <Button
-              variant="outline-secondary"
-              onClick={() => this.setState({ register: false })}
-            >
-              Register
-            </Button>
-          </Col>
-        </Row>
-      );
+    const { movies, user, register } = this.state;
 
-    if (!register && !user)
-      return (
-        <Row>
-          <Col>
-            <RegistrationView
-              onRegistration={(register) => this.onRegistration(register)}
-            />
-            Already Have a User Login?
-            <br />
-            <Button
-              variant="outline-secondary"
-              onClick={() => this.setState({ register: true })}
-            >
-              Login
-            </Button>
-          </Col>
-        </Row>
-      );
-
-    if (movies.length === 0) return <div className="main-view" />;
-*/
     return (
       <Router>
         <Button
@@ -215,7 +178,7 @@ export class MainView extends React.Component {
           />
 
           <Route
-            path="/genres/:title"
+            path="/genres/:genreId"
             render={({ match, history }) => {
               if (!user)
                 return (
@@ -227,10 +190,13 @@ export class MainView extends React.Component {
               return (
                 <Col md={8}>
                   <GenreView
-                    genre={
-                      genres.find((g) => g.Genre.Title === match.params.title)
-                        .Genre
-                    }
+                    genre={movies.reduce(
+                      (genre, m) =>
+                        genre
+                          ? genre
+                          : m.Genre.find((g) => g._id === match.params.genreId),
+                      null
+                    )}
                     onBackClick={() => history.goBack()}
                   />
                 </Col>
@@ -247,7 +213,11 @@ export class MainView extends React.Component {
                   <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />
                 );
               if (movies.length === 0) return;
-              return <ProfileView history={history} movies={movies} />;
+              return (
+                <Col>
+                  <ProfileView history={history} movies={movies} />
+                </Col>
+              );
             }}
           />
         </Row>
