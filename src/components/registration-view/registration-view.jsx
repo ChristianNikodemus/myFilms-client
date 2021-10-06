@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+import { Link } from "react-router-dom";
+
 import "./registration-view.scss";
 
 export function RegistrationView(props) {
@@ -44,7 +46,6 @@ export function RegistrationView(props) {
           placeholder="Firstname Lastname"
         />
       </Form.Group>
-
       <Form.Group className="mb-3 username" controlId="formBasicUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
@@ -54,7 +55,6 @@ export function RegistrationView(props) {
           placeholder="Username"
         />
       </Form.Group>
-
       <Form.Group className="mb-3 email" controlId="formBasicEmail">
         <Form.Label>Email address:</Form.Label>
         <Form.Control
@@ -67,7 +67,6 @@ export function RegistrationView(props) {
           We'll never share your email with anyone else.
         </Form.Text>
       </Form.Group>
-
       <Form.Group className="mb-3 password" controlId="formBasicPassword">
         <Form.Label>Password:</Form.Label>
         <Form.Control
@@ -77,7 +76,6 @@ export function RegistrationView(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
       </Form.Group>
-
       <Form.Group className="mb-3 birthday" controlId="formBasicDate">
         <Form.Label>Birth date:</Form.Label>
         <Form.Control
@@ -87,7 +85,6 @@ export function RegistrationView(props) {
           placeholder="Birthday"
         />
       </Form.Group>
-
       <Button
         variant="outline-primary"
         className="registerBtn"
@@ -96,6 +93,12 @@ export function RegistrationView(props) {
       >
         Register
       </Button>
+      <br />
+      Already have an account? Log in here!
+      <br />
+      <Link to={`/`}>
+        <Button variant="outline-secondary">Login</Button>
+      </Link>
     </Form>
   );
 }
