@@ -23,7 +23,6 @@ export class MainView extends React.Component {
     // Initial state is set to null
     this.state = {
       movies: [],
-      genres: [],
       //selectedMovie: null,
       user: null,
       register: true,
@@ -75,23 +74,6 @@ export class MainView extends React.Component {
         // Assign the result to the state
         this.setState({
           movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  //   Get all genres in DB
-  getGenres(token) {
-    axios
-      .get("https://my-films-db.herokuapp.com/genres", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          genres: response.data,
         });
       })
       .catch(function (error) {
@@ -204,7 +186,7 @@ export class MainView extends React.Component {
           />
 
           <Route
-            path="/directors/:name"
+            path="/directors/:directorId"
             render={({ match, history }) => {
               if (!user)
                 return (
@@ -216,10 +198,15 @@ export class MainView extends React.Component {
               return (
                 <Col md={8}>
                   <DirectorView
-                    director={
-                      movies.find((m) => m.Director.Name === match.params.name)
-                        .Director
-                    }
+                    director={movies.reduce(
+                      (director, m) =>
+                        director
+                          ? director
+                          : m.Director.find(
+                              (d) => d._id === match.params.directorId
+                            ),
+                      null
+                    )}
                     onBackClick={() => history.goBack()}
                   />
                 </Col>

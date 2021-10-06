@@ -39,11 +39,9 @@ export class MovieView extends React.Component {
         </div>
         <div className="movie-director">
           <span className="label">Director(s): </span>
-          {movie.Director.map((Director) => (
-            <span key={Director._id} className="value">
-              <Link to={`/directors/${movie.Director.Name}`}>
-                {Director.Name}
-              </Link>
+          {movie.Director.map((director) => (
+            <span key={director._id} className="value">
+              <Link to={`/directors/${director._id}`}>{director.Name}</Link>
             </span>
           ))}
         </div>

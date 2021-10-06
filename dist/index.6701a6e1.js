@@ -22927,7 +22927,6 @@ class MainView extends _reactDefault.default.Component {
         // Initial state is set to null
         this.state = {
             movies: [],
-            genres: [],
             //selectedMovie: null,
             user: null,
             register: true
@@ -22972,21 +22971,6 @@ class MainView extends _reactDefault.default.Component {
             // Assign the result to the state
             this.setState({
                 movies: response.data
-            });
-        }).catch(function(error) {
-            console.log(error);
-        });
-    }
-    //   Get all genres in DB
-    getGenres(token) {
-        _axiosDefault.default.get("https://my-films-db.herokuapp.com/genres", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>{
-            // Assign the result to the state
-            this.setState({
-                genres: response.data
             });
         }).catch(function(error) {
             console.log(error);
@@ -23041,7 +23025,7 @@ class MainView extends _reactDefault.default.Component {
 */ return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 151
+                lineNumber: 133
             },
             __self: this,
             children: [
@@ -23052,7 +23036,7 @@ class MainView extends _reactDefault.default.Component {
                     },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 152
+                        lineNumber: 134
                     },
                     __self: this,
                     children: "Logout"
@@ -23061,7 +23045,7 @@ class MainView extends _reactDefault.default.Component {
                     className: "justify-content-md-center main-view",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 160
+                        lineNumber: 142
                     },
                     __self: this,
                     children: [
@@ -23087,7 +23071,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 161
+                                lineNumber: 143
                             },
                             __self: this
                         }),
@@ -23104,7 +23088,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 180
+                                lineNumber: 162
                             },
                             __self: this
                         }),
@@ -23122,12 +23106,12 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 192
+                                lineNumber: 174
                             },
                             __self: this
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
-                            path: "/directors/:name",
+                            path: "/directors/:directorId",
                             render: ({ match , history  })=>{
                                 if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
@@ -23140,15 +23124,16 @@ class MainView extends _reactDefault.default.Component {
                                 return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
                                     md: 8,
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_directorView.DirectorView, {
-                                        director: movies.find((m)=>m.Director.Name === match.params.name
-                                        ).Director,
+                                        director: movies.reduce((director, m)=>director ? director : m.Director.find((d)=>d._id === match.params.directorId
+                                            )
+                                        , null),
                                         onBackClick: ()=>history.goBack()
                                     })
                                 }));
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 206
+                                lineNumber: 188
                             },
                             __self: this
                         }),
@@ -23174,7 +23159,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 230
+                                lineNumber: 217
                             },
                             __self: this
                         }),
@@ -23193,7 +23178,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 254
+                                lineNumber: 241
                             },
                             __self: this
                         })
@@ -26951,7 +26936,7 @@ class MovieView extends _reactDefault.default.Component {
                             __self: this,
                             children: "Director(s): "
                         }),
-                        movie.Director.map((Director)=>/*#__PURE__*/ _jsxRuntime.jsx("span", {
+                        movie.Director.map((director)=>/*#__PURE__*/ _jsxRuntime.jsx("span", {
                                 className: "value",
                                 __source: {
                                     fileName: "src/components/movie-view/movie-view.jsx",
@@ -26959,15 +26944,15 @@ class MovieView extends _reactDefault.default.Component {
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                    to: `/directors/${movie.Director.Name}`,
+                                    to: `/directors/${director._id}`,
                                     __source: {
                                         fileName: "src/components/movie-view/movie-view.jsx",
                                         lineNumber: 44
                                     },
                                     __self: this,
-                                    children: Director.Name
+                                    children: director.Name
                                 })
-                            }, Director._id)
+                            }, director._id)
                         )
                     ]
                 }),
@@ -26975,14 +26960,14 @@ class MovieView extends _reactDefault.default.Component {
                     className: "movie-featured",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 50
+                        lineNumber: 48
                     },
                     __self: this,
                     children: movie.Featured ? /*#__PURE__*/ _jsxRuntime.jsx("span", {
                         className: "label",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 52
+                            lineNumber: 50
                         },
                         __self: this,
                         children: "This movie is Featured!"
@@ -26990,7 +26975,7 @@ class MovieView extends _reactDefault.default.Component {
                         className: "label",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 54
+                            lineNumber: 52
                         },
                         __self: this,
                         children: "This movie is not Featured."
@@ -27003,7 +26988,7 @@ class MovieView extends _reactDefault.default.Component {
                     variant: "link",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 57
+                        lineNumber: 55
                     },
                     __self: this,
                     children: "Back"
@@ -29888,7 +29873,7 @@ var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _directorViewScss = require("./director-view.scss");
 class DirectorView extends _reactDefault.default.Component {
     render() {
-        const { movie , onBackClick  } = this.props;
+        const { director , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "director-view",
             __source: {
@@ -29917,7 +29902,7 @@ class DirectorView extends _reactDefault.default.Component {
                                 lineNumber: 15
                             },
                             __self: this,
-                            children: movie.Director.Name
+                            children: director.Name
                         })
                     })
                 }),
@@ -29935,7 +29920,7 @@ class DirectorView extends _reactDefault.default.Component {
                             lineNumber: 19
                         },
                         __self: this,
-                        children: movie.Director.Bio
+                        children: director.Bio
                     })
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
@@ -29952,7 +29937,7 @@ class DirectorView extends _reactDefault.default.Component {
                             lineNumber: 23
                         },
                         __self: this,
-                        children: movie.Director.Birthyear
+                        children: director.Birthyear
                     })
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
@@ -29969,13 +29954,13 @@ class DirectorView extends _reactDefault.default.Component {
                             lineNumber: 27
                         },
                         __self: this,
-                        children: movie.Director.Deathyear
+                        children: director.Deathyear
                     })
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                     variant: "primary",
                     onClick: ()=>{
-                        onBackClick(null);
+                        onBackClick();
                     },
                     __source: {
                         fileName: "src/components/director-view/director-view.jsx",
