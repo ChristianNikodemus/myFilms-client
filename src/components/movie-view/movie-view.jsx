@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 import "./movie-view.scss";
 
@@ -28,17 +30,17 @@ export class MovieView extends React.Component {
         </div>
         <div className="movie-genre">
           <span className="label">Genre: </span>
-          {movie.Genre.map((Genre) => (
-            <span key={Genre._id} className="value">
-              {Genre.Title}
+          {movie.Genre.map((genre) => (
+            <span key={genre._id} className="value">
+              <Link to={`/genres/${genre._id}`}>{genre.Title}</Link>
             </span>
           ))}
         </div>
         <div className="movie-director">
           <span className="label">Director(s): </span>
-          {movie.Director.map((Director) => (
-            <span key={Director._id} className="value">
-              {Director.Name}
+          {movie.Director.map((director) => (
+            <span key={director._id} className="value">
+              <Link to={`/directors/${director._id}`}>{director.Name}</Link>
             </span>
           ))}
         </div>
@@ -49,13 +51,14 @@ export class MovieView extends React.Component {
             <span className="label">This movie is not Featured.</span>
           )}
         </div>
-        <button
+        <Button
           onClick={() => {
             onBackClick(null);
           }}
+          variant="link"
         >
           Back
-        </button>
+        </Button>
       </div>
     );
   }

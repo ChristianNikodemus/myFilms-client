@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 import "./login-view.scss";
 
@@ -12,43 +13,51 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
     /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
+    axios
+      .post("https://my-films-db.herokuapp.com/login", {
+        Username: username,
+        Password: password,
+      })
+      .then((response) => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch((e) => {
+        console.log("no such user");
+      });
   };
 
   return (
-    <Row className="justify-content-center">
-      <Form>
-        <Form.Group
-          className="mb-3 username"
-          controlId="exampleForm.ControlInput1"
-        >
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3 password" controlId="formBasicPassword">
-          <Form.Label>Password:</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-
-        <Button variant="outline-primary" type="submit" onClick={handleSubmit}>
-          Submit
-        </Button>
-      </Form>
-    </Row>
+    <Form>
+      <Form.Group className="mb-3 username" controlId="formBasicUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username"
+        />
+      </Form.Group>
+      <Form.Group className="mb-3 password" controlId="formBasicPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Form.Group>
+      <Button variant="outline-primary" type="submit" onClick={handleSubmit}>
+        Submit
+      </Button>
+      <br />
+      Don't have an account? Register Here!
+      <br />
+      <Link to={`/register`}>
+        <Button variant="outline-secondary">Register</Button>
+      </Link>
+    </Form>
   );
 }
 
