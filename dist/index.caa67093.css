@@ -1,6 +1,10 @@
 .my-films {
   color: steelblue;
 }
+
+Container {
+  width: 100%;
+}
 .movie-genre span.value:not(:last-child):after,
 .movie-director span.value:not(:last-child):after {
   content: ", ";
@@ -12,6 +16,7 @@ Form {
 Form {
   margin-top: 10%;
 }
+
 
 
 

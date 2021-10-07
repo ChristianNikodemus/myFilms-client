@@ -21,7 +21,7 @@ export class GenreView extends React.Component {
         </div>
 
         <Button
-          variant="primary"
+          variant="link"
           onClick={() => {
             onBackClick();
           }}

@@ -22914,12 +22914,11 @@ var _registrationView = require("../registration-view/registration-view");
 var _directorView = require("../director-view/director-view");
 var _genreView = require("../genre-view/genre-view");
 var _profileView = require("../profile-view/profile-view");
+var _navbarView = require("../navbar-view/navbar-view");
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
-var _button = require("react-bootstrap/Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _mainViewScss = require("./main-view.scss");
 class MainView extends _reactDefault.default.Component {
     constructor(){
@@ -22947,12 +22946,7 @@ class MainView extends _reactDefault.default.Component {
       selectedMovie: movie,
     });
   }
-  */ onRegistration(register) {
-        this.setState({
-            register
-        });
-    }
-    onLoggedIn(authData) {
+  */ onLoggedIn(authData) {
         console.log(authData);
         this.setState({
             user: authData.user.Username
@@ -22984,31 +22978,27 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     render() {
-        const { movies , user , register  } = this.state;
+        const { movies , user  } = this.state;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 96
+                lineNumber: 90
             },
             __self: this,
             children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                    variant: "outline-primary",
-                    onClick: ()=>{
-                        this.onLoggedOut();
-                    },
+                /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavbarView, {
+                    user: user,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 97
+                        lineNumber: 91
                     },
-                    __self: this,
-                    children: "Logout"
+                    __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
                     className: "justify-content-md-center main-view",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 105
+                        lineNumber: 92
                     },
                     __self: this,
                     children: [
@@ -23034,7 +23024,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 106
+                                lineNumber: 93
                             },
                             __self: this
                         }),
@@ -23051,7 +23041,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 125
+                                lineNumber: 112
                             },
                             __self: this
                         }),
@@ -23069,7 +23059,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 137
+                                lineNumber: 124
                             },
                             __self: this
                         }),
@@ -23096,7 +23086,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 151
+                                lineNumber: 138
                             },
                             __self: this
                         }),
@@ -23123,7 +23113,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 180
+                                lineNumber: 167
                             },
                             __self: this
                         }),
@@ -23144,7 +23134,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 207
+                                lineNumber: 194
                             },
                             __self: this
                         })
@@ -23161,7 +23151,7 @@ exports.default = MainView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","axios":"iYoWk","../login-view/login-view":"054li","./main-view.scss":"jyMAr","../registration-view/registration-view":"aP2YV","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","react-router-dom":"cpyQW","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","../profile-view/profile-view":"2E7Aw"}],"6EiBJ":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","axios":"iYoWk","../login-view/login-view":"054li","./main-view.scss":"jyMAr","../registration-view/registration-view":"aP2YV","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-router-dom":"cpyQW","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","../profile-view/profile-view":"2E7Aw","../navbar-view/navbar-view":"j0Dt2"}],"6EiBJ":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4249 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -29955,6 +29945,13 @@ class DirectorView extends _reactDefault.default.Component {
                         children: director.Bio
                     })
                 }),
+                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                    __source: {
+                        fileName: "src/components/director-view/director-view.jsx",
+                        lineNumber: 21
+                    },
+                    __self: this
+                }),
                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                     className: "director-birthyear",
                     __source: {
@@ -29962,15 +29959,25 @@ class DirectorView extends _reactDefault.default.Component {
                         lineNumber: 22
                     },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs("span", {
                         className: "value",
                         __source: {
                             fileName: "src/components/director-view/director-view.jsx",
                             lineNumber: 23
                         },
                         __self: this,
-                        children: director.Birthyear
+                        children: [
+                            "Born: ",
+                            director.Birthyear
+                        ]
                     })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                    __source: {
+                        fileName: "src/components/director-view/director-view.jsx",
+                        lineNumber: 25
+                    },
+                    __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx("div", {
                     className: "director-deathyear",
@@ -29979,18 +29986,21 @@ class DirectorView extends _reactDefault.default.Component {
                         lineNumber: 26
                     },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                    children: /*#__PURE__*/ _jsxRuntime.jsxs("span", {
                         className: "value",
                         __source: {
                             fileName: "src/components/director-view/director-view.jsx",
                             lineNumber: 27
                         },
                         __self: this,
-                        children: director.Deathyear
+                        children: [
+                            "Past away: ",
+                            director.Deathyear
+                        ]
                     })
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                    variant: "primary",
+                    variant: "link",
                     onClick: ()=>{
                         onBackClick();
                     },
@@ -30094,7 +30104,7 @@ class GenreView extends _reactDefault.default.Component {
                     })
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                    variant: "primary",
+                    variant: "link",
                     onClick: ()=>{
                         onBackClick();
                     },
@@ -30123,7 +30133,7 @@ exports.default = GenreView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","./genre-view.scss":"3BqnD","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","react-bootstrap/Button":"9CzHT"}],"3BqnD":[function() {},{}],"2E7Aw":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Button":"9CzHT","./genre-view.scss":"3BqnD","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi"}],"3BqnD":[function() {},{}],"2E7Aw":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$58c6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -41046,6 +41056,115 @@ Tooltip.defaultProps = defaultProps;
 Tooltip.displayName = 'Tooltip';
 exports.default = Tooltip;
 
-},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","prop-types-extra/lib/isRequiredForA11y":"1p075","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN"}],"gb0ga":[function() {},{}]},["2LXlr","4cHv3","dLPEP"], "dLPEP", "parcelRequired96c")
+},{"@babel/runtime/helpers/esm/extends":"bKAu6","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"3Rubg","classnames":"bOXOh","react":"6TuXu","prop-types-extra/lib/isRequiredForA11y":"1p075","./ThemeProvider":"eeqfi","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN"}],"gb0ga":[function() {},{}],"j0Dt2":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$469c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$469c.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "NavbarView", ()=>NavbarView
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _navbar = require("react-bootstrap/Navbar");
+var _navbarDefault = parcelHelpers.interopDefault(_navbar);
+var _container = require("react-bootstrap/Container");
+var _containerDefault = parcelHelpers.interopDefault(_container);
+var _nav = require("react-bootstrap/Nav");
+var _navDefault = parcelHelpers.interopDefault(_nav);
+var _reactRouterDom = require("react-router-dom");
+var _navbarViewScss = require("./navbar-view.scss");
+class NavbarView extends _reactDefault.default.Component {
+    constructor(){
+        super();
+        this.state = {
+        };
+    }
+    onLoggedOut = ()=>{
+        localStorage.clear();
+        window.open("/", "_self");
+    };
+    render() {
+        const { user  } = this.props;
+        const profile = `/users/${user}`;
+        if (!user) return null;
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default, {
+            bg: "light",
+            variant: "light",
+            __source: {
+                fileName: "src/components/navbar-view/navbar-view.jsx",
+                lineNumber: 28
+            },
+            __self: this,
+            children: /*#__PURE__*/ _jsxRuntime.jsxs(_containerDefault.default, {
+                __source: {
+                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                    lineNumber: 29
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                        to: `/`,
+                        __source: {
+                            fileName: "src/components/navbar-view/navbar-view.jsx",
+                            lineNumber: 30
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Brand, {
+                            __source: {
+                                fileName: "src/components/navbar-view/navbar-view.jsx",
+                                lineNumber: 31
+                            },
+                            __self: this,
+                            children: "myFilms"
+                        })
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_navDefault.default, {
+                        className: "me-auto",
+                        __source: {
+                            fileName: "src/components/navbar-view/navbar-view.jsx",
+                            lineNumber: 33
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Link, {
+                                as: _reactRouterDom.Link,
+                                to: profile,
+                                __source: {
+                                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                                    lineNumber: 34
+                                },
+                                __self: this,
+                                children: "myProfile"
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(_navDefault.default.Link, {
+                                to: `/`,
+                                onClick: this.onLoggedOut,
+                                __source: {
+                                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                                    lineNumber: 37
+                                },
+                                __self: this,
+                                children: "Logout"
+                            })
+                        ]
+                    })
+                ]
+            })
+        }));
+    }
+}
+exports.default = NavbarView;
+
+  $parcel$ReactRefreshHelpers$469c.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","react-bootstrap/Navbar":"eYZQl","react-bootstrap/Container":"2PRIq","react-bootstrap/Nav":"io07g","./navbar-view.scss":"eDP1C"}],"eDP1C":[function() {},{}]},["2LXlr","4cHv3","dLPEP"], "dLPEP", "parcelRequired96c")
 
 //# sourceMappingURL=index.6701a6e1.js.map
