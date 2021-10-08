@@ -28519,27 +28519,32 @@ function LoginView(props) {
     _s();
     const [username, setUsername] = _react.useState("");
     const [password, setPassword] = _react.useState("");
+    const [validated, setValidated] = _react.useState(false);
+    const [error, setError] = _react.useState(null);
     const handleSubmit = (e)=>{
         const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            e.preventDefault();
-            e.stopPropagation();
-        } else _axiosDefault.default.post("https://my-films-db.herokuapp.com/login", {
+        e.preventDefault();
+        e.stopPropagation();
+        if (form.checkValidity() !== false) _axiosDefault.default.post("https://my-films-db.herokuapp.com/login", {
             Username: username,
             Password: password
         }).then((response)=>{
             const data = response.data;
             props.onLoggedIn(data);
         }).catch((e1)=>{
+            setError("Wrong password credentials.");
+            setValidated(false);
             console.log("no such user");
         });
+        else setValidated(true);
     };
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
         noValidate: true,
+        validated: validated,
         onSubmit: handleSubmit,
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 37
+            lineNumber: 42
         },
         __self: this,
         children: [
@@ -28548,14 +28553,14 @@ function LoginView(props) {
                 controlId: "formBasicUsername",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 38
+                    lineNumber: 43
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 39
+                            lineNumber: 44
                         },
                         __self: this,
                         children: "Username:"
@@ -28564,7 +28569,7 @@ function LoginView(props) {
                         hasValidation: true,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 40
+                            lineNumber: 45
                         },
                         __self: this,
                         children: [
@@ -28574,9 +28579,10 @@ function LoginView(props) {
                                 onChange: (e)=>setUsername(e.target.value)
                                 ,
                                 placeholder: "Username",
+                                required: true,
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 41
+                                    lineNumber: 46
                                 },
                                 __self: this
                             }),
@@ -28584,7 +28590,7 @@ function LoginView(props) {
                                 type: "invalid",
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 47
+                                    lineNumber: 53
                                 },
                                 __self: this,
                                 children: "Please choose a username."
@@ -28598,14 +28604,14 @@ function LoginView(props) {
                 controlId: "formBasicPassword",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 52
+                    lineNumber: 58
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 53
+                            lineNumber: 59
                         },
                         __self: this,
                         children: "Password:"
@@ -28616,38 +28622,31 @@ function LoginView(props) {
                         value: password,
                         onChange: (e)=>setPassword(e.target.value)
                         ,
-                        __source: {
-                            fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 54
-                        },
-                        __self: this
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control.Feedback, {
+                        required: true,
+                        isInvalid: password && error !== null,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
                             lineNumber: 60
                         },
-                        __self: this,
-                        children: "Looks good!"
+                        __self: this
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control.Feedback, {
                         type: "invalid",
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 61
+                            lineNumber: 68
                         },
                         __self: this,
-                        children: "Please provide your password."
+                        children: password && error !== null ? error : "Please provide your password."
                     })
                 ]
             }),
             /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                 variant: "outline-primary",
                 type: "submit",
-                onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 65
+                    lineNumber: 72
                 },
                 __self: this,
                 children: "Submit"
@@ -28655,7 +28654,7 @@ function LoginView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx("br", {
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 68
+                    lineNumber: 75
                 },
                 __self: this
             }),
@@ -28663,7 +28662,7 @@ function LoginView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx("br", {
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 70
+                    lineNumber: 77
                 },
                 __self: this
             }),
@@ -28671,14 +28670,14 @@ function LoginView(props) {
                 to: `/register`,
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 71
+                    lineNumber: 78
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                     variant: "outline-secondary",
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 72
+                        lineNumber: 79
                     },
                     __self: this,
                     children: "Register"
@@ -28687,7 +28686,7 @@ function LoginView(props) {
         ]
     }));
 }
-_s(LoginView, "Lrw7JeD9zj6OUWhT/IH4OIvPKEk=");
+_s(LoginView, "iiIfXtBa6oLLzKoKeG4PimPThwE=");
 _c = LoginView;
 LoginView.propTypes = {
     register: _propTypesDefault.default.shape({

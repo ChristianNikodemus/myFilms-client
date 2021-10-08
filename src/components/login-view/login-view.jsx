@@ -11,13 +11,14 @@ import "./login-view.scss";
 export function LoginView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [validated, setValidated] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    } else {
+    e.preventDefault();
+    e.stopPropagation();
+    if (form.checkValidity() !== false) {
       axios
         .post("https://my-films-db.herokuapp.com/login", {
           Username: username,
@@ -28,13 +29,17 @@ export function LoginView(props) {
           props.onLoggedIn(data);
         })
         .catch((e) => {
+          setError("Wrong password credentials.");
+          setValidated(false);
           console.log("no such user");
         });
+    } else {
+      setValidated(true);
     }
   };
 
   return (
-    <Form noValidate onSubmit={handleSubmit}>
+    <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group className="mb-3 username" controlId="formBasicUsername">
         <Form.Label>Username:</Form.Label>
         <InputGroup hasValidation>
@@ -43,6 +48,7 @@ export function LoginView(props) {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
+            required
           />
           <Form.Control.Feedback type="invalid">
             Please choose a username.
@@ -56,13 +62,14 @@ export function LoginView(props) {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+          isInvalid={password && error !== null}
         />
-        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         <Form.Control.Feedback type="invalid">
-          Please provide your password.
+          {password && error !== null ? error : "Please provide your password."}
         </Form.Control.Feedback>
       </Form.Group>
-      <Button variant="outline-primary" type="submit" onClick={handleSubmit}>
+      <Button variant="outline-primary" type="submit">
         Submit
       </Button>
       <br />
