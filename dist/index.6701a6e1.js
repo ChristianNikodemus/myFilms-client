@@ -29661,6 +29661,7 @@ var _registrationViewScss = require("./registration-view.scss");
 var _s = $RefreshSig$();
 function RegistrationView(props) {
     _s();
+    const [validated, setValidated] = _react.useState(false);
     const [name, setName] = _react.useState("");
     const [username, setUsername] = _react.useState("");
     const [email, setEmail] = _react.useState("");
@@ -29679,19 +29680,22 @@ function RegistrationView(props) {
     const handleSubmit = (e)=>{
         e.preventDefault();
         let setisValid = formValidation();
-        if (setisValid) _axiosDefault.default.post("https://my-films-db.herokuapp.com/users", {
-            Name: name,
-            Username: username,
-            Email: email,
-            Password: password,
-            Birthday: birthday
-        }).then((response)=>{
-            const data = response.data;
-            console.log(data);
-            window.open("/", "_self");
-        }).catch((e1)=>{
-            console.log("no such user");
-        });
+        if (setisValid) {
+            setValidated(true);
+            _axiosDefault.default.post("https://my-films-db.herokuapp.com/users", {
+                Name: name,
+                Username: username,
+                Email: email,
+                Password: password,
+                Birthday: birthday
+            }).then((response)=>{
+                const data = response.data;
+                console.log(data);
+                window.open("/", "_self");
+            }).catch((e1)=>{
+                console.log("no such user");
+            });
+        }
     };
     const formValidation = ()=>{
         let nameError1 = {
@@ -29733,9 +29737,11 @@ function RegistrationView(props) {
         return isValid;
     };
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
+        noValidate: true,
+        validated: validated,
         __source: {
             fileName: "src/components/registration-view/registration-view.jsx",
-            lineNumber: 84
+            lineNumber: 87
         },
         __self: this,
         children: [
@@ -29744,14 +29750,14 @@ function RegistrationView(props) {
                 controlId: "formBasicName",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 85
+                    lineNumber: 88
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 86
+                            lineNumber: 89
                         },
                         __self: this,
                         children: "Name:"
@@ -29762,21 +29768,30 @@ function RegistrationView(props) {
                         onChange: (e)=>setName(e.target.value)
                         ,
                         placeholder: "Firstname Lastname",
+                        isInvalid: nameError.nameEmpty,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 87
+                            lineNumber: 90
                         },
                         __self: this
                     }),
-                    Object.keys(nameError).map((key)=>{
-                        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            __source: {
-                                fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 94
-                            },
-                            __self: this,
-                            children: nameError[key]
-                        }, key));
+                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control.Feedback, {
+                        type: "invalid",
+                        __source: {
+                            fileName: "src/components/registration-view/registration-view.jsx",
+                            lineNumber: 97
+                        },
+                        __self: this,
+                        children: Object.keys(nameError).map((key)=>{
+                            return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                __source: {
+                                    fileName: "src/components/registration-view/registration-view.jsx",
+                                    lineNumber: 99
+                                },
+                                __self: this,
+                                children: nameError[key]
+                            }, key));
+                        })
                     })
                 ]
             }),
@@ -29785,14 +29800,14 @@ function RegistrationView(props) {
                 controlId: "formBasicUsername",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 97
+                    lineNumber: 103
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 98
+                            lineNumber: 104
                         },
                         __self: this,
                         children: "Username:"
@@ -29803,21 +29818,30 @@ function RegistrationView(props) {
                         onChange: (e)=>setUsername(e.target.value)
                         ,
                         placeholder: "Username",
+                        isInvalid: usernameError.usernameShort,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 99
+                            lineNumber: 105
                         },
                         __self: this
                     }),
-                    Object.keys(usernameError).map((key)=>{
-                        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            __source: {
-                                fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 106
-                            },
-                            __self: this,
-                            children: usernameError[key]
-                        }, key));
+                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control.Feedback, {
+                        type: "invalid",
+                        __source: {
+                            fileName: "src/components/registration-view/registration-view.jsx",
+                            lineNumber: 112
+                        },
+                        __self: this,
+                        children: Object.keys(usernameError).map((key)=>{
+                            return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                __source: {
+                                    fileName: "src/components/registration-view/registration-view.jsx",
+                                    lineNumber: 114
+                                },
+                                __self: this,
+                                children: usernameError[key]
+                            }, key));
+                        })
                     })
                 ]
             }),
@@ -29826,14 +29850,14 @@ function RegistrationView(props) {
                 controlId: "formBasicEmail",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 109
+                    lineNumber: 118
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 110
+                            lineNumber: 119
                         },
                         __self: this,
                         children: "Email address:"
@@ -29844,27 +29868,36 @@ function RegistrationView(props) {
                         value: email,
                         onChange: (e)=>setEmail(e.target.value)
                         ,
+                        isInvalid: emailError.emailNotEmail,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 111
+                            lineNumber: 120
                         },
                         __self: this
                     }),
-                    Object.keys(emailError).map((key)=>{
-                        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            __source: {
-                                fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 118
-                            },
-                            __self: this,
-                            children: emailError[key]
-                        }, key));
+                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control.Feedback, {
+                        type: "invalid",
+                        __source: {
+                            fileName: "src/components/registration-view/registration-view.jsx",
+                            lineNumber: 127
+                        },
+                        __self: this,
+                        children: Object.keys(emailError).map((key)=>{
+                            return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                __source: {
+                                    fileName: "src/components/registration-view/registration-view.jsx",
+                                    lineNumber: 129
+                                },
+                                __self: this,
+                                children: emailError[key]
+                            }, key));
+                        })
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Text, {
                         className: "text-muted",
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 120
+                            lineNumber: 132
                         },
                         __self: this,
                         children: "We'll never share your email with anyone else."
@@ -29874,47 +29907,6 @@ function RegistrationView(props) {
             /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
                 className: "mb-3 password",
                 controlId: "formBasicPassword",
-                __source: {
-                    fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 124
-                },
-                __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
-                        __source: {
-                            fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 125
-                        },
-                        __self: this,
-                        children: "Password:"
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
-                        type: "password",
-                        placeholder: "Password",
-                        value: password,
-                        onChange: (e)=>setPassword(e.target.value)
-                        ,
-                        __source: {
-                            fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 126
-                        },
-                        __self: this
-                    }),
-                    Object.keys(passwordError).map((key)=>{
-                        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            __source: {
-                                fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 133
-                            },
-                            __self: this,
-                            children: passwordError[key]
-                        }, key));
-                    })
-                ]
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                className: "mb-3 birthday",
-                controlId: "formBasicDate",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
                     lineNumber: 136
@@ -29927,6 +29919,56 @@ function RegistrationView(props) {
                             lineNumber: 137
                         },
                         __self: this,
+                        children: "Password:"
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+                        type: "password",
+                        placeholder: "Password",
+                        value: password,
+                        onChange: (e)=>setPassword(e.target.value)
+                        ,
+                        isInvalid: passwordError.passwordMissing,
+                        __source: {
+                            fileName: "src/components/registration-view/registration-view.jsx",
+                            lineNumber: 138
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control.Feedback, {
+                        type: "invalid",
+                        __source: {
+                            fileName: "src/components/registration-view/registration-view.jsx",
+                            lineNumber: 145
+                        },
+                        __self: this,
+                        children: Object.keys(passwordError).map((key)=>{
+                            return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                __source: {
+                                    fileName: "src/components/registration-view/registration-view.jsx",
+                                    lineNumber: 147
+                                },
+                                __self: this,
+                                children: passwordError[key]
+                            }, key));
+                        })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
+                className: "mb-3 birthday",
+                controlId: "formBasicDate",
+                __source: {
+                    fileName: "src/components/registration-view/registration-view.jsx",
+                    lineNumber: 151
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Label, {
+                        __source: {
+                            fileName: "src/components/registration-view/registration-view.jsx",
+                            lineNumber: 152
+                        },
+                        __self: this,
                         children: "Birth date:"
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
@@ -29935,21 +29977,30 @@ function RegistrationView(props) {
                         onChange: (e)=>setBirthday(e.target.value)
                         ,
                         placeholder: "Birthday",
+                        isInvalid: birthdayError.birthdayEmpty,
                         __source: {
                             fileName: "src/components/registration-view/registration-view.jsx",
-                            lineNumber: 138
+                            lineNumber: 153
                         },
                         __self: this
                     }),
-                    Object.keys(birthdayError).map((key)=>{
-                        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-                            __source: {
-                                fileName: "src/components/registration-view/registration-view.jsx",
-                                lineNumber: 145
-                            },
-                            __self: this,
-                            children: birthdayError[key]
-                        }, key));
+                    /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control.Feedback, {
+                        type: "invalid",
+                        __source: {
+                            fileName: "src/components/registration-view/registration-view.jsx",
+                            lineNumber: 160
+                        },
+                        __self: this,
+                        children: Object.keys(birthdayError).map((key)=>{
+                            return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                __source: {
+                                    fileName: "src/components/registration-view/registration-view.jsx",
+                                    lineNumber: 162
+                                },
+                                __self: this,
+                                children: birthdayError[key]
+                            }, key));
+                        })
                     })
                 ]
             }),
@@ -29960,7 +30011,7 @@ function RegistrationView(props) {
                 onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 148
+                    lineNumber: 166
                 },
                 __self: this,
                 children: "Register"
@@ -29968,7 +30019,7 @@ function RegistrationView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx("br", {
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 156
+                    lineNumber: 174
                 },
                 __self: this
             }),
@@ -29976,7 +30027,7 @@ function RegistrationView(props) {
             /*#__PURE__*/ _jsxRuntime.jsx("br", {
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 158
+                    lineNumber: 176
                 },
                 __self: this
             }),
@@ -29984,14 +30035,14 @@ function RegistrationView(props) {
                 to: `/`,
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 159
+                    lineNumber: 177
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
                     variant: "outline-secondary",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 160
+                        lineNumber: 178
                     },
                     __self: this,
                     children: "Login"
@@ -30000,7 +30051,7 @@ function RegistrationView(props) {
         ]
     }));
 }
-_s(RegistrationView, "UrYEt6JwQt/lyRpryZhhmnQk4sk=");
+_s(RegistrationView, "daKfXrBtU3SpS1UxQ5GBBg8A+RI=");
 _c = RegistrationView;
 RegistrationView.propTypes = {
     register: _propTypesDefault.default.shape({
