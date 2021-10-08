@@ -12,24 +12,28 @@ export function LoginView(props) {
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    /* Send a request to the server for authentication */
-    axios
-      .post("https://my-films-db.herokuapp.com/login", {
-        Username: username,
-        Password: password,
-      })
-      .then((response) => {
-        const data = response.data;
-        props.onLoggedIn(data);
-      })
-      .catch((e) => {
-        console.log("no such user");
-      });
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      axios
+        .post("https://my-films-db.herokuapp.com/login", {
+          Username: username,
+          Password: password,
+        })
+        .then((response) => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch((e) => {
+          console.log("no such user");
+        });
+    }
   };
 
   return (
-    <Form>
+    <Form noValidate>
       <Form.Group className="mb-3 username" controlId="formBasicUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
@@ -37,6 +41,7 @@ export function LoginView(props) {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
+          required
         />
       </Form.Group>
       <Form.Group className="mb-3 password" controlId="formBasicPassword">
@@ -46,7 +51,12 @@ export function LoginView(props) {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
+        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">
+          Please provide your password.
+        </Form.Control.Feedback>
       </Form.Group>
       <Button variant="outline-primary" type="submit" onClick={handleSubmit}>
         Submit
