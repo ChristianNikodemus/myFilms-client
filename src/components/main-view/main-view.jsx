@@ -10,10 +10,10 @@ import { RegistrationView } from "../registration-view/registration-view";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import { ProfileView } from "../profile-view/profile-view";
+import { NavbarView } from "../navbar-view/navbar-view";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 
 import "./main-view.scss";
 
@@ -23,9 +23,9 @@ export class MainView extends React.Component {
     // Initial state is set to null
     this.state = {
       movies: [],
-      //selectedMovie: null,
       user: null,
-      register: true,
+      //selectedMovie: null,
+      //register: true,
     };
   }
 
@@ -46,12 +46,6 @@ export class MainView extends React.Component {
     });
   }
   */
-
-  onRegistration(register) {
-    this.setState({
-      register,
-    });
-  }
 
   onLoggedIn(authData) {
     console.log(authData);
@@ -90,18 +84,11 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, register } = this.state;
+    const { movies, user } = this.state;
 
     return (
       <Router>
-        <Button
-          variant="outline-primary"
-          onClick={() => {
-            this.onLoggedOut();
-          }}
-        >
-          Logout
-        </Button>
+        <NavbarView user={user} />
         <Row className="justify-content-md-center main-view">
           <Route
             exact

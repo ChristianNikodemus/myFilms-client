@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -10,34 +11,49 @@ import "./login-view.scss";
 export function LoginView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [validated, setValidated] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
+    const form = e.currentTarget;
     e.preventDefault();
-    /* Send a request to the server for authentication */
-    axios
-      .post("https://my-films-db.herokuapp.com/login", {
-        Username: username,
-        Password: password,
-      })
-      .then((response) => {
-        const data = response.data;
-        props.onLoggedIn(data);
-      })
-      .catch((e) => {
-        console.log("no such user");
-      });
+    e.stopPropagation();
+    if (form.checkValidity() !== false) {
+      axios
+        .post("https://my-films-db.herokuapp.com/login", {
+          Username: username,
+          Password: password,
+        })
+        .then((response) => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch((e) => {
+          setError("Wrong password credentials.");
+          setValidated(false);
+          console.log("no such user");
+        });
+    } else {
+      setValidated(true);
+    }
   };
 
   return (
-    <Form>
+    <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group className="mb-3 username" controlId="formBasicUsername">
         <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-        />
+        <InputGroup hasValidation>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please choose a username.
+          </Form.Control.Feedback>
+        </InputGroup>
       </Form.Group>
       <Form.Group className="mb-3 password" controlId="formBasicPassword">
         <Form.Label>Password:</Form.Label>
@@ -46,9 +62,14 @@ export function LoginView(props) {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+          isInvalid={password && error !== null}
         />
+        <Form.Control.Feedback type="invalid">
+          {password && error !== null ? error : "Please provide your password."}
+        </Form.Control.Feedback>
       </Form.Group>
-      <Button variant="outline-primary" type="submit" onClick={handleSubmit}>
+      <Button variant="outline-primary" type="submit">
         Submit
       </Button>
       <br />
