@@ -41394,6 +41394,6 @@ exports.default = NavbarView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi","react-bootstrap/Navbar":"eYZQl","react-bootstrap/Container":"2PRIq","react-bootstrap/Nav":"io07g","./navbar-view.scss":"eDP1C"}],"eDP1C":[function() {},{}]},["2LXlr","4cHv3","dLPEP"], "dLPEP", "parcelRequired96c")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Navbar":"eYZQl","react-bootstrap/Container":"2PRIq","react-bootstrap/Nav":"io07g","react-router-dom":"cpyQW","./navbar-view.scss":"eDP1C","@parcel/transformer-js/src/esmodule-helpers.js":"5RunN","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"boICi"}],"eDP1C":[function() {},{}]},["2LXlr","4cHv3","dLPEP"], "dLPEP", "parcelRequired96c")
 
 //# sourceMappingURL=index.6701a6e1.js.map
