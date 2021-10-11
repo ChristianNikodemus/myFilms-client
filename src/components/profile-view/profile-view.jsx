@@ -47,7 +47,7 @@ export class ProfileView extends React.Component {
       });
   }
 
-  removeFavouriteMovie() {
+  removeFavouriteMovie(e, movie) {
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("user");
 
@@ -171,40 +171,37 @@ export class ProfileView extends React.Component {
           <div className="text-center">No Saved Movies.</div>
         )}
 
-        {FavouriteMovies.length > 0 &&
-          movies.map((movie) => {
-            if (
-              movie._id ===
-              FavouriteMovies.find((favMovie) => favMovie === movie._id)
-            ) {
+        {FavouriteMovies.length > 0 && (
+          <CardDeck className="movie-card-deck">
+            {FavouriteMovies.map((movieId) => {
+              const movie = movies.find((m) => movieId === m._id);
               return (
-                <CardDeck className="movie-card-deck">
-                  <Card key={movie._id}>
-                    <Card.Img
-                      style={{ width: "18rem" }}
-                      className="movieCard"
-                      variant="top"
-                      src={movie.ImageURL}
-                    />
-                    <Card.Body>
-                      <Card.Title className="movie-card-title">
-                        {movie.Title}
-                      </Card.Title>
-                      <Button
-                        size="sm"
-                        className="profile-button remove-favourite"
-                        variant="danger"
-                        value={movie._id}
-                        onClick={(e) => this.removeFavouriteMovie(e, movie)}
-                      >
-                        Remove
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                </CardDeck>
+                <Card key={movie._id}>
+                  <Card.Img
+                    style={{ width: "18rem" }}
+                    className="movieCard"
+                    variant="top"
+                    src={movie.ImageURL}
+                  />
+                  <Card.Body>
+                    <Card.Title className="movie-card-title">
+                      {movie.Title}
+                    </Card.Title>
+                    <Button
+                      size="sm"
+                      className="profile-button remove-favourite"
+                      variant="danger"
+                      value={movie._id}
+                      onClick={(e) => this.removeFavouriteMovie(e, movie)}
+                    >
+                      Remove
+                    </Button>
+                  </Card.Body>
+                </Card>
               );
-            }
-          })}
+            })}
+          </CardDeck>
+        )}
 
         {["info"].map((variant, idx) => (
           <Alert key={idx} variant={variant}>
