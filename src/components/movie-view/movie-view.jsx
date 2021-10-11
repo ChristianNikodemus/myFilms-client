@@ -20,9 +20,14 @@ export class MovieView extends React.Component {
         }
       )
       .then((response) => {
-        alert(`Added to Favorites List`);
+        alert(`Added to favorites list`);
       })
       .catch(function (error) {
+        if (error.response.status === 400) {
+          alert("The movie was already added to favourites list.");
+        } else {
+          alert("Something went wrong.");
+        }
         console.log(error);
       });
   }
