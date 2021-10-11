@@ -1,6 +1,6 @@
 Welcome to the front end of myFilms Application. This project uses the front end framework: React, to compliment my API Database!
 
-Objective: Using React, build the client-side for an application called myFlix based on its existing server-side code (REST API and database).
+Objective: Using React, build the client-side for an application called myFlims based on its existing server-side code (REST API and database).
 
 Technical Features:
 
