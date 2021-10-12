@@ -213,7 +213,6 @@ export class ProfileView extends React.Component {
           noValidate
           validated={validated}
           className="update-form"
-          /*
           onSubmit={(e) =>
             this.handleUpdate(
               e,
@@ -224,7 +223,6 @@ export class ProfileView extends React.Component {
               this.Birthday
             )
           }
-          */
         >
           <Form.Group controlId="formName">
             <Form.Label className="form-label">Name:</Form.Label>
@@ -289,7 +287,7 @@ export class ProfileView extends React.Component {
           type="submit"
           className="update_btn"
         >
-          Update
+          Update Information
         </Button>
 
         {["danger"].map((variant, idx) => (
