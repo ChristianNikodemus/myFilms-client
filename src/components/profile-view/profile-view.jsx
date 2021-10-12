@@ -121,12 +121,12 @@ export class ProfileView extends React.Component {
     this.Username = input;
   }
 
-  setPassword(input) {
-    this.Password = input;
-  }
-
   setEmail(input) {
     this.Email = input;
+  }
+
+  setPassword(input) {
+    this.Password = input;
   }
 
   setBirthday(input) {
@@ -213,6 +213,7 @@ export class ProfileView extends React.Component {
           noValidate
           validated={validated}
           className="update-form"
+          /*
           onSubmit={(e) =>
             this.handleUpdate(
               e,
@@ -223,6 +224,7 @@ export class ProfileView extends React.Component {
               this.Birthday
             )
           }
+          */
         >
           <Form.Group controlId="formName">
             <Form.Label className="form-label">Name:</Form.Label>
@@ -274,7 +276,16 @@ export class ProfileView extends React.Component {
 
         <Button
           variant="outline-primary"
-          onClick={(e) => this.handleUpdate(e)}
+          onClick={(e) =>
+            this.handleUpdate(
+              e,
+              this.Name,
+              this.Username,
+              this.Email,
+              this.Password,
+              this.Birthday
+            )
+          }
           type="submit"
           className="update_btn"
         >
