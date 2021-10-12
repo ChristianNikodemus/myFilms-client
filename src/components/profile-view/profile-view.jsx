@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Alert, Button, Card, CardDeck, Form, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./profile-view.scss";
 
 export class ProfileView extends React.Component {
@@ -157,7 +158,8 @@ export class ProfileView extends React.Component {
   render() {
     const { FavouriteMovies, validated } = this.state;
     const { movies } = this.props;
-    console.log(FavouriteMovies);
+
+    const imgLink = "https://my-films-db.herokuapp.com/";
 
     return (
       <div>
@@ -178,15 +180,16 @@ export class ProfileView extends React.Component {
               return (
                 <Card key={movie._id}>
                   <Card.Img
-                    style={{ width: "18rem" }}
+                    style={{ width: "auto" }}
                     className="movieCard"
                     variant="top"
-                    src={movie.ImageURL}
+                    src={imgLink + movie.ImagePath}
                   />
                   <Card.Body>
                     <Card.Title className="movie-card-title">
-                      {movie.Title}
+                      <Link to={`/movies/${movie._id}`}>{movie.Title}</Link>
                     </Card.Title>
+
                     <Button
                       size="sm"
                       className="profile-button remove-favourite"
