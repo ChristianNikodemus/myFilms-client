@@ -272,7 +272,12 @@ export class ProfileView extends React.Component {
           </Form.Group>
         </Form>
 
-        <Button variant="outline-primary" type="submit" className="update_btn">
+        <Button
+          variant="outline-primary"
+          onClick={(e) => this.handleUpdate(e)}
+          type="submit"
+          className="update_btn"
+        >
           Update
         </Button>
 

@@ -30876,6 +30876,8 @@ class ProfileView extends _reactDefault.default.Component {
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                     variant: "outline-primary",
+                    onClick: (e)=>this.handleUpdate(e)
+                    ,
                     type: "submit",
                     className: "update_btn",
                     __source: {
@@ -30891,13 +30893,13 @@ class ProfileView extends _reactDefault.default.Component {
                         variant: variant,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 280
+                            lineNumber: 285
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx("h5", {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 281
+                                lineNumber: 286
                             },
                             __self: this,
                             children: "Delete your Account"
@@ -30910,7 +30912,7 @@ class ProfileView extends _reactDefault.default.Component {
                     ,
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 285
+                        lineNumber: 290
                     },
                     __self: this,
                     children: "Delete Account"
