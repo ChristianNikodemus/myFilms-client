@@ -68,7 +68,15 @@ export class ProfileView extends React.Component {
       });
   }
 
-  handleUpdate(e, newName, newUsername, newPassword, newEmail, newBirthday) {
+  handleUpdate(
+    e,
+    newName,
+    newUsername,
+    newPassword,
+    newEmail,
+    newBirthday,
+    token
+  ) {
     this.setState({
       validated: null,
     });
