@@ -68,15 +68,7 @@ export class ProfileView extends React.Component {
       });
   }
 
-  handleUpdate(
-    e,
-    newName,
-    newUsername,
-    newPassword,
-    newEmail,
-    newBirthday,
-    token
-  ) {
+  handleUpdate(e, newName, newUsername, newPassword, newEmail, newBirthday) {
     this.setState({
       validated: null,
     });
@@ -96,16 +88,19 @@ export class ProfileView extends React.Component {
     const username = localStorage.getItem("user");
 
     axios
-      .put(`https://my-films-db.herokuapp.com/users/${username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-        data: {
-          Name: newName ? newName : this.state.Name,
-          Username: newUsername ? newUsername : this.state.Username,
-          Email: newEmail ? newEmail : this.state.Email,
-          Password: newPassword ? newPassword : this.state.Password,
-          Birthday: newBirthday ? newBirthday : this.state.Birthday,
+      .put(
+        `https://my-films-db.herokuapp.com/users/${username}`,
+        {
+          data: {
+            Name: newName ? newName : this.state.Name,
+            Username: newUsername ? newUsername : this.state.Username,
+            Email: newEmail ? newEmail : this.state.Email,
+            Password: newPassword ? newPassword : this.state.Password,
+            Birthday: newBirthday ? newBirthday : this.state.Birthday,
+          },
         },
-      })
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
       .then((response) => {
         alert("Saved Changes");
         this.setState({
