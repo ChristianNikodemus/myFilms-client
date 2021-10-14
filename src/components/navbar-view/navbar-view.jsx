@@ -20,9 +20,10 @@ export class NavbarView extends React.Component {
 
   render() {
     const { user } = this.props;
-    const profile = `/users/${user}`;
 
     if (!user) return null;
+
+    const profile = `/users/${user.Username}`;
 
     return (
       <Navbar bg="light" variant="light">
@@ -32,7 +33,7 @@ export class NavbarView extends React.Component {
           </Link>
           <Nav className="me-auto">
             <Nav.Link as={Link} to={profile}>
-              myProfile
+              Go to {user.Username}
             </Nav.Link>
             <Nav.Link to={`/`} onClick={this.onLoggedOut}>
               Logout
