@@ -30533,7 +30533,7 @@ class ProfileView extends _reactDefault.default.Component {
         }).then((response)=>{
             alert("Saved Changes");
             onSubmit(response.data);
-            localStorage.setItem("user", this.state.Username);
+            localStorage.setItem("user", response.data.Username);
         //window.open(`/users/${username}`, "_self");
         }).catch(function(error) {
             console.log(error);
