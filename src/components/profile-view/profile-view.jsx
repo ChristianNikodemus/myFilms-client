@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Alert, Button, Card, CardDeck, Form, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 import "./profile-view.scss";
 
 export class ProfileView extends React.Component {
@@ -19,35 +21,8 @@ export class ProfileView extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const accessToken = localStorage.getItem("token");
-    if (accessToken !== null) {
-      this.getUser(accessToken);
-    }
-  }
-
-  getUser(token) {
-    const username = localStorage.getItem("user");
-    axios
-      .get(`https://my-films-db.herokuapp.com/users/${username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        this.setState({
-          Name: response.data.Name,
-          Username: response.data.Username,
-          Email: response.data.Email,
-          Password: response.data.Password,
-          Birthday: response.data.Birthday,
-          FavouriteMovies: response.data.FavouriteMovies,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   removeFavouriteMovie(e, movie) {
+    const { onSubmit } = this.props;
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("user");
 
@@ -58,16 +33,17 @@ export class ProfileView extends React.Component {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .then(() => {
+      .then((response) => {
         alert("Movie was removed");
-        this.componentDidMount();
+        onSubmit(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  handleUpdate(e, newName, newUsername, newPassword, newEmail, newBirthday) {
+  handleUpdate(e, newName, newUsername, newEmail, newPassword, newBirthday) {
+    const { onSubmit } = this.props;
     this.setState({
       validated: null,
     });
@@ -87,27 +63,22 @@ export class ProfileView extends React.Component {
     const username = localStorage.getItem("user");
 
     axios
-      .put(`https://my-films-db.herokuapp.com/users/${username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-        data: {
-          Name: newName ? newName : this.state.Name,
-          Username: newUsername ? newUsername : this.state.Username,
-          Email: newEmail ? newEmail : this.state.Email,
-          Password: newPassword ? newPassword : this.state.Password,
-          Birthday: newBirthday ? newBirthday : this.state.Birthday,
+      .put(
+        `https://my-films-db.herokuapp.com/users/${username}`,
+        {
+          Name: newName,
+          Username: newUsername,
+          Email: newEmail,
+          Password: newPassword,
+          Birthday: newBirthday,
         },
-      })
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
       .then((response) => {
         alert("Saved Changes");
-        this.setState({
-          Name: response.data.Name,
-          Username: response.data.Username,
-          Email: response.data.Email,
-          Password: response.data.Password,
-          Birthday: response.data.Birthday,
-        });
-        localStorage.setItem("user", this.state.Username);
-        window.open(`/users/${username}`, "_self");
+        onSubmit(response.data);
+        localStorage.setItem("user", response.data.Username);
+        //window.open(`/users/${username}`, "_self");
       })
       .catch(function (error) {
         console.log(error);
@@ -121,12 +92,12 @@ export class ProfileView extends React.Component {
     this.Username = input;
   }
 
-  setPassword(input) {
-    this.Password = input;
-  }
-
   setEmail(input) {
     this.Email = input;
+  }
+
+  setPassword(input) {
+    this.Password = input;
   }
 
   setBirthday(input) {
@@ -155,38 +126,44 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { FavouriteMovies, validated } = this.state;
-    const { movies } = this.props;
-    console.log(FavouriteMovies);
+    const { validated } = this.state;
+    const { movies, user } = this.props;
+
+    const imgLink = "https://my-films-db.herokuapp.com/";
 
     return (
       <div>
+        <h2 style={{ textAlign: "center" }}>
+          Hello {user.Username}, welcome back!
+        </h2>
+
         {["primary"].map((variant, idx) => (
           <Alert key={idx} variant={variant}>
             <h5>Favourites Movies</h5>
           </Alert>
         ))}
 
-        {FavouriteMovies.length === 0 && (
+        {user.FavouriteMovies.length === 0 && (
           <div className="text-center">No Saved Movies.</div>
         )}
 
-        {FavouriteMovies.length > 0 && (
+        {user.FavouriteMovies.length > 0 && (
           <CardDeck className="movie-card-deck">
-            {FavouriteMovies.map((movieId) => {
+            {user.FavouriteMovies.map((movieId) => {
               const movie = movies.find((m) => movieId === m._id);
               return (
                 <Card key={movie._id}>
                   <Card.Img
-                    style={{ width: "18rem" }}
+                    style={{ width: "auto" }}
                     className="movieCard"
                     variant="top"
-                    src={movie.ImageURL}
+                    src={imgLink + movie.ImagePath}
                   />
                   <Card.Body>
                     <Card.Title className="movie-card-title">
-                      {movie.Title}
+                      <Link to={`/movies/${movie._id}`}>{movie.Title}</Link>
                     </Card.Title>
+
                     <Button
                       size="sm"
                       className="profile-button remove-favourite"
@@ -216,11 +193,11 @@ export class ProfileView extends React.Component {
           onSubmit={(e) =>
             this.handleUpdate(
               e,
-              this.Name,
-              this.Username,
-              this.Email,
-              this.Password,
-              this.Birthday
+              this.Name || user.Name,
+              this.Username || user.Username,
+              this.Email || user.Email,
+              this.Password || user.Password,
+              this.Birthday || user.Birthday
             )
           }
         >
@@ -228,7 +205,7 @@ export class ProfileView extends React.Component {
             <Form.Label className="form-label">Name:</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Change Name"
+              placeholder={user.Name}
               onChange={(e) => this.setName(e.target.value)}
             />
           </Form.Group>
@@ -237,7 +214,7 @@ export class ProfileView extends React.Component {
             <Form.Label className="form-label">Username:</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Change Username"
+              placeholder={user.Username}
               onChange={(e) => this.setUsername(e.target.value)}
             />
           </Form.Group>
@@ -246,7 +223,7 @@ export class ProfileView extends React.Component {
             <Form.Label className="form-label">Email:</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Change Email"
+              placeholder={user.Email}
               onChange={(e) => this.setEmail(e.target.value)}
             />
           </Form.Group>
@@ -263,7 +240,7 @@ export class ProfileView extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="formBasicDate">
-            <Form.Label className="form-label">Birthday</Form.Label>
+            <Form.Label className="form-label">Birthday:</Form.Label>
             <Form.Control
               type="date"
               placeholder="Change Birthday"
@@ -272,8 +249,22 @@ export class ProfileView extends React.Component {
           </Form.Group>
         </Form>
 
-        <Button variant="outline-primary" type="submit" className="update_btn">
-          Update
+        <Button
+          variant="outline-primary"
+          onClick={(e) =>
+            this.handleUpdate(
+              e,
+              this.Name || user.Name,
+              this.Username || user.Username,
+              this.Email || user.Email,
+              this.Password || user.Password,
+              this.Birthday || user.Birthday
+            )
+          }
+          type="submit"
+          className="update_btn"
+        >
+          Update Information
         </Button>
 
         {["danger"].map((variant, idx) => (

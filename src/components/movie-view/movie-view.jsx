@@ -8,6 +8,7 @@ import "./movie-view.scss";
 
 export class MovieView extends React.Component {
   addFavorite() {
+    const { onSubmit } = this.props;
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("user");
 
@@ -20,15 +21,21 @@ export class MovieView extends React.Component {
         }
       )
       .then((response) => {
-        alert(`Added to Favorites List`);
+        alert(`Added to favorites list`);
+        onSubmit(response.data);
       })
       .catch(function (error) {
+        if (error.response.status === 400) {
+          alert("The movie was already added to favourites list.");
+        } else {
+          alert("Something went wrong.");
+        }
         console.log(error);
       });
   }
 
   render() {
-    const { movie, onBackClick } = this.props;
+    const { isFavourited, movie, onBackClick } = this.props;
 
     const imgLink = "https://my-films-db.herokuapp.com/";
 
@@ -78,8 +85,9 @@ export class MovieView extends React.Component {
           size="lg"
           value={movie._id}
           onClick={(e) => this.addFavorite(e, movie)}
+          disabled={isFavourited}
         >
-          Add to Favourites
+          {isFavourited ? "Already Favourited" : "Add to Favourites"}
         </Button>
         <br />
         <Button

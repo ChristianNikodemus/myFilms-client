@@ -35,22 +35,30 @@ export class MainView extends React.Component {
       this.setState({
         user: localStorage.getItem("user"),
       });
+      this.getUser(accessToken, localStorage.getItem("user"));
       this.getMovies(accessToken);
     }
   }
 
-  /*
-  setSelectedMovie(movie) {
-    this.setState({
-      selectedMovie: movie,
-    });
+  getUser(token, username) {
+    axios
+      .get(`https://my-films-db.herokuapp.com/users/${username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.setState({
+          user: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-  */
 
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
-      user: authData.user.Username,
+      user: authData.user,
     });
 
     localStorage.setItem("token", authData.token);
@@ -124,11 +132,18 @@ export class MainView extends React.Component {
           <Route
             path="/movies/:movieId"
             render={({ match, history }) => {
+              const movie = movies.find((m) => m._id === match.params.movieId);
               return (
                 <Col md={8}>
                   <MovieView
-                    movie={movies.find((m) => m._id === match.params.movieId)}
+                    movie={movie}
                     onBackClick={() => history.goBack()}
+                    onSubmit={(user) => this.setState({ user })}
+                    isFavourited={Boolean(
+                      user.FavouriteMovies.find(
+                        (movieId) => movieId === movie._id
+                      )
+                    )}
                   />
                 </Col>
               );
@@ -202,7 +217,12 @@ export class MainView extends React.Component {
               if (movies.length === 0) return;
               return (
                 <Col>
-                  <ProfileView history={history} movies={movies} />
+                  <ProfileView
+                    history={history}
+                    movies={movies}
+                    onSubmit={(user) => this.setState({ user })}
+                    user={user}
+                  />
                 </Col>
               );
             }}
