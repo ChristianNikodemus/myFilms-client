@@ -1,9 +1,16 @@
 import React from "react";
 import axios from "axios";
 
+import { connect } from "react-redux";
+
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-import { MovieCard } from "../movie-card/movie-card";
+import { setMovies } from "../../actions/actions";
+
+// haven't written this yet
+import MoviesList from "../movies-list/movies-list";
+
+//import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
@@ -17,12 +24,12 @@ import Col from "react-bootstrap/Col";
 
 import "./main-view.scss";
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
   constructor() {
     super();
     // Initial state is set to null
     this.state = {
-      movies: [],
+      //movies: [],
       user: null,
       //selectedMovie: null,
       //register: true,
@@ -55,6 +62,21 @@ export class MainView extends React.Component {
       });
   }
 
+  //   Get all movies in DB
+  getMovies(token) {
+    axios
+      .get("https://my-films-db.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.props.setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
@@ -66,23 +88,6 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  //   Get all movies in DB
-  getMovies(token) {
-    axios
-      .get("https://my-films-db.herokuapp.com/movies", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   onLoggedOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -92,7 +97,8 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
+    let { movies } = this.props;
+    let { user } = this.state;
 
     return (
       <Router>
@@ -109,11 +115,14 @@ export class MainView extends React.Component {
                   </Col>
                 );
               if (movies.length === 0) return <div className="main-view" />;
-              return movies.map((m) => (
+              return <MoviesList movies={movies} />;
+              {
+                /*movies.map((m) => (
                 <Col md={3} key={m._id}>
                   <MovieCard movie={m} />
                 </Col>
-              ));
+              ));*/
+              }
             }}
           />
 
@@ -233,4 +242,9 @@ export class MainView extends React.Component {
   }
 }
 
-export default MainView;
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+
+//export default MainView;
+export default connect(mapStateToProps, { setMovies })(MainView);
