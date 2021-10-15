@@ -229,9 +229,7 @@ export class ProfileView extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label className="form-label">
-              Password:<span className="required">*</span>
-            </Form.Label>
+            <Form.Label className="form-label">Password:</Form.Label>
             <Form.Control
               type="password"
               placeholder="New Password"
@@ -240,7 +238,9 @@ export class ProfileView extends React.Component {
           </Form.Group>
 
           <Form.Group controlId="formBasicDate">
-            <Form.Label className="form-label">Birthday:</Form.Label>
+            <Form.Label className="form-label">
+              Birthday: ({user.Birthday.slice(0, 10)})
+            </Form.Label>
             <Form.Control
               type="date"
               placeholder="Change Birthday"
