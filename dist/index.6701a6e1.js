@@ -30691,6 +30691,7 @@ class ProfileView extends _reactDefault.default.Component {
                     }, idx)
                 ),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                    className: "delete_btn",
                     variant: "danger",
                     onClick: (e)=>this.handleDeleteUser(e)
                     ,

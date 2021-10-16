@@ -273,7 +273,11 @@ export class ProfileView extends React.Component {
           </Alert>
         ))}
 
-        <Button variant="danger" onClick={(e) => this.handleDeleteUser(e)}>
+        <Button
+          className="delete_btn"
+          variant="danger"
+          onClick={(e) => this.handleDeleteUser(e)}
+        >
           Delete Account
         </Button>
       </div>
