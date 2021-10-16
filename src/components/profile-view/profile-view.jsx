@@ -287,12 +287,7 @@ export class ProfileView extends React.Component {
 
 ProfileView.propTypes = {
   user: PropTypes.shape({
-    FavouriteMovies: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        Title: PropTypes.string.isRequired,
-      })
-    ),
+    FavouriteMovies: PropTypes.arrayOf(PropTypes.string),
     Username: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
     Birthday: PropTypes.string,
