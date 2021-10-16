@@ -41,6 +41,11 @@ export function RegistrationView(props) {
           window.open("/", "_self");
         })
         .catch((e) => {
+          if (e.response.status === 400) {
+            alert("User already exists");
+          } else {
+            alert("Uh oh, something went wrong.");
+          }
           console.log("no such user");
         });
     }
