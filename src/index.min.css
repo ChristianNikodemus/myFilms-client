@@ -1,1 +1,1 @@
-.my-films{color:#4682b4}Container{width:100%}
+:root{--background-color:#0376e3}.container{background-color:var(--background-color)}

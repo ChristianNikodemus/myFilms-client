@@ -1,3 +1,7 @@
-.my-films {
-  color: steelblue;
+:root {
+  --background-color: #0376e3;
+}
+
+.container {
+  background-color: var(--background-color);
 }

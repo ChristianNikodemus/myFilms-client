@@ -1,16 +1,64 @@
-.my-films {
-  color: steelblue;
-}
 
-Container {
-  width: 100%;
-}
 .movie-genre span.value:not(:last-child):after,
 .movie-director span.value:not(:last-child):after {
   content: ", ";
 }
-Form {
-  margin-top: 10%;
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&display=swap");
+:root {
+  --text-primary-color: #ffffff;
+  --text-secondary-color: #828d99;
+  --text-third-color: #bec2cc;
+  --background-color: #0376e3;
+  --background-secondary-color: #1e2127;
+}
+.form {
+  margin: 10% auto;
+  padding: 2em 2.7em;
+  width: 430px;
+  background-color: var(--background-secondary-color);
+  border-radius: 2px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+.welcome-text {
+  font-family: "Archivo", sans-serif;
+  text-align: center;
+  font-weight: 500;
+  font-size: 38px;
+  letter-spacing: -0.8;
+  line-height: 1.316;
+  color: var(--text-primary-color);
+}
+.login-text {
+  font-family: "Archivo", sans-serif;
+  text-align: center;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 1.6;
+  color: var(--text-secondary-color);
+}
+.label {
+  font-family: "Archivo", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 1.6;
+  color: var(--text-third-color);
+}
+.login_btn {
+  width: 108px;
+  font-family: "Archivo", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 1.6;
+  color: var(--text-primary-color);
+  margin: 2em 0;
+}
+.register_btn {
+  border-top: 1px solid #30333a;
+  padding-top: 2em;
+  text-align: center;
 }
 
 Form {

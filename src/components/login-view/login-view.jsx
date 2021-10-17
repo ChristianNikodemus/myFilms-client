@@ -39,46 +39,59 @@ export function LoginView(props) {
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Form.Group className="mb-3 username" controlId="formBasicUsername">
-        <Form.Label>Username:</Form.Label>
-        <InputGroup hasValidation>
+    <div className="d-flex color-overlay">
+      <Form
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+        className="form"
+      >
+        <h1 className="welcome-text">Great to meet you!</h1>
+        <p className="login-text">Login to your account</p>
+        <Form.Group className="mb-3 username" controlId="formBasicUsername">
+          <Form.Label className="label">Username:</Form.Label>
+          <InputGroup hasValidation>
+            <Form.Control
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please choose a username.
+            </Form.Control.Feedback>
+          </InputGroup>
+        </Form.Group>
+        <Form.Group className="mb-3 password" controlId="formBasicPassword">
+          <Form.Label className="label">Password:</Form.Label>
           <Form.Control
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
+            isInvalid={password && error !== null}
           />
           <Form.Control.Feedback type="invalid">
-            Please choose a username.
+            {password && error !== null
+              ? error
+              : "Please provide your password."}
           </Form.Control.Feedback>
-        </InputGroup>
-      </Form.Group>
-      <Form.Group className="mb-3 password" controlId="formBasicPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          isInvalid={password && error !== null}
-        />
-        <Form.Control.Feedback type="invalid">
-          {password && error !== null ? error : "Please provide your password."}
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Button variant="outline-primary" type="submit">
-        Submit
-      </Button>
-      <br />
-      Don't have an account? Register Here!
-      <br />
-      <Link to={`/register`}>
-        <Button variant="outline-secondary">Register</Button>
-      </Link>
-    </Form>
+        </Form.Group>
+        <div className="login_btn">
+          <Button variant="primary" type="submit">
+            Login
+          </Button>
+        </div>
+
+        <div className="register_btn d-grid gap-2">
+          <Link to={`/register`}>
+            <Button variant="primary w-100">Register</Button>
+          </Link>
+        </div>
+      </Form>
+    </div>
   );
 }
 

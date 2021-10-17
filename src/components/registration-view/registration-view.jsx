@@ -66,6 +66,7 @@ export function RegistrationView(props) {
     if (username.trim().length < 4) {
       usernameError.usernameShort = "Username requires at least 4 characters.";
       isValid = false;
+      0;
     }
     if (!(email && email.includes(".") && email.includes("@"))) {
       emailError.emailNotEmail = "Email address is not valid.";
