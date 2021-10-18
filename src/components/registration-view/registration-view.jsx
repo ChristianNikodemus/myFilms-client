@@ -90,100 +90,103 @@ export function RegistrationView(props) {
   };
 
   return (
-    <Form noValidate validated={validated}>
-      <Form.Group className="mb-3 name" controlId="formBasicName">
-        <Form.Label>Name:</Form.Label>
-        <Form.Control
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Firstname Lastname"
-          isInvalid={nameError.nameEmpty}
-        />
-        <Form.Control.Feedback type="invalid">
-          {Object.keys(nameError).map((key) => {
-            return <div key={key}>{nameError[key]}</div>;
-          })}
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className="mb-3 username" controlId="formBasicUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-          isInvalid={usernameError.usernameShort}
-        />
-        <Form.Control.Feedback type="invalid">
-          {Object.keys(usernameError).map((key) => {
-            return <div key={key}>{usernameError[key]}</div>;
-          })}
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className="mb-3 email" controlId="formBasicEmail">
-        <Form.Label>Email address:</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          isInvalid={emailError.emailNotEmail}
-        />
-        <Form.Control.Feedback type="invalid">
-          {Object.keys(emailError).map((key) => {
-            return <div key={key}>{emailError[key]}</div>;
-          })}
-        </Form.Control.Feedback>
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3 password" controlId="formBasicPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          isInvalid={passwordError.passwordMissing}
-        />
-        <Form.Control.Feedback type="invalid">
-          {Object.keys(passwordError).map((key) => {
-            return <div key={key}>{passwordError[key]}</div>;
-          })}
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className="mb-3 birthday" controlId="formBasicDate">
-        <Form.Label>Birth date:</Form.Label>
-        <Form.Control
-          type="date"
-          value={birthday}
-          onChange={(e) => setBirthday(e.target.value)}
-          placeholder="Birthday"
-          isInvalid={birthdayError.birthdayEmpty}
-        />
-        <Form.Control.Feedback type="invalid">
-          {Object.keys(birthdayError).map((key) => {
-            return <div key={key}>{birthdayError[key]}</div>;
-          })}
-        </Form.Control.Feedback>
-      </Form.Group>
-      <Button
-        variant="outline-primary"
-        className="registerBtn"
-        type="submit"
-        onClick={handleSubmit}
-      >
-        Register
-      </Button>
-      <br />
-      Already have an account? Log in here!
-      <br />
-      <Link to={`/`}>
-        <Button variant="outline-secondary">Login</Button>
-      </Link>
-    </Form>
+    <div className="d-flex justify-content-center">
+      <Form noValidate validated={validated} className="form">
+        <h1 className="welcome-text">Great to meet you!</h1>
+        <p className="login-text">Create an account</p>
+        <Form.Group className="mb-3 name" controlId="formBasicName">
+          <Form.Label className="label">Name:</Form.Label>
+          <Form.Control
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Firstname Lastname"
+            isInvalid={nameError.nameEmpty}
+          />
+          <Form.Control.Feedback type="invalid">
+            {Object.keys(nameError).map((key) => {
+              return <div key={key}>{nameError[key]}</div>;
+            })}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group className="mb-3 username" controlId="formBasicUsername">
+          <Form.Label className="label">Username:</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            isInvalid={usernameError.usernameShort}
+          />
+          <Form.Control.Feedback type="invalid">
+            {Object.keys(usernameError).map((key) => {
+              return <div key={key}>{usernameError[key]}</div>;
+            })}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group className="mb-3 email" controlId="formBasicEmail">
+          <Form.Label className="label">Email address:</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            isInvalid={emailError.emailNotEmail}
+          />
+          <Form.Control.Feedback type="invalid">
+            {Object.keys(emailError).map((key) => {
+              return <div key={key}>{emailError[key]}</div>;
+            })}
+          </Form.Control.Feedback>
+          <Form.Text className="text-muted">
+            <p className="muted">
+              We'll never share your email with anyone else.
+            </p>
+          </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3 password" controlId="formBasicPassword">
+          <Form.Label className="label">Password:</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            isInvalid={passwordError.passwordMissing}
+          />
+          <Form.Control.Feedback type="invalid">
+            {Object.keys(passwordError).map((key) => {
+              return <div key={key}>{passwordError[key]}</div>;
+            })}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group className="mb-3 birthday" controlId="formBasicDate">
+          <Form.Label className="label">Birth date:</Form.Label>
+          <Form.Control
+            type="date"
+            value={birthday}
+            onChange={(e) => setBirthday(e.target.value)}
+            placeholder="Birthday"
+            isInvalid={birthdayError.birthdayEmpty}
+          />
+          <Form.Control.Feedback type="invalid">
+            {Object.keys(birthdayError).map((key) => {
+              return <div key={key}>{birthdayError[key]}</div>;
+            })}
+          </Form.Control.Feedback>
+        </Form.Group>
+        <div className="small_btn">
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Register
+          </Button>
+        </div>
+
+        <div className="block_btn d-grid gap-2">
+          <Link to={`/`}>
+            <Button variant="primary w-100">Login</Button>
+          </Link>
+        </div>
+      </Form>
+    </div>
   );
 }
 

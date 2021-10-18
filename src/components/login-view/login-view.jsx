@@ -39,7 +39,7 @@ export function LoginView(props) {
   };
 
   return (
-    <div className="d-flex color-overlay">
+    <div className="d-flex justify-content-center align-items-center">
       <Form
         noValidate
         validated={validated}
@@ -79,13 +79,13 @@ export function LoginView(props) {
               : "Please provide your password."}
           </Form.Control.Feedback>
         </Form.Group>
-        <div className="login_btn">
+        <div className="small_btn">
           <Button variant="primary" type="submit">
             Login
           </Button>
         </div>
 
-        <div className="register_btn d-grid gap-2">
+        <div className="block_btn d-grid gap-2">
           <Link to={`/register`}>
             <Button variant="primary w-100">Register</Button>
           </Link>

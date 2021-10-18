@@ -12,7 +12,7 @@
   --background-secondary-color: #1e2127;
 }
 .form {
-  margin: 10% auto;
+  margin: 10%;
   padding: 2em 2.7em;
   width: 430px;
   background-color: var(--background-secondary-color);
@@ -45,7 +45,7 @@
   line-height: 1.6;
   color: var(--text-third-color);
 }
-.login_btn {
+.small_btn {
   width: 108px;
   font-family: "Archivo", sans-serif;
   font-weight: 500;
@@ -55,14 +55,14 @@
   color: var(--text-primary-color);
   margin: 2em 0;
 }
-.register_btn {
+.block_btn {
   border-top: 1px solid #30333a;
   padding-top: 2em;
   text-align: center;
 }
 
-Form {
-  margin-top: 10%;
+.muted {
+  color: var(--text-third-color);
 }
 
 
