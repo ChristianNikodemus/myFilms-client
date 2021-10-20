@@ -19,7 +19,7 @@ class MyFilmsApplication extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Container fluid>
+        <Container fluid className="con_fluid">
           <MainView />
         </Container>
       </Provider>

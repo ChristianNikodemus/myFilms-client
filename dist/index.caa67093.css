@@ -1,4 +1,7 @@
-
+.con_fluid {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
 .movie-genre span.value:not(:last-child):after,
 .movie-director span.value:not(:last-child):after {
   content: ", ";
@@ -11,8 +14,13 @@
   --background-color: #0376e3;
   --background-secondary-color: #1e2127;
 }
+/*
+.background {
+  background-color: var(--background-color);
+}
+*/
 .form {
-  margin: 10%;
+  margin: 10% 0;
   padding: 2em 2.7em;
   width: 430px;
   background-color: var(--background-secondary-color);

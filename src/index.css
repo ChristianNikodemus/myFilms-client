@@ -1,5 +1,4 @@
-html,
-body {
-  height: 100%;
-  min-height: 100%;
+.con_fluid {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
