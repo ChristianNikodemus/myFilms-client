@@ -80,6 +80,9 @@
   margin-bottom: 1rem;
 }
 
-
+.searchbar {
+  margin: 0 auto;
+  width: 60% !important;
+}
 
 /*# sourceMappingURL=index.caa67093.css.map */

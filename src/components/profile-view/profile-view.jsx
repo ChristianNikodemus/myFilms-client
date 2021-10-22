@@ -285,6 +285,8 @@ export class ProfileView extends React.Component {
   }
 }
 
+//export default ProfileView;
+
 ProfileView.propTypes = {
   user: PropTypes.shape({
     FavouriteMovies: PropTypes.arrayOf(PropTypes.string),

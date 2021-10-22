@@ -23043,7 +23043,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 109
+                                lineNumber: 102
                             },
                             __self: this
                         }),
@@ -23067,7 +23067,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 121
+                                lineNumber: 114
                             },
                             __self: this
                         }),
@@ -23094,7 +23094,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 142
+                                lineNumber: 135
                             },
                             __self: this
                         }),
@@ -23121,7 +23121,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 171
+                                lineNumber: 164
                             },
                             __self: this
                         }),
@@ -23145,7 +23145,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 198
+                                lineNumber: 191
                             },
                             __self: this
                         })
@@ -34199,6 +34199,7 @@ class ProfileView extends _reactDefault.default.Component {
         }));
     }
 }
+//export default ProfileView;
 ProfileView.propTypes = {
     user: _propTypesDefault.default.shape({
         FavouriteMovies: _propTypesDefault.default.arrayOf(_propTypesDefault.default.string),
@@ -42863,6 +42864,7 @@ var _actions = require("../../actions/actions");
 var _visibilityFilterInputScss = require("./visibility-filter-input.scss");
 function VisibilityFilterInput(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
+        className: "searchbar",
         onChange: (e)=>props.setFilter(e.target.value)
         ,
         value: props.visibilityFilter,
