@@ -45,7 +45,7 @@ export function RegistrationView(props) {
         })
         .catch((e) => {
           if (e.response.status === 400) {
-            alert("User already exists");
+            setUsernameError("Username is already taken.");
           } else {
             alert("Uh oh, something went wrong.");
           }
@@ -71,10 +71,12 @@ export function RegistrationView(props) {
       isValid = false;
       0;
     }
-    if (username.e.response.status === 400) {
+    /*
+    if ((username === e.response.status) === 400) {
       usernameError.usernameTaken = "Username is already taken";
       isValid = false;
     }
+    */
     if (!(email && email.includes(".") && email.includes("@"))) {
       emailError.emailNotEmail = "Email address is not valid.";
       isValid = false;
@@ -134,9 +136,7 @@ export function RegistrationView(props) {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
-              isInvalid={
-                (usernameError.usernameShort, usernameError.usernameTaken)
-              }
+              isInvalid={usernameError.usernameShort}
             />
             <Form.Control.Feedback type="invalid">
               {Object.keys(usernameError).map((key) => {
