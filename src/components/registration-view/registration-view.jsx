@@ -71,7 +71,7 @@ export function RegistrationView(props) {
       isValid = false;
       0;
     }
-    if (username === (e.response.status === 400)) {
+    if (username.e.response.status === 400) {
       usernameError.usernameTaken = "Username is already taken";
       isValid = false;
     }
@@ -135,7 +135,7 @@ export function RegistrationView(props) {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
               isInvalid={
-                usernameError.usernameShort || usernameError.usernameTaken
+                (usernameError.usernameShort, usernameError.usernameTaken)
               }
             />
             <Form.Control.Feedback type="invalid">

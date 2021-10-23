@@ -32962,7 +32962,7 @@ function RegistrationView(props) {
             usernameError1.usernameShort = "Username requires at least 4 characters.";
             isValid = false;
         }
-        if (username === (e.response.status === 400)) {
+        if (username.e.response.status === 400) {
             usernameError1.usernameTaken = "Username is already taken";
             isValid = false;
         }
@@ -33154,7 +33154,7 @@ function RegistrationView(props) {
                                     onChange: (e)=>setUsername(e.target.value)
                                     ,
                                     placeholder: "Username",
-                                    isInvalid: usernameError.usernameShort || usernameError.usernameTaken,
+                                    isInvalid: (usernameError.usernameShort, usernameError.usernameTaken),
                                     __source: {
                                         fileName: "src/components/registration-view/registration-view.jsx",
                                         lineNumber: 132
