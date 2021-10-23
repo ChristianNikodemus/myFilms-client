@@ -32937,7 +32937,7 @@ function RegistrationView(props) {
                 window.open("/", "_self");
             }).catch((e1)=>{
                 if (e1.response.status === 400) {
-                    let usernameTaken = "Username is already taken.";
+                    const usernameTaken = "Username is already taken.";
                     return setUsernameError(usernameTaken);
                 } else alert("Uh oh, something went wrong.");
                 console.log("no such user");
