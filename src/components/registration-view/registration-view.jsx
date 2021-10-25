@@ -45,8 +45,13 @@ export function RegistrationView(props) {
         })
         .catch((e) => {
           if (e.response.status === 400) {
-            const usernameTaken = "Username is already taken.";
-            return setUsernameError(usernameTaken);
+            alert("Username is already in use.");
+            /*
+            setUsernameError({
+              usernameError.usernameShort = "Username is taken.",
+              isValid = false,
+
+            })*/
           } else {
             alert("Uh oh, something went wrong.");
           }

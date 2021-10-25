@@ -90,7 +90,7 @@ class MainView extends React.Component {
             render={() => {
               if (!user)
                 return (
-                  <Col>
+                  <Col className="nopadding">
                     <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   </Col>
                 );
@@ -104,7 +104,7 @@ class MainView extends React.Component {
             render={() => {
               if (user) return <Redirect to="/" />;
               return (
-                <Col>
+                <Col className="nopadding">
                   <RegistrationView />
                 </Col>
               );
@@ -143,7 +143,7 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col md={8}>
+                <Col md={8} className="nopadding">
                   <DirectorView
                     director={movies.reduce(
                       (director, m) =>
@@ -172,7 +172,7 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col md={8}>
+                <Col md={8} className="nopadding">
                   <GenreView
                     genre={movies.reduce(
                       (genre, m) =>
@@ -198,7 +198,7 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return;
               return (
-                <Col>
+                <Col className="nopadding">
                   <ProfileView
                     history={history}
                     movies={movies}

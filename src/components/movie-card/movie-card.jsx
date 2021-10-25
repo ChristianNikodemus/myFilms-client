@@ -12,11 +12,15 @@ export class MovieCard extends React.Component {
     const imgLink = "https://my-films-db.herokuapp.com/";
 
     return (
-      <Card>
+      <Card style={{ backgroundColor: "var(--background-secondary-color)" }}>
         <Card.Img variant="top" src={imgLink + movie.ImagePath} />
         <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>{movie.Description}</Card.Text>
+          <Card.Title style={{ color: "var(--text-primary-color)" }}>
+            {movie.Title}
+          </Card.Title>
+          <Card.Text style={{ color: "var(--text-third-color)" }}>
+            {movie.Description}
+          </Card.Text>
           <Link to={`/movies/${movie._id}`}>
             <Button variant="link">Open</Button>
           </Link>
