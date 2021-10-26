@@ -23262,7 +23262,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Title: "
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "value",
+                            className: "value label",
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
                                 lineNumber: 49
@@ -23290,7 +23290,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Description: "
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "value",
+                            className: "value label",
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
                                 lineNumber: 53
@@ -23318,7 +23318,7 @@ class MovieView extends _reactDefault.default.Component {
                             children: "Year: "
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "value",
+                            className: "value label",
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
                                 lineNumber: 57
@@ -23435,7 +23435,7 @@ class MovieView extends _reactDefault.default.Component {
                     __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                    variant: "outline-primary",
+                    variant: "primary",
                     size: "lg",
                     value: movie._id,
                     onClick: (e)=>this.addFavorite(e, movie)
