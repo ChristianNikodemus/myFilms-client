@@ -1,7 +1,16 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { Alert, Button, Card, CardDeck, Form, Row } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Card,
+  CardGroup,
+  Form,
+  Row,
+  Col,
+  Container,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import "./profile-view.scss";
@@ -148,17 +157,12 @@ export class ProfileView extends React.Component {
         )}
 
         {user.FavouriteMovies.length > 0 && (
-          <div className="movie-card-deck">
+          <CardGroup>
             {user.FavouriteMovies.map((movieId) => {
               const movie = movies.find((m) => movieId === m._id);
               return (
-                <Card key={movie._id}>
-                  <Card.Img
-                    style={{ width: "auto" }}
-                    className="movieCard"
-                    variant="top"
-                    src={imgLink + movie.ImagePath}
-                  />
+                <Card style={{ width: "18rem" }} key={movie._id}>
+                  <Card.Img variant="top" src={imgLink + movie.ImagePath} />
                   <Card.Body>
                     <Card.Title className="movie-card-title">
                       <Link to={`/movies/${movie._id}`}>{movie.Title}</Link>
@@ -166,7 +170,6 @@ export class ProfileView extends React.Component {
 
                     <Button
                       size="sm"
-                      className="profile-button remove-favourite"
                       variant="danger"
                       value={movie._id}
                       onClick={(e) => this.removeFavouriteMovie(e, movie)}
@@ -177,7 +180,7 @@ export class ProfileView extends React.Component {
                 </Card>
               );
             })}
-          </div>
+          </CardGroup>
         )}
 
         {["info"].map((variant, idx) => (
