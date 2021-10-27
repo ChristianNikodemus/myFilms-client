@@ -48,12 +48,7 @@ export function RegistrationView(props) {
         .catch((e) => {
           if (e.response.status === 400) {
             alert("Username is already in use.");
-            /*
-            setUsernameError({
-              usernameError.usernameShort = "Username is taken.",
-              isValid = false,
-
-            })*/
+            setUsernameUsed(true);
           } else {
             alert("Uh oh, something went wrong.");
           }
@@ -79,12 +74,6 @@ export function RegistrationView(props) {
       isValid = false;
       0;
     }
-    /*
-    if ((username === e.response.status) === 400) {
-      usernameError.usernameTaken = "Username is already taken";
-      isValid = false;
-    }
-    */
     if (!(email && email.includes(".") && email.includes("@"))) {
       emailError.emailNotEmail = "Email address is not valid.";
       isValid = false;
@@ -144,12 +133,14 @@ export function RegistrationView(props) {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
-              isInvalid={usernameError.usernameShort}
+              isInvalid={usernameError.usernameShort || usernameUsed}
             />
             <Form.Control.Feedback type="invalid">
-              {Object.keys(usernameError).map((key) => {
-                return <div key={key}>{usernameError[key]}</div>;
-              })}
+              {usernameUsed
+                ? "Username is already in use."
+                : Object.keys(usernameError).map((key) => {
+                    return <div key={key}>{usernameError[key]}</div>;
+                  })}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3 email" controlId="formBasicEmail">
