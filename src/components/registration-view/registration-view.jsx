@@ -47,7 +47,6 @@ export function RegistrationView(props) {
         })
         .catch((e) => {
           if (e.response.status === 400) {
-            alert("Username is already in use.");
             setUsernameUsed(true);
           } else {
             alert("Uh oh, something went wrong.");
@@ -137,7 +136,7 @@ export function RegistrationView(props) {
             />
             <Form.Control.Feedback type="invalid">
               {usernameUsed
-                ? "Username is already in use."
+                ? "Sorry, that username is already in use."
                 : Object.keys(usernameError).map((key) => {
                     return <div key={key}>{usernameError[key]}</div>;
                   })}
