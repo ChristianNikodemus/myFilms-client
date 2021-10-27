@@ -25,6 +25,8 @@ export function RegistrationView(props) {
   const [passwordError, setPasswordError] = useState({});
   const [birthdayError, setBirthdayError] = useState({});
 
+  const [usernameUsed, setUsernameUsed] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let setisValid = formValidation();

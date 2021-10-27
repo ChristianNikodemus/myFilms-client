@@ -148,7 +148,7 @@ export class ProfileView extends React.Component {
         )}
 
         {user.FavouriteMovies.length > 0 && (
-          <CardDeck className="movie-card-deck">
+          <div className="movie-card-deck">
             {user.FavouriteMovies.map((movieId) => {
               const movie = movies.find((m) => movieId === m._id);
               return (
@@ -177,7 +177,7 @@ export class ProfileView extends React.Component {
                 </Card>
               );
             })}
-          </CardDeck>
+          </div>
         )}
 
         {["info"].map((variant, idx) => (

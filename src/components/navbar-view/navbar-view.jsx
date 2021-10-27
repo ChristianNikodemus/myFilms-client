@@ -32,12 +32,12 @@ export class NavbarView extends React.Component {
             <Navbar.Brand>myFilms</Navbar.Brand>
           </Link>
           <Nav className="me-auto">
-            <Nav.Link as={Link} to={profile}>
+            <Link as={Link} to={profile}>
               Go to {user.Username}
-            </Nav.Link>
-            <Nav.Link to={`/`} onClick={this.onLoggedOut}>
+            </Link>
+            <Link to={`/`} onClick={this.onLoggedOut}>
               Logout
-            </Nav.Link>
+            </Link>
           </Nav>
         </Container>
       </Navbar>
