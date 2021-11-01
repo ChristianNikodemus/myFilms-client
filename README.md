@@ -14,3 +14,14 @@ Technical Features:
 - Uses Bootstrap as a UI library for styling and responsiveness
 - Contains a mix of class components and function components
 - Hosted online
+
+To start the project simply navigate to the project in terminal and run:
+
+ npm install
+
+This installs all the dependencies to run the program, then run:
+
+ npm start
+
+This starts the program, your terminal will prompt you that the server is running at a url such as 'http://localhost:1234' for example. You can then go to your browser and enter this url in the address bar to see the project in action!
+
