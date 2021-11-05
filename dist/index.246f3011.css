@@ -27,7 +27,6 @@
   background-color: var(--background-color);
 }
 .form {
-  margin: 10% 5%;
   padding: 2em 2.7em;
   width: 430px;
   background-color: var(--background-secondary-color);
@@ -105,5 +104,12 @@ html.full-page .container-fluid,
 html.full-page .main-view,
 html.full-page .background {
   height: 100%;
+}
+html.full-page .background {
+  display: flex;
+  flex-direction: column;
+}
+html.full-page .background .d-flex {
+  flex-grow: 1;
 }
 /*# sourceMappingURL=index.246f3011.css.map */

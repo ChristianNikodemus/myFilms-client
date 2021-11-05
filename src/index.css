@@ -14,3 +14,12 @@ html.full-page .main-view,
 html.full-page .background {
   height: 100%;
 }
+
+html.full-page .background {
+  display: flex;
+  flex-direction: column;
+}
+
+html.full-page .background .d-flex {
+  flex-grow: 1;
+}

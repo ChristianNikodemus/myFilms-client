@@ -12,4 +12,12 @@ html.full-page {
   .background {
     height: 100%;
   }
+
+  .background {
+    display: flex;
+    flex-direction: column;
+    .d-flex {
+      flex-grow: 1;
+    }
+  }
 }

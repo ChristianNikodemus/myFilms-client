@@ -35292,7 +35292,7 @@ function RegistrationView(props) {
                 })
             }),
             /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                className: "d-flex justify-content-center",
+                className: "d-flex justify-content-center align-items-center",
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
                     lineNumber: 109
