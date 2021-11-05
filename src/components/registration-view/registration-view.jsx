@@ -107,7 +107,7 @@ export function RegistrationView(props) {
         </Container>
       </Navbar>
       <div className="d-flex justify-content-center align-items-center">
-        <Form noValidate validated={validated} className="form">
+        <Form noValidate validated={validated} className="form register">
           <h1 className="welcome-text">Great to meet you!</h1>
           <p className="login-text">Create an account</p>
           <Form.Group className="mb-3 name" controlId="formBasicName">

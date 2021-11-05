@@ -78,6 +78,10 @@
   color: var(--text-third-color);
 }
 
+.register {
+  margin: 10% 0;
+}
+
 
 .update_btn {
   margin-bottom: 1rem;

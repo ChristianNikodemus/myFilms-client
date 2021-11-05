@@ -35301,7 +35301,7 @@ function RegistrationView(props) {
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default, {
                     noValidate: true,
                     validated: validated,
-                    className: "form",
+                    className: "form register",
                     __source: {
                         fileName: "src/components/registration-view/registration-view.jsx",
                         lineNumber: 110
