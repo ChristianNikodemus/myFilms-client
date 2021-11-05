@@ -80,6 +80,12 @@ class MainView extends React.Component {
   render() {
     let { movies, user } = this.props;
 
+    if (!user && movies.length === 0) {
+      document.body.parentElement.classList.add("full-page");
+    } else {
+      document.body.parentElement.classList.remove("full-page");
+    }
+
     return (
       <Router>
         <NavbarView user={user} />

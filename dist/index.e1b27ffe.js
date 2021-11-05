@@ -25650,10 +25650,12 @@ class MainView extends _reactDefault.default.Component {
     }
     render() {
         let { movies , user  } = this.props;
+        if (!user && movies.length === 0) document.body.parentElement.classList.add("full-page");
+        else document.body.parentElement.classList.remove("full-page");
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 84
+                lineNumber: 90
             },
             __self: this,
             children: [
@@ -25661,7 +25663,7 @@ class MainView extends _reactDefault.default.Component {
                     user: user,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 85
+                        lineNumber: 91
                     },
                     __self: this
                 }),
@@ -25669,7 +25671,7 @@ class MainView extends _reactDefault.default.Component {
                     className: "justify-content-md-center main-view",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 86
+                        lineNumber: 92
                     },
                     __self: this,
                     children: [
@@ -25691,7 +25693,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 87
+                                lineNumber: 93
                             },
                             __self: this
                         }),
@@ -25709,7 +25711,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 102
+                                lineNumber: 108
                             },
                             __self: this
                         }),
@@ -25733,7 +25735,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 114
+                                lineNumber: 120
                             },
                             __self: this
                         }),
@@ -25761,7 +25763,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 135
+                                lineNumber: 141
                             },
                             __self: this
                         }),
@@ -25789,7 +25791,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 164
+                                lineNumber: 170
                             },
                             __self: this
                         }),
@@ -25814,7 +25816,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 191
+                                lineNumber: 197
                             },
                             __self: this
                         })
