@@ -7,6 +7,10 @@
 .main-view {
   background-color: var(--background-third-color);
 }
+
+.search-bar {
+  margin: 1em;
+}
 .movie-genre span.value:not(:last-child):after,
 .movie-director span.value:not(:last-child):after {
   content: ", ";
