@@ -19,6 +19,12 @@ body {
 .row {
   width: 100%;
 }
+
+.movie-cards {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 2em;
+}
 .movie-genre span.value:not(:last-child):after,
 .movie-director span.value:not(:last-child):after {
   content: ", ";
