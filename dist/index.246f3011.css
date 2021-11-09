@@ -4,12 +4,20 @@
   width: 60% !important;
 }
 
-.main-view {
-  background-color: var(--background-third-color);
+body {
+  background-color: var(--background-third-color) !important;
 }
 
 .search-bar {
-  margin: 1em;
+  padding: 1em 0;
+}
+
+.movie-cards .row {
+  margin: 0 !important;
+}
+
+.row {
+  width: 100%;
 }
 .movie-genre span.value:not(:last-child):after,
 .movie-director span.value:not(:last-child):after {
@@ -106,6 +114,7 @@ html.full-page body,
 html.full-page .app-container,
 html.full-page .container-fluid,
 html.full-page .main-view,
+html.full-page .main-view > .nopadding.col,
 html.full-page .background {
   height: 100%;
 }

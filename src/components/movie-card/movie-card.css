@@ -1,3 +1,3 @@
-.bottom-border {
-  border-top: 1px solid #30333a !important;
+.movie-title {
+  color: var(--text-primary-color);
 }

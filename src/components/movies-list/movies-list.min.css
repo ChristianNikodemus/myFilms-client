@@ -1,1 +1,1 @@
-.main-view{background-color:var(--background-third-color)}.search-bar{margin:1em}
+body{background-color:var(--background-third-color) !important}.search-bar{padding:1em 0}.movie-cards .row{margin:0 !important}.row{width:100%}

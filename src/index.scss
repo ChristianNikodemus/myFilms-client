@@ -9,6 +9,7 @@ html.full-page {
   .app-container,
   .container-fluid,
   .main-view,
+  .main-view > .nopadding.col,
   .background {
     height: 100%;
   }
