@@ -46,15 +46,15 @@ export class MovieView extends React.Component {
         </div>
         <div className="movie-title">
           <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
+          <span className="value label">{movie.Title}</span>
         </div>
         <div className="movie-description">
           <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
+          <span className="value label">{movie.Description}</span>
         </div>
         <div className="movie-year">
           <span className="label">Year: </span>
-          <span className="value">{movie.Year}</span>
+          <span className="value label">{movie.Year}</span>
         </div>
         <div className="movie-genre">
           <span className="label">Genre: </span>
@@ -81,7 +81,7 @@ export class MovieView extends React.Component {
         </div>
         <br />
         <Button
-          variant="outline-primary"
+          variant="primary"
           size="lg"
           value={movie._id}
           onClick={(e) => this.addFavorite(e, movie)}

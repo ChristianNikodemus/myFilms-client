@@ -5,9 +5,12 @@ import Form from "react-bootstrap/Form";
 
 import { setFilter } from "../../actions/actions";
 
+import "./visibility-filter-input.scss";
+
 function VisibilityFilterInput(props) {
   return (
     <Form.Control
+      className="searchbar"
       onChange={(e) => props.setFilter(e.target.value)}
       value={props.visibilityFilter}
       placeholder="Search movie"

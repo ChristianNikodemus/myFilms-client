@@ -1,3 +1,26 @@
-.my-films {
-  color: steelblue;
+.con_fluid {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+html.full-page {
+  height: 100%;
+}
+
+html.full-page body,
+html.full-page .app-container,
+html.full-page .container-fluid,
+html.full-page .main-view,
+html.full-page .main-view > .nopadding.col,
+html.full-page .background {
+  height: 100%;
+}
+
+html.full-page .background {
+  display: flex;
+  flex-direction: column;
+}
+
+html.full-page .background .d-flex {
+  flex-grow: 1;
 }

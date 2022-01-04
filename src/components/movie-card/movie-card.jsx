@@ -5,6 +5,8 @@ import Card from "react-bootstrap/Card";
 
 import { Link } from "react-router-dom";
 
+import "./movie-card.scss";
+
 export class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
@@ -12,14 +14,33 @@ export class MovieCard extends React.Component {
     const imgLink = "https://my-films-db.herokuapp.com/";
 
     return (
-      <Card>
-        <Card.Img variant="top" src={imgLink + movie.ImagePath} />
+      <Card
+        style={{
+          backgroundColor: "var(--background-secondary-color)",
+          boxShadow: "5px 5px 5px rgba(0, 0, 0, 0.2)",
+        }}
+      >
         <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>{movie.Description}</Card.Text>
-          <Link to={`/movies/${movie._id}`}>
-            <Button variant="link">Open</Button>
-          </Link>
+          <Card.Title style={{ color: "var(--text-primary-color)" }}>
+            {movie.Title}
+          </Card.Title>
+          <Card.Img variant="top" src={imgLink + movie.ImagePath} />
+          <Card.Text
+            style={{
+              color: "var(--text-third-color)",
+              marginTop: "1rem",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+            }}
+          >
+            {movie.Description}
+          </Card.Text>
+          <div style={{ borderTop: "1px solid #30333a" }}>
+            <Link to={`/movies/${movie._id}`}>
+              <Button variant="link">Read more</Button>
+            </Link>
+          </div>
         </Card.Body>
       </Card>
     );

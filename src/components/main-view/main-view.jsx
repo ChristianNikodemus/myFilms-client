@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-import { setMovies } from "../../actions/actions";
+import { setMovies, setUser } from "../../actions/actions";
 
 // haven't written this yet
 import MoviesList from "../movies-list/movies-list";
@@ -25,23 +25,9 @@ import Col from "react-bootstrap/Col";
 import "./main-view.scss";
 
 class MainView extends React.Component {
-  constructor() {
-    super();
-    // Initial state is set to null
-    this.state = {
-      //movies: [],
-      user: null,
-      //selectedMovie: null,
-      //register: true,
-    };
-  }
-
   componentDidMount() {
     let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem("user"),
-      });
       this.getUser(accessToken, localStorage.getItem("user"));
       this.getMovies(accessToken);
     }
@@ -53,11 +39,10 @@ class MainView extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        this.setState({
-          user: response.data,
-        });
+        this.props.setUser(response.data);
       })
       .catch(function (error) {
+        alert("Uh oh, something broke.");
         console.log(error);
       });
   }
@@ -79,9 +64,7 @@ class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log(authData);
-    this.setState({
-      user: authData.user,
-    });
+    this.props.setUser(authData.user);
 
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", authData.user.Username);
@@ -91,38 +74,34 @@ class MainView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    this.setState({
-      user: null,
-    });
+    this.props.setUser(null);
   }
 
   render() {
-    let { movies } = this.props;
-    let { user } = this.state;
+    let { movies, user } = this.props;
+
+    if (!user && movies.length === 0) {
+      document.body.parentElement.classList.add("full-page");
+    } else {
+      document.body.parentElement.classList.remove("full-page");
+    }
 
     return (
       <Router>
         <NavbarView user={user} />
-        <Row className="justify-content-md-center main-view">
+        <div className="justify-content-md-center main-view">
           <Route
             exact
             path="/"
             render={() => {
               if (!user)
                 return (
-                  <Col>
+                  <Col className="nopadding">
                     <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   </Col>
                 );
               if (movies.length === 0) return <div className="main-view" />;
-              return <MoviesList movies={movies} />;
-              {
-                /*movies.map((m) => (
-                <Col md={3} key={m._id}>
-                  <MovieCard movie={m} />
-                </Col>
-              ));*/
-              }
+              return <MoviesList />;
             }}
           />
 
@@ -131,7 +110,7 @@ class MainView extends React.Component {
             render={() => {
               if (user) return <Redirect to="/" />;
               return (
-                <Col>
+                <Col className="nopadding">
                   <RegistrationView />
                 </Col>
               );
@@ -147,7 +126,7 @@ class MainView extends React.Component {
                   <MovieView
                     movie={movie}
                     onBackClick={() => history.goBack()}
-                    onSubmit={(user) => this.setState({ user })}
+                    onSubmit={(user) => this.props.setUser(user)}
                     isFavourited={Boolean(
                       user.FavouriteMovies.find(
                         (movieId) => movieId === movie._id
@@ -170,7 +149,7 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col md={8}>
+                <Col md={8} className="nopadding">
                   <DirectorView
                     director={movies.reduce(
                       (director, m) =>
@@ -199,7 +178,7 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col md={8}>
+                <Col md={8} className="nopadding">
                   <GenreView
                     genre={movies.reduce(
                       (genre, m) =>
@@ -225,26 +204,26 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return;
               return (
-                <Col>
+                <Col className="nopadding">
                   <ProfileView
                     history={history}
                     movies={movies}
-                    onSubmit={(user) => this.setState({ user })}
+                    onSubmit={(user) => this.props.setUser(user)}
                     user={user}
                   />
                 </Col>
               );
             }}
           />
-        </Row>
+        </div>
       </Router>
     );
   }
 }
 
 let mapStateToProps = (state) => {
-  return { movies: state.movies };
+  return { movies: state.movies, user: state.user };
 };
 
 //export default MainView;
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);
