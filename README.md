@@ -1,8 +1,12 @@
+# myFilms - Client
+
 Welcome to the front end of myFilms Application. This project uses the front end framework: React, to compliment my API Database!
 
-Objective: Using React, build the client-side for an application called myFlims based on its existing server-side code (REST API and database).
+## Objective
 
-Technical Features:
+Using React, build the client-side for an application called myFlims based on its existing server-side code (REST API and database).
+
+### Technical Features
 
 - The application is a single-page application (SPA)
 - Uses state routing to navigate between views and share URLs
@@ -15,7 +19,11 @@ Technical Features:
 - Contains a mix of class components and function components
 - Hosted online
 
-To start the project simply navigate to the project in terminal and run:
+### How to Start
+
+First clone this repository to your machine locally.
+
+Then, to start the project simply navigate to the project in terminal and run:
 
  npm install
 
