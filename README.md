@@ -25,11 +25,10 @@ First clone this repository to your machine locally.
 
 Then, to start the project simply navigate to the project in terminal and run:
 
- npm install
+`npm install`
 
 This installs all the dependencies to run the program, then run:
 
- npm start
+`npm start`
 
-This starts the program, your terminal will prompt you that the server is running at a url such as 'http://localhost:1234' for example. You can then go to your browser and enter this url in the address bar to see the project in action!
-
+This starts the program, your terminal will prompt you that the server is running at a url such as `http://localhost:1234` for example. You can then go to your browser and enter this url in the address bar to see the project in action!
