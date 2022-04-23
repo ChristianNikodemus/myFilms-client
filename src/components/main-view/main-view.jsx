@@ -33,6 +33,11 @@ class MainView extends React.Component {
     }
   }
 
+  /**
+   * Calls API endpoint to retrieve the Users information saved to the database
+   * @param token
+   * @param username
+   */
   getUser(token, username) {
     axios
       .get(`https://my-films-db.herokuapp.com/users/${username}`, {
@@ -47,7 +52,11 @@ class MainView extends React.Component {
       });
   }
 
-  //   Get all movies in DB
+  /**
+   * Retreives all movies from database
+   * so it can be utulized in the movie cards
+   * @param token
+   */
   getMovies(token) {
     axios
       .get("https://my-films-db.herokuapp.com/movies", {
@@ -62,6 +71,10 @@ class MainView extends React.Component {
       });
   }
 
+  /**
+   * Sends the users authorization data to the backend
+   * @param authData
+   */
   onLoggedIn(authData) {
     console.log(authData);
     this.props.setUser(authData.user);
@@ -71,6 +84,9 @@ class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  /**
+   * Discards the users login token and user data from the network
+   */
   onLoggedOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -166,7 +182,6 @@ class MainView extends React.Component {
               );
             }}
           />
-
           <Route
             path="/genres/:genreId"
             render={({ match, history }) => {
