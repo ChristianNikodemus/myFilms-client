@@ -37,8 +37,8 @@ This starts the program, your terminal will prompt you that the server is runnin
 
 ### View JSDoc Documentation
 
-To open the JSDoc documentation, simply navigate to folder called "out" at the first level of this project, then find the "index.html" file and open it within your internet browser.
+To open the JSDoc documentation, simply navigate to folder called "docs" at the first level of this project, then find the "index.html" file and open it within your internet browser.
 
 ### Build JSDoc Documentation
 
-You may want to re-build the documentation, which is a benefit for if say for example, if another contributor adds additional JSDoc comments. First, you'll need to install JSDoc which you can do by entering this command within terminal: `npm install -g jsdoc`, then make sure you're navigated to this project within terminal and enter the command `jsdoc src`. This will rebuild the JSDoc documentation.
+You may want to re-build the documentation, which is a benefit for if say for example, if another contributor adds additional JSDoc comments. First, ensure you are navigated to the top level this projects folder structure within terminal. Then, enter the command `npm run docs`. This will rebuild the JSDoc documentation.
