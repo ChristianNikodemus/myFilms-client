@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: login-view/login-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: login-view/login-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+import "./login-view.scss";
+
+/**
+ * @function LoginView
+ * @param props
+ * @returns a form where the user is able to submit their login credentials
+ * @description Takes the users login credentials and grants them a token to sign in
+ */
+export function LoginView(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [validated, setValidated] = useState(false);
+  const [error, setError] = useState(null);
+
+  /**
+   * @function handleSumbit
+   * @param e
+   * @description Submits the users login credentials to check if they are valid
+   */
+  const handleSubmit = (e) => {
+    const form = e.currentTarget;
+    e.preventDefault();
+    e.stopPropagation();
+    if (form.checkValidity() !== false) {
+      axios
+        .post("https://my-films-db.herokuapp.com/login", {
+          Username: username,
+          Password: password,
+        })
+        .then((response) => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch((e) => {
+          setError("Wrong password credentials.");
+          setValidated(false);
+          console.log("no such user");
+        });
+    } else {
+      setValidated(true);
+    }
+  };
+
+  return (
+    &lt;div className="background">
+      &lt;Navbar bg="light" variant="light">
+        &lt;Container>
+          &lt;Navbar.Brand>myFilms&lt;/Navbar.Brand>
+          &lt;Nav className="me-auto">
+            &lt;Link to={`/register`}>
+              &lt;Button variant="primary">Register&lt;/Button>
+            &lt;/Link>
+          &lt;/Nav>
+        &lt;/Container>
+      &lt;/Navbar>
+      &lt;div className="d-flex justify-content-center align-items-center">
+        &lt;Form
+          noValidate
+          validated={validated}
+          onSubmit={handleSubmit}
+          className="form"
+        >
+          &lt;h1 className="welcome-text">Great to meet you!&lt;/h1>
+          &lt;p className="login-text">Login to your account&lt;/p>
+          &lt;Form.Group className="mb-3 username" controlId="formBasicUsername">
+            &lt;Form.Label className="label">Username:&lt;/Form.Label>
+            &lt;InputGroup hasValidation>
+              &lt;Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+                required
+              />
+              &lt;Form.Control.Feedback type="invalid">
+                Please choose a username.
+              &lt;/Form.Control.Feedback>
+            &lt;/InputGroup>
+          &lt;/Form.Group>
+          &lt;Form.Group className="mb-3 password" controlId="formBasicPassword">
+            &lt;Form.Label className="label">Password:&lt;/Form.Label>
+            &lt;Form.Control
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              isInvalid={password &amp;&amp; error !== null}
+            />
+            &lt;Form.Control.Feedback type="invalid">
+              {password &amp;&amp; error !== null
+                ? error
+                : "Please provide your password."}
+            &lt;/Form.Control.Feedback>
+          &lt;/Form.Group>
+          &lt;div className="small_btn">
+            &lt;Button variant="primary" type="submit">
+              Login
+            &lt;/Button>
+          &lt;/div>
+
+          &lt;div className="block_btn d-grid gap-2">
+            &lt;Link to={`/register`}>
+              &lt;Button variant="primary w-100">Register&lt;/Button>
+            &lt;/Link>
+          &lt;/div>
+        &lt;/Form>
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+LoginView.propTypes = {
+  register: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }),
+  onLoggedIn: PropTypes.func.isRequired,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#formValidation">formValidation</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleSumbit">handleSumbit</a></li><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#mapStateToProps">mapStateToProps</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#RegistrationView">RegistrationView</a></li><li><a href="global.html#removeFavouriteMovie">removeFavouriteMovie</a></li><li><a href="global.html#VisibilityFilterInput">VisibilityFilterInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sat Apr 23 2022 18:38:43 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

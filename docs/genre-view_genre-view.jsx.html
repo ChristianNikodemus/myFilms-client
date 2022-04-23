@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: director-view/director-view.jsx</title>
+    <title>JSDoc: Source: genre-view/genre-view.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: director-view/director-view.jsx</h1>
+    <h1 class="page-title">Source: genre-view/genre-view.jsx</h1>
 
     
 
@@ -30,33 +30,26 @@
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 
-import "./director-view.scss";
+import "./genre-view.scss";
 
-export class DirectorView extends React.Component {
+export class GenreView extends React.Component {
   /**
    * @returns
-   * @description Renders the view of the directors information
+   * @description Renders the view of the genre information
    */
   render() {
-    const { director, onBackClick } = this.props;
+    const { genre, onBackClick } = this.props;
+    console.log("The genre is: ", genre);
 
     return (
-      &lt;div className="director-view">
-        &lt;div className="director-name">
+      &lt;div className="genre-view">
+        &lt;div className="genre-name">
           &lt;h1>
-            &lt;span className="value">{director.Name}&lt;/span>
+            &lt;span className="value">{genre.Title}&lt;/span>
           &lt;/h1>
         &lt;/div>
-        &lt;div className="director-bio">
-          &lt;span className="value">{director.Bio}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-birthyear">
-          &lt;span className="value">Born: {director.Birthyear}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-deathyear">
-          &lt;span className="value">Past away: {director.Deathyear}&lt;/span>
+        &lt;div className="genre-description">
+          &lt;span className="value">{genre.Description}&lt;/span>
         &lt;/div>
 
         &lt;Button
@@ -72,17 +65,15 @@ export class DirectorView extends React.Component {
   }
 }
 
-DirectorView.propTypes = {
-  director: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
-    Bio: PropTypes.string.isRequired,
-    Birthyear: PropTypes.string.isRequired,
-    Deathyear: PropTypes.string.isRequired,
+GenreView.propTypes = {
+  genre: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
   }).isRequired,
   onBackClick: PropTypes.func.isRequired,
 };
 
-export default DirectorView;
+export default GenreView;
 </code></pre>
         </article>
     </section>

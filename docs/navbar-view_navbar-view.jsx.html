@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: director-view/director-view.jsx</title>
+    <title>JSDoc: Source: navbar-view/navbar-view.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: director-view/director-view.jsx</h1>
+    <h1 class="page-title">Source: navbar-view/navbar-view.jsx</h1>
 
     
 
@@ -27,62 +27,61 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import PropTypes from "prop-types";
-import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import { Link } from "react-router-dom";
 
-import "./director-view.scss";
+import "./navbar-view.scss";
 
-export class DirectorView extends React.Component {
+export class NavbarView extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {};
+  }
+
   /**
-   * @returns
-   * @description Renders the view of the directors information
+   * @function onLoggedOut
+   * @description Clears the local storage of the users token
+   */
+  onLoggedOut = () => {
+    localStorage.clear();
+    window.open("/", "_self");
+  };
+
+  /**
+   * @returns Navigation bar
+   * @description This allows to user to navigate through the web application
    */
   render() {
-    const { director, onBackClick } = this.props;
+    const { user } = this.props;
+
+    if (!user) return null;
+
+    const profile = `/users/${user.Username}`;
 
     return (
-      &lt;div className="director-view">
-        &lt;div className="director-name">
-          &lt;h1>
-            &lt;span className="value">{director.Name}&lt;/span>
-          &lt;/h1>
-        &lt;/div>
-        &lt;div className="director-bio">
-          &lt;span className="value">{director.Bio}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-birthyear">
-          &lt;span className="value">Born: {director.Birthyear}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-deathyear">
-          &lt;span className="value">Past away: {director.Deathyear}&lt;/span>
-        &lt;/div>
-
-        &lt;Button
-          variant="link"
-          onClick={() => {
-            onBackClick();
-          }}
-        >
-          Back
-        &lt;/Button>
-      &lt;/div>
+      &lt;Navbar bg="light" variant="light">
+        &lt;Container>
+          &lt;Link to={`/`}>
+            &lt;Navbar.Brand>myFilms&lt;/Navbar.Brand>
+          &lt;/Link>
+          &lt;Nav className="me-auto">
+            &lt;Link as={Link} to={profile}>
+              Go to {user.Username}
+            &lt;/Link>
+            &lt;Link to={`/`} onClick={this.onLoggedOut}>
+              Logout
+            &lt;/Link>
+          &lt;/Nav>
+        &lt;/Container>
+      &lt;/Navbar>
     );
   }
 }
 
-DirectorView.propTypes = {
-  director: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
-    Bio: PropTypes.string.isRequired,
-    Birthyear: PropTypes.string.isRequired,
-    Deathyear: PropTypes.string.isRequired,
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired,
-};
-
-export default DirectorView;
+export default NavbarView;
 </code></pre>
         </article>
     </section>

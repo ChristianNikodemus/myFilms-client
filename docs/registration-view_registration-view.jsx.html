@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: registration-view/registration-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: registration-view/registration-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import { Link } from "react-router-dom";
+
+import "./registration-view.scss";
+
+/**
+ * @function RegistrationView
+ * @param props
+ * @returns A form where the user is able to input their registration credentials
+ */
+export function RegistrationView(props) {
+  const [validated, setValidated] = useState(false);
+
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [birthday, setBirthday] = useState("");
+
+  const [nameError, setNameError] = useState({});
+  const [usernameError, setUsernameError] = useState({});
+  const [emailError, setEmailError] = useState({});
+  const [passwordError, setPasswordError] = useState({});
+  const [birthdayError, setBirthdayError] = useState({});
+
+  const [usernameUsed, setUsernameUsed] = useState(false);
+
+  /**
+   * @function handleSubmit
+   * @param e
+   * @description Enters the users registration inputs to the database
+   */
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let setisValid = formValidation();
+    if (setisValid) {
+      setValidated(true);
+      axios
+        .post("https://my-films-db.herokuapp.com/users", {
+          Name: name,
+          Username: username,
+          Email: email,
+          Password: password,
+          Birthday: birthday,
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          window.open("/", "_self");
+        })
+        .catch((e) => {
+          if (e.response.status === 400) {
+            setUsernameUsed(true);
+          } else {
+            alert("Uh oh, something went wrong.");
+          }
+          console.log("no such user");
+        });
+    }
+  };
+
+  /**
+   * @function formValidation
+   * @returns a boolean variable the sets the state to 'isValid'
+   * @description Checks to makes sure the users inputs are usable credentials
+   */
+  const formValidation = () => {
+    let nameError = {};
+    let usernameError = {};
+    let emailError = {};
+    let passwordError = {};
+    let birthdayError = {};
+    let isValid = true;
+
+    if (name === "") {
+      nameError.nameEmpty = "Please enter your Name.";
+      isValid = false;
+    }
+    if (username.trim().length &lt; 4) {
+      usernameError.usernameShort = "Username requires at least 4 characters.";
+      isValid = false;
+      0;
+    }
+    if (!(email &amp;&amp; email.includes(".") &amp;&amp; email.includes("@"))) {
+      emailError.emailNotEmail = "Email address is not valid.";
+      isValid = false;
+    }
+    if (password.trim().length &lt; 5) {
+      passwordError.passwordMissing =
+        "Password requires at least 5 characters.";
+      isValid = false;
+    }
+    if (birthday === "") {
+      birthdayError.birthdayEmpty = "Please enter your birthdate.";
+      isValid = false;
+    }
+    setNameError(nameError);
+    setUsernameError(usernameError);
+    setPasswordError(passwordError);
+    setEmailError(emailError);
+    setBirthdayError(birthdayError);
+    return isValid;
+  };
+
+  return (
+    &lt;div className="background">
+      &lt;Navbar bg="light" variant="light">
+        &lt;Container>
+          &lt;Navbar.Brand>myFilms&lt;/Navbar.Brand>
+          &lt;Nav className="me-auto">
+            &lt;Link to={`/`}>
+              &lt;Button variant="primary">Login&lt;/Button>
+            &lt;/Link>
+          &lt;/Nav>
+        &lt;/Container>
+      &lt;/Navbar>
+      &lt;div className="d-flex justify-content-center align-items-center">
+        &lt;Form noValidate validated={validated} className="form register">
+          &lt;h1 className="welcome-text">Great to meet you!&lt;/h1>
+          &lt;p className="login-text">Create an account&lt;/p>
+          &lt;Form.Group className="mb-3 name" controlId="formBasicName">
+            &lt;Form.Label className="label">Name:&lt;/Form.Label>
+            &lt;Form.Control
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Firstname Lastname"
+              isInvalid={nameError.nameEmpty}
+            />
+            &lt;Form.Control.Feedback type="invalid">
+              {Object.keys(nameError).map((key) => {
+                return &lt;div key={key}>{nameError[key]}&lt;/div>;
+              })}
+            &lt;/Form.Control.Feedback>
+          &lt;/Form.Group>
+          &lt;Form.Group className="mb-3 username" controlId="formBasicUsername">
+            &lt;Form.Label className="label">Username:&lt;/Form.Label>
+            &lt;Form.Control
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+              isInvalid={usernameError.usernameShort || usernameUsed}
+            />
+            &lt;Form.Control.Feedback type="invalid">
+              {usernameUsed
+                ? "Sorry, that username is already in use."
+                : Object.keys(usernameError).map((key) => {
+                    return &lt;div key={key}>{usernameError[key]}&lt;/div>;
+                  })}
+            &lt;/Form.Control.Feedback>
+          &lt;/Form.Group>
+          &lt;Form.Group className="mb-3 email" controlId="formBasicEmail">
+            &lt;Form.Label className="label">Email address:&lt;/Form.Label>
+            &lt;Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              isInvalid={emailError.emailNotEmail}
+            />
+            &lt;Form.Control.Feedback type="invalid">
+              {Object.keys(emailError).map((key) => {
+                return &lt;div key={key}>{emailError[key]}&lt;/div>;
+              })}
+            &lt;/Form.Control.Feedback>
+            &lt;Form.Text className="text-muted">
+              &lt;p className="muted">
+                We'll never share your email with anyone else.
+              &lt;/p>
+            &lt;/Form.Text>
+          &lt;/Form.Group>
+          &lt;Form.Group className="mb-3 password" controlId="formBasicPassword">
+            &lt;Form.Label className="label">Password:&lt;/Form.Label>
+            &lt;Form.Control
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              isInvalid={passwordError.passwordMissing}
+            />
+            &lt;Form.Control.Feedback type="invalid">
+              {Object.keys(passwordError).map((key) => {
+                return &lt;div key={key}>{passwordError[key]}&lt;/div>;
+              })}
+            &lt;/Form.Control.Feedback>
+          &lt;/Form.Group>
+          &lt;Form.Group className="mb-3 birthday" controlId="formBasicDate">
+            &lt;Form.Label className="label">Birth date:&lt;/Form.Label>
+            &lt;Form.Control
+              type="date"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+              placeholder="Birthday"
+              isInvalid={birthdayError.birthdayEmpty}
+            />
+            &lt;Form.Control.Feedback type="invalid">
+              {Object.keys(birthdayError).map((key) => {
+                return &lt;div key={key}>{birthdayError[key]}&lt;/div>;
+              })}
+            &lt;/Form.Control.Feedback>
+          &lt;/Form.Group>
+          &lt;div className="small_btn">
+            &lt;Button variant="primary" type="submit" onClick={handleSubmit}>
+              Register
+            &lt;/Button>
+          &lt;/div>
+
+          &lt;div className="block_btn d-grid gap-2">
+            &lt;Link to={`/`}>
+              &lt;Button variant="primary w-100">Login&lt;/Button>
+            &lt;/Link>
+          &lt;/div>
+        &lt;/Form>
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+RegistrationView.propTypes = {
+  register: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    birthday: PropTypes.string.isRequired,
+  }),
+  //onRegistration: PropTypes.func.isRequired,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#formValidation">formValidation</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleSumbit">handleSumbit</a></li><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#mapStateToProps">mapStateToProps</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#RegistrationView">RegistrationView</a></li><li><a href="global.html#removeFavouriteMovie">removeFavouriteMovie</a></li><li><a href="global.html#VisibilityFilterInput">VisibilityFilterInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sat Apr 23 2022 18:38:43 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: director-view/director-view.jsx</title>
+    <title>JSDoc: Source: movies-list/movies-list.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: director-view/director-view.jsx</h1>
+    <h1 class="page-title">Source: movies-list/movies-list.jsx</h1>
 
     
 
@@ -27,62 +27,56 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-import PropTypes from "prop-types";
-import Button from "react-bootstrap/Button";
+import { Col, Row } from "react-bootstrap";
+import { connect } from "react-redux";
 
-import "./director-view.scss";
+import VisibilityFilterInput from "../visibility-filter-input/visibility-filter-input";
+import { MovieCard } from "../movie-card/movie-card";
 
-export class DirectorView extends React.Component {
-  /**
-   * @returns
-   * @description Renders the view of the directors information
-   */
-  render() {
-    const { director, onBackClick } = this.props;
+import "./movies-list.scss";
 
-    return (
-      &lt;div className="director-view">
-        &lt;div className="director-name">
-          &lt;h1>
-            &lt;span className="value">{director.Name}&lt;/span>
-          &lt;/h1>
-        &lt;/div>
-        &lt;div className="director-bio">
-          &lt;span className="value">{director.Bio}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-birthyear">
-          &lt;span className="value">Born: {director.Birthyear}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-deathyear">
-          &lt;span className="value">Past away: {director.Deathyear}&lt;/span>
-        &lt;/div>
-
-        &lt;Button
-          variant="link"
-          onClick={() => {
-            onBackClick();
-          }}
-        >
-          Back
-        &lt;/Button>
-      &lt;/div>
-    );
-  }
-}
-
-DirectorView.propTypes = {
-  director: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
-    Bio: PropTypes.string.isRequired,
-    Birthyear: PropTypes.string.isRequired,
-    Deathyear: PropTypes.string.isRequired,
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired,
+/**
+ * @function mapStateToProps
+ * @param state
+ * @returns The VisibilityFilterInput component and then the movie cards in a grid
+ * @description The VisibilityFilterInput component first determines which cards to display in the grid
+ */
+const mapStateToProps = (state) => {
+  const { movies, visibilityFilter } = state;
+  return { movies, visibilityFilter };
 };
 
-export default DirectorView;
+function MoviesList(props) {
+  const { movies, visibilityFilter } = props;
+  let filteredMovies = movies;
+
+  if (visibilityFilter !== "") {
+    filteredMovies = movies.filter((m) =>
+      m.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
+    );
+  }
+
+  if (!movies) return &lt;div className="main-view" />;
+
+  return (
+    &lt;>
+      &lt;div className="movie-cards">
+        &lt;Col md={12} className="search-bar">
+          &lt;VisibilityFilterInput visibilityFilter={visibilityFilter} />
+        &lt;/Col>
+        &lt;Row>
+          {filteredMovies.map((m) => (
+            &lt;Col md={3} sm={4} key={m._id}>
+              &lt;MovieCard movie={m} />
+            &lt;/Col>
+          ))}
+        &lt;/Row>
+      &lt;/div>
+    &lt;/>
+  );
+}
+
+export default connect(mapStateToProps)(MoviesList);
 </code></pre>
         </article>
     </section>

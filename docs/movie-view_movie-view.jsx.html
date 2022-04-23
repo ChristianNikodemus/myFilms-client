@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: movie-view/movie-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: movie-view/movie-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+
+import "./movie-view.scss";
+
+export class MovieView extends React.Component {
+  /**
+   * @description Adds the movie to the users favourites
+   */
+  addFavorite() {
+    const { onSubmit } = this.props;
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("user");
+
+    axios
+      .post(
+        `https://my-films-db.herokuapp.com/users/${username}/movies/${this.props.movie._id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        alert(`Added to favorites list`);
+        onSubmit(response.data);
+      })
+      .catch(function (error) {
+        if (error.response.status === 400) {
+          alert("The movie was already added to favourites list.");
+        } else {
+          alert("Something went wrong.");
+        }
+        console.log(error);
+      });
+  }
+
+  /**
+   * @returns A card showcasing in depth information about the movie
+   */
+  render() {
+    const { isFavourited, movie, onBackClick } = this.props;
+
+    const imgLink = "https://my-films-db.herokuapp.com/";
+
+    return (
+      &lt;div className="movie-view">
+        &lt;div className="movie-poster">
+          &lt;img src={imgLink + movie.ImagePath} />
+        &lt;/div>
+        &lt;div className="movie-title">
+          &lt;span className="label">Title: &lt;/span>
+          &lt;span className="value label">{movie.Title}&lt;/span>
+        &lt;/div>
+        &lt;div className="movie-description">
+          &lt;span className="label">Description: &lt;/span>
+          &lt;span className="value label">{movie.Description}&lt;/span>
+        &lt;/div>
+        &lt;div className="movie-year">
+          &lt;span className="label">Year: &lt;/span>
+          &lt;span className="value label">{movie.Year}&lt;/span>
+        &lt;/div>
+        &lt;div className="movie-genre">
+          &lt;span className="label">Genre: &lt;/span>
+          {movie.Genre.map((genre) => (
+            &lt;span key={genre._id} className="value">
+              &lt;Link to={`/genres/${genre._id}`}>{genre.Title}&lt;/Link>
+            &lt;/span>
+          ))}
+        &lt;/div>
+        &lt;div className="movie-director">
+          &lt;span className="label">Director(s): &lt;/span>
+          {movie.Director.map((director) => (
+            &lt;span key={director._id} className="value">
+              &lt;Link to={`/directors/${director._id}`}>{director.Name}&lt;/Link>
+            &lt;/span>
+          ))}
+        &lt;/div>
+        &lt;div className="movie-featured">
+          {movie.Featured ? (
+            &lt;span className="label">This movie is Featured!&lt;/span>
+          ) : (
+            &lt;span className="label">This movie is not Featured.&lt;/span>
+          )}
+        &lt;/div>
+        &lt;br />
+        &lt;Button
+          variant="primary"
+          size="lg"
+          value={movie._id}
+          onClick={(e) => this.addFavorite(e, movie)}
+          disabled={isFavourited}
+        >
+          {isFavourited ? "Already Favourited" : "Add to Favourites"}
+        &lt;/Button>
+        &lt;br />
+        &lt;Button
+          onClick={() => {
+            onBackClick(null);
+          }}
+          variant="link"
+        >
+          Back
+        &lt;/Button>
+      &lt;/div>
+    );
+  }
+}
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    ImagePath: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Year: PropTypes.string.isRequired,
+    Genre: PropTypes.array.isRequired,
+    Director: PropTypes.array.isRequired,
+    Featured: PropTypes.bool.isRequired,
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#formValidation">formValidation</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleSumbit">handleSumbit</a></li><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#mapStateToProps">mapStateToProps</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#RegistrationView">RegistrationView</a></li><li><a href="global.html#removeFavouriteMovie">removeFavouriteMovie</a></li><li><a href="global.html#VisibilityFilterInput">VisibilityFilterInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sat Apr 23 2022 18:38:43 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
