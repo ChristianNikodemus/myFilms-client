@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
 export class MovieView extends React.Component {
+  /**
+   * @description Adds the movie to the users favourites
+   */
   addFavorite() {
     const { onSubmit } = this.props;
     const token = localStorage.getItem("token");
@@ -34,6 +37,9 @@ export class MovieView extends React.Component {
       });
   }
 
+  /**
+   * @returns A card showcasing in depth information about the movie
+   */
   render() {
     const { isFavourited, movie, onBackClick } = this.props;
 

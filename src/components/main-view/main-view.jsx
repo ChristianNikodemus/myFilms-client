@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { setMovies, setUser } from "../../actions/actions";
 
-// haven't written this yet
 import MoviesList from "../movies-list/movies-list";
 
 //import { MovieCard } from "../movie-card/movie-card";
@@ -34,9 +33,9 @@ class MainView extends React.Component {
   }
 
   /**
-   * Calls API endpoint to retrieve the Users information saved to the database
    * @param token
    * @param username
+   * @description Calls API endpoint to retrieve the Users information saved to the database
    */
   getUser(token, username) {
     axios
@@ -53,9 +52,8 @@ class MainView extends React.Component {
   }
 
   /**
-   * Retreives all movies from database
-   * so it can be utulized in the movie cards
    * @param token
+   * @description Retreives all movies from database so it can be utulized in the movie cards
    */
   getMovies(token) {
     axios
@@ -72,8 +70,8 @@ class MainView extends React.Component {
   }
 
   /**
-   * Sends the users authorization data to the backend
    * @param authData
+   * @description Sends the users authorization data to the backend
    */
   onLoggedIn(authData) {
     console.log(authData);
@@ -85,7 +83,7 @@ class MainView extends React.Component {
   }
 
   /**
-   * Discards the users login token and user data from the network
+   * @description Discards the users login token and user data from the network
    */
   onLoggedOut() {
     localStorage.removeItem("token");
@@ -94,8 +92,8 @@ class MainView extends React.Component {
   }
 
   /**
-   * Renders the main view through a series of different routes
    * @returns the different rendered views through the <Router>
+   * @description Renders the main view through a series of different routes
    */
   render() {
     let { movies, user } = this.props;
@@ -241,11 +239,10 @@ class MainView extends React.Component {
 }
 
 /**
- * Takes the state of the movies and user and returns it to
- * be used in the props
  * @function mapStateToProps
  * @param state
  * @returns movies and user objects with the state
+ * @description Takes the state of the movies and user and returns it to be used in the props
  */
 let mapStateToProps = (state) => {
   return { movies: state.movies, user: state.user };

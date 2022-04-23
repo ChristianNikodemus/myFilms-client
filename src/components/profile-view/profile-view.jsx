@@ -15,6 +15,10 @@ import { Link } from "react-router-dom";
 
 import "./profile-view.scss";
 
+/**
+ * @class
+ * @description Creates a profile page where the user is able to edit their information, favourite movies, and delete their account
+ */
 export class ProfileView extends React.Component {
   constructor() {
     super();
@@ -30,6 +34,12 @@ export class ProfileView extends React.Component {
     };
   }
 
+  /**
+   * @param e
+   * @param movie
+   * @function removeFavouriteMovie
+   * @description Removes a users favourited movie from their list
+   */
   removeFavouriteMovie(e, movie) {
     const { onSubmit } = this.props;
     const token = localStorage.getItem("token");
@@ -51,6 +61,16 @@ export class ProfileView extends React.Component {
       });
   }
 
+  /**
+   * @param e
+   * @param newName
+   * @param newUsername
+   * @param newEmail
+   * @param newPassword
+   * @param newBirthday
+   * @returns the updated users information if it is valid
+   * @description Takes the updated profile information and sets it as the new value
+   */
   handleUpdate(e, newName, newUsername, newEmail, newPassword, newBirthday) {
     const { onSubmit } = this.props;
     this.setState({
@@ -93,26 +113,51 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   }
+
+  /**
+   * @param input
+   * @description Allows the user to change their profile Name
+   */
   setName(input) {
     this.Name = input;
   }
 
+  /**
+   * @param input
+   * @description Allows the user to change their profile Username
+   */
   setUsername(input) {
     this.Username = input;
   }
 
+  /**
+   * @param input
+   * @description Allows the user to change their profile Email
+   */
   setEmail(input) {
     this.Email = input;
   }
 
+  /**
+   * @param input
+   * @description Allows the user to change their profile Password
+   */
   setPassword(input) {
     this.Password = input;
   }
 
+  /**
+   * @param input
+   * @description Allows the user to change their profile Birthday
+   */
   setBirthday(input) {
     this.Birthday = input;
   }
 
+  /**
+   * @param e
+   * @description Deletes the users profile information from the database completely
+   */
   handleDeleteUser(e) {
     e.preventDefault();
 
@@ -134,6 +179,10 @@ export class ProfileView extends React.Component {
       });
   }
 
+  /**
+   * @returns The profile page in HTML
+   * @description Renders the users profile page where they can edit their profile information, remove favourite movies, and delete their account
+   */
   render() {
     const { validated } = this.state;
     const { movies, user } = this.props;

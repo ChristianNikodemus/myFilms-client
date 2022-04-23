@@ -13,11 +13,19 @@ export class NavbarView extends React.Component {
     this.state = {};
   }
 
+  /**
+   * @function onLoggedOut
+   * @description Clears the local storage of the users token
+   */
   onLoggedOut = () => {
     localStorage.clear();
     window.open("/", "_self");
   };
 
+  /**
+   * @returns Navigation bar
+   * @description This allows to user to navigate through the web application
+   */
   render() {
     const { user } = this.props;
 

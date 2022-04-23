@@ -5,6 +5,10 @@ import Button from "react-bootstrap/Button";
 import "./genre-view.scss";
 
 export class GenreView extends React.Component {
+  /**
+   * @returns
+   * @description Renders the view of the genre information
+   */
   render() {
     const { genre, onBackClick } = this.props;
     console.log("The genre is: ", genre);

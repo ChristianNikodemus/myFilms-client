@@ -6,8 +6,8 @@ import "./director-view.scss";
 
 export class DirectorView extends React.Component {
   /**
-   * Renders the view of the directors information
    * @returns
+   * @description Renders the view of the directors information
    */
   render() {
     const { director, onBackClick } = this.props;

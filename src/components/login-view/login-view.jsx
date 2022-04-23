@@ -11,12 +11,23 @@ import { Link } from "react-router-dom";
 
 import "./login-view.scss";
 
+/**
+ * @function LoginView
+ * @param props
+ * @returns a form where the user is able to submit their login credentials
+ * @description Takes the users login credentials and grants them a token to sign in
+ */
 export function LoginView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [validated, setValidated] = useState(false);
   const [error, setError] = useState(null);
 
+  /**
+   * @function handleSumbit
+   * @param e
+   * @description Submits the users login credentials to check if they are valid
+   */
   const handleSubmit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
