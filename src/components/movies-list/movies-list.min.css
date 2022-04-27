@@ -1,1 +1,1 @@
-body{background-color:var(--background-third-color) !important}.search-bar{padding:1em 0}.movie-cards .row{margin:0 !important}.row{width:100%}.movie-cards{margin-left:1em;margin-right:1em;margin-bottom:2em}
+body{background-color:var(--background-third-color) !important}.search-bar{padding:1em 0}.movie-cards .row{margin:0 auto !important;max-width:1200px}.row{width:100%}.movie-cards{margin-left:1em;margin-right:1em;margin-bottom:2em}
