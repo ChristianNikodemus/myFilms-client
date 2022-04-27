@@ -1,7 +1,18 @@
 @import "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&display=swap";
 .searchbar {
   margin: 0 auto;
-  width: 60% !important;
+  width: 500px !important;
+  background-color: var(--background-secondary-color) !important;
+}
+
+.searchbar::placeholder {
+  color: var(--text-primary-color) !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .searchbar {
+    width: 100% !important;
+  }
 }
 
 body {
