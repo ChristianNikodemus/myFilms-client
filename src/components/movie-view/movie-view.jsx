@@ -3,8 +3,11 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
 
 import "./movie-view.scss";
+import CardHeader from "react-bootstrap/esm/CardHeader";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
 
 export class MovieView extends React.Component {
   /**
@@ -46,65 +49,66 @@ export class MovieView extends React.Component {
     const imgLink = "https://my-films-db.herokuapp.com/";
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={imgLink + movie.ImagePath} />
-        </div>
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value label">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value label">{movie.Description}</span>
-        </div>
-        <div className="movie-year">
-          <span className="label">Year: </span>
-          <span className="value label">{movie.Year}</span>
-        </div>
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          {movie.Genre.map((genre) => (
-            <span key={genre._id} className="value">
-              <Link to={`/genres/${genre._id}`}>{genre.Title}</Link>
-            </span>
-          ))}
-        </div>
-        <div className="movie-director">
-          <span className="label">Director(s): </span>
-          {movie.Director.map((director) => (
-            <span key={director._id} className="value">
-              <Link to={`/directors/${director._id}`}>{director.Name}</Link>
-            </span>
-          ))}
-        </div>
-        <div className="movie-featured">
-          {movie.Featured ? (
-            <span className="label">This movie is Featured!</span>
-          ) : (
-            <span className="label">This movie is not Featured.</span>
-          )}
-        </div>
-        <br />
-        <Button
-          variant="primary"
-          size="lg"
-          value={movie._id}
-          onClick={(e) => this.addFavorite(e, movie)}
-          disabled={isFavourited}
-        >
-          {isFavourited ? "Already Favourited" : "Add to Favourites"}
-        </Button>
-        <br />
-        <Button
-          onClick={() => {
-            onBackClick(null);
-          }}
-          variant="link"
-        >
-          Back
-        </Button>
-      </div>
+      <Card>
+        <CardHeader as="h3">{movie.Title}</CardHeader>
+        <Card.Body className="card-img-description">
+          <Card.Img
+            variant="top"
+            src={imgLink + movie.ImagePath}
+            style={{
+              maxWidth: "300px",
+              marginRight: "0.5em",
+            }}
+          />
+          <Card.Text>Description: {movie.Description}</Card.Text>
+        </Card.Body>
+        <ListGroup>
+          <ListGroupItem>Year: {movie.Year}</ListGroupItem>
+          <ListGroupItem className="movie-genre">
+            Genre:{" "}
+            {movie.Genre.map((genre) => (
+              <span key={genre._id} className="value">
+                <Link to={`/genres/${genre._id}`}>{genre.Title}</Link>
+              </span>
+            ))}
+          </ListGroupItem>
+          <ListGroupItem className="movie-director">
+            Director(s):{" "}
+            {movie.Director.map((director) => (
+              <span key={director._id} className="value">
+                <Link to={`/directors/${director._id}`}>{director.Name}</Link>
+              </span>
+            ))}
+          </ListGroupItem>
+          <ListGroupItem>
+            {movie.Featured ? (
+              <span>This movie is Featured!</span>
+            ) : (
+              <span>This movie is not Featured.</span>
+            )}
+          </ListGroupItem>
+        </ListGroup>
+
+        <Card.Body>
+          <Button
+            onClick={() => {
+              onBackClick(null);
+            }}
+            variant="link"
+          >
+            Back
+          </Button>
+          <Button
+            variant="primary"
+            size="lg"
+            value={movie._id}
+            onClick={(e) => this.addFavorite(e, movie)}
+            disabled={isFavourited}
+          >
+            {isFavourited ? "Already Favourited" : "Add to Favourites"}
+          </Button>
+        </Card.Body>
+      </Card>
     );
   }
 }

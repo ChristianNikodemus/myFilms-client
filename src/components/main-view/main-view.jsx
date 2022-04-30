@@ -140,7 +140,14 @@ class MainView extends React.Component {
             render={({ match, history }) => {
               const movie = movies.find((m) => m._id === match.params.movieId);
               return (
-                <Col md={8}>
+                <Col
+                  md={8}
+                  style={{
+                    margin: "0 auto",
+                    paddingTop: "1em",
+                    paddingBottom: "1em",
+                  }}
+                >
                   <MovieView
                     movie={movie}
                     onBackClick={() => history.goBack()}

@@ -2,3 +2,14 @@
 .movie-director span.value:not(:last-child):after {
   content: ", ";
 }
+
+.card-img-description {
+  display: inline-flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .card-img-description {
+    display: block;
+    text-align: center;
+  }
+}
