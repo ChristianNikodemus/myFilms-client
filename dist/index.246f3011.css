@@ -122,9 +122,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.nopadding {
-  padding: 0 !important;
-}
+
 :root {
   --text-primary-color: #ffffff;
   --text-secondary-color: #828d99;

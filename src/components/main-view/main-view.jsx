@@ -202,7 +202,14 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col md={8} className="nopadding">
+                <Col
+                  md={8}
+                  style={{
+                    margin: "0 auto",
+                    paddingTop: "1em",
+                    paddingBottom: "1em",
+                  }}
+                >
                   <GenreView
                     genre={movies.reduce(
                       (genre, m) =>
