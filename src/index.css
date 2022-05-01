@@ -8,6 +8,10 @@
   --background-third-color: #1b1d24;
 }
 
+body {
+  background-color: var(--background-third-color) !important;
+}
+
 .con_fluid {
   padding-right: 0 !important;
   padding-left: 0 !important;

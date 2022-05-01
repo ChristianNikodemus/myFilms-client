@@ -43546,7 +43546,10 @@ var _navDefault = parcelHelpers.interopDefault(_nav);
 var _container = require("react-bootstrap/Container");
 var _containerDefault = parcelHelpers.interopDefault(_container);
 var _reactRouterDom = require("react-router-dom");
+var _accountCircleFILL0Wght400GRAD0Opsz48Svg = require("../../img/account_circle_FILL0_wght400_GRAD0_opsz48.svg");
+var _accountCircleFILL0Wght400GRAD0Opsz48SvgDefault = parcelHelpers.interopDefault(_accountCircleFILL0Wght400GRAD0Opsz48Svg);
 var _navbarViewScss = require("./navbar-view.scss");
+var _reactBootstrap = require("react-bootstrap");
 class NavbarView extends _reactDefault.default.Component {
     constructor(){
         super();
@@ -43572,13 +43575,13 @@ class NavbarView extends _reactDefault.default.Component {
             variant: "light",
             __source: {
                 fileName: "src/components/navbar-view/navbar-view.jsx",
-                lineNumber: 37
+                lineNumber: 39
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_containerDefault.default, {
                 __source: {
                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                    lineNumber: 38
+                    lineNumber: 40
                 },
                 __self: this,
                 children: [
@@ -43586,45 +43589,57 @@ class NavbarView extends _reactDefault.default.Component {
                         to: `/`,
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 39
+                            lineNumber: 41
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Brand, {
+                            className: "nav-link",
                             __source: {
                                 fileName: "src/components/navbar-view/navbar-view.jsx",
-                                lineNumber: 40
+                                lineNumber: 42
                             },
                             __self: this,
                             children: "myFilms"
                         })
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_navDefault.default, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
                         className: "me-auto",
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 42
+                            lineNumber: 45
                         },
                         __self: this,
                         children: [
                             /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Link, {
                                 as: _reactRouterDom.Link,
                                 to: profile,
+                                className: "nav-link",
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 43
+                                    lineNumber: 46
                                 },
                                 __self: this,
                                 children: [
-                                    "Go to ",
+                                    /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                                        src: _accountCircleFILL0Wght400GRAD0Opsz48SvgDefault.default,
+                                        alt: "account-icon",
+                                        className: "nav-img",
+                                        __source: {
+                                            fileName: "src/components/navbar-view/navbar-view.jsx",
+                                            lineNumber: 47
+                                        },
+                                        __self: this
+                                    }),
                                     user.Username
                                 ]
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
                                 to: `/`,
                                 onClick: this.onLoggedOut,
+                                className: "nav-link",
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 46
+                                    lineNumber: 50
                                 },
                                 __self: this,
                                 children: "Logout"
@@ -43643,7 +43658,45 @@ exports.default = NavbarView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap/Navbar":"6tJ6F","react-bootstrap/Nav":"3TTuV","react-bootstrap/Container":"gFkXb","react-router-dom":"etVME","./navbar-view.scss":"2VsN7","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"2VsN7":[function() {},{}],"hRkrD":[function() {},{}],"fbbZr":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap/Navbar":"6tJ6F","react-bootstrap/Container":"gFkXb","react-router-dom":"etVME","./navbar-view.scss":"2VsN7","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react-bootstrap":"9qMdX","react-bootstrap/Nav":"3TTuV","../../img/account_circle_FILL0_wght400_GRAD0_opsz48.svg":"6NsP2"}],"2VsN7":[function() {},{}],"6NsP2":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('a8mfF') + "account_circle_FILL0_wght400_GRAD0_opsz48.eab14bda.svg" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"chiK4"}],"chiK4":[function(require,module,exports) {
+"use strict";
+var bundleURL = {
+};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"hRkrD":[function() {},{}],"fbbZr":[function(require,module,exports) {
 'use strict';
 var compose = require('redux').compose;
 exports.__esModule = true;
