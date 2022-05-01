@@ -62,7 +62,7 @@ export class MovieView extends React.Component {
           />
           <Card.Text>Description: {movie.Description}</Card.Text>
         </Card.Body>
-        <ListGroup>
+        <ListGroup variant="flush">
           <ListGroupItem>Year: {movie.Year}</ListGroupItem>
           <ListGroupItem className="movie-genre">
             Genre:{" "}

@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 
 import "./director-view.scss";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
 
 export class DirectorView extends React.Component {
   /**
@@ -19,9 +20,13 @@ export class DirectorView extends React.Component {
         <CardHeader as="h3">{director.Name}</CardHeader>
         <Card.Body>
           <Card.Text>{director.Bio}</Card.Text>
-          <Card.Text>
+        </Card.Body>
+        <ListGroup variant="flush">
+          <ListGroupItem>
             Life: {director.Birthyear} until {director.Deathyear}
-          </Card.Text>
+          </ListGroupItem>
+        </ListGroup>
+        <Card.Body>
           <Button
             variant="link"
             onClick={() => {
