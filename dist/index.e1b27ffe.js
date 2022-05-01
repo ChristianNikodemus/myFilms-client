@@ -43572,6 +43572,8 @@ var _containerDefault = parcelHelpers.interopDefault(_container);
 var _reactRouterDom = require("react-router-dom");
 var _accountCircleFILL0Wght400GRAD0Opsz48Svg = require("../../img/account_circle_FILL0_wght400_GRAD0_opsz48.svg");
 var _accountCircleFILL0Wght400GRAD0Opsz48SvgDefault = parcelHelpers.interopDefault(_accountCircleFILL0Wght400GRAD0Opsz48Svg);
+var _logoutFILL0Wght400GRAD0Opsz48Svg = require("../../img/logout_FILL0_wght400_GRAD0_opsz48.svg");
+var _logoutFILL0Wght400GRAD0Opsz48SvgDefault = parcelHelpers.interopDefault(_logoutFILL0Wght400GRAD0Opsz48Svg);
 var _navbarViewScss = require("./navbar-view.scss");
 var _reactBootstrap = require("react-bootstrap");
 class NavbarView extends _reactDefault.default.Component {
@@ -43599,13 +43601,13 @@ class NavbarView extends _reactDefault.default.Component {
             variant: "light",
             __source: {
                 fileName: "src/components/navbar-view/navbar-view.jsx",
-                lineNumber: 39
+                lineNumber: 40
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_containerDefault.default, {
                 __source: {
                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                    lineNumber: 40
+                    lineNumber: 41
                 },
                 __self: this,
                 children: [
@@ -43613,14 +43615,14 @@ class NavbarView extends _reactDefault.default.Component {
                         to: `/`,
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 41
+                            lineNumber: 42
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Brand, {
                             className: "nav-link",
                             __source: {
                                 fileName: "src/components/navbar-view/navbar-view.jsx",
-                                lineNumber: 42
+                                lineNumber: 43
                             },
                             __self: this,
                             children: "myFilms"
@@ -43630,7 +43632,7 @@ class NavbarView extends _reactDefault.default.Component {
                         className: "me-auto",
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 45
+                            lineNumber: 46
                         },
                         __self: this,
                         children: [
@@ -43640,7 +43642,7 @@ class NavbarView extends _reactDefault.default.Component {
                                 className: "nav-link",
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 46
+                                    lineNumber: 47
                                 },
                                 __self: this,
                                 children: [
@@ -43650,23 +43652,35 @@ class NavbarView extends _reactDefault.default.Component {
                                         className: "nav-img",
                                         __source: {
                                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                                            lineNumber: 47
+                                            lineNumber: 48
                                         },
                                         __self: this
                                     }),
                                     user.Username
                                 ]
                             }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                            /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Link, {
                                 to: `/`,
                                 onClick: this.onLoggedOut,
                                 className: "nav-link",
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 50
+                                    lineNumber: 51
                                 },
                                 __self: this,
-                                children: "Logout"
+                                children: [
+                                    /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                                        src: _logoutFILL0Wght400GRAD0Opsz48SvgDefault.default,
+                                        alt: "logout-icon",
+                                        className: "nav-img",
+                                        __source: {
+                                            fileName: "src/components/navbar-view/navbar-view.jsx",
+                                            lineNumber: 52
+                                        },
+                                        __self: this
+                                    }),
+                                    "Logout"
+                                ]
                             })
                         ]
                     })
@@ -43682,7 +43696,7 @@ exports.default = NavbarView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap/Navbar":"6tJ6F","react-bootstrap/Container":"gFkXb","react-router-dom":"etVME","./navbar-view.scss":"2VsN7","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react-bootstrap":"9qMdX","react-bootstrap/Nav":"3TTuV","../../img/account_circle_FILL0_wght400_GRAD0_opsz48.svg":"6NsP2"}],"2VsN7":[function() {},{}],"6NsP2":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap/Navbar":"6tJ6F","react-bootstrap/Container":"gFkXb","react-router-dom":"etVME","./navbar-view.scss":"2VsN7","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react-bootstrap":"9qMdX","react-bootstrap/Nav":"3TTuV","../../img/account_circle_FILL0_wght400_GRAD0_opsz48.svg":"6NsP2","../../img/logout_FILL0_wght400_GRAD0_opsz48.svg":"3Wgib"}],"2VsN7":[function() {},{}],"6NsP2":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('a8mfF') + "account_circle_FILL0_wght400_GRAD0_opsz48.eab14bda.svg" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"chiK4"}],"chiK4":[function(require,module,exports) {
@@ -43720,7 +43734,10 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"hRkrD":[function() {},{}],"fbbZr":[function(require,module,exports) {
+},{}],"3Wgib":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('a8mfF') + "logout_FILL0_wght400_GRAD0_opsz48.1e9f7ffc.svg" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"chiK4"}],"hRkrD":[function() {},{}],"fbbZr":[function(require,module,exports) {
 'use strict';
 var compose = require('redux').compose;
 exports.__esModule = true;
