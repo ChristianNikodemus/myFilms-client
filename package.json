@@ -4,7 +4,10 @@
   "description": "",
   "default": "src/index.html",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "parcel src/index.html",
+    "build": "react-scripts build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "jsdoc -c jsdoc.conf.json"
   },
@@ -17,11 +20,12 @@
   "bugs": {
     "url": "https://github.com/ChristianNikodemus/myFilms-client/issues"
   },
-  "homepage": "https://github.com/ChristianNikodemus/myFilms-client#readme",
+  "homepage": "https://christiannikodemus.github.io/myFilms-client/",
   "dependencies": {
     "axios": "^0.21.4",
     "better-docs": "^2.7.2",
     "bootstrap": "^5.1.3",
+    "gh-pages": "^3.2.3",
     "i": "^0.3.7",
     "jsdoc": "^3.6.10",
     "npm": "^8.7.0",
