@@ -134,8 +134,17 @@
   margin-bottom: 0 !important;
 }
 
-.delete_btn {
-  margin-bottom: 1rem;
+.alert-align {
+  align-items: baseline;
+}
+
+.delete-alert {
+  display: flex;
+  margin-top: 1em;
+}
+
+.delete-btn {
+  margin-left: 1rem;
 }
 .me-auto {
   align-items: baseline !important;

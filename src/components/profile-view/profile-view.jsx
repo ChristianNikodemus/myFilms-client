@@ -12,9 +12,6 @@ import {
   Container,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 import "./profile-view.scss";
 
@@ -200,12 +197,14 @@ export class ProfileView extends React.Component {
 
         {["primary"].map((variant, idx) => (
           <Alert key={idx} variant={variant} className="no-bottom-margin">
-            <h5>Favourites Movies</h5>
+            <h5 className="no-bottom-margin">Favourites Movies</h5>
           </Alert>
         ))}
 
         {user.FavouriteMovies.length === 0 && (
-          <div className="text-center">No Saved Movies.</div>
+          <p style={{ textAlign: "center", color: "white", margin: "2em 0" }}>
+            No Saved Movies.
+          </p>
         )}
 
         {user.FavouriteMovies.length > 0 && (
@@ -238,106 +237,111 @@ export class ProfileView extends React.Component {
           </CardGroup>
         )}
 
-        {["info"].map((variant, idx) => (
-          <Alert key={idx} variant={variant}>
-            <h5 className="section">Update Profile Information</h5>
-          </Alert>
-        ))}
+        <Card>
+          {["info"].map((variant, idx) => (
+            <Alert key={idx} variant={variant} className="no-bottom-margin">
+              <h5 className="no-bottom-margin">Update Profile Information</h5>
+            </Alert>
+          ))}
+          <Card.Body>
+            <Form
+              noValidate
+              validated={validated}
+              onSubmit={(e) =>
+                this.handleUpdate(
+                  e,
+                  this.Name || user.Name,
+                  this.Username || user.Username,
+                  this.Email || user.Email,
+                  this.Password || user.Password,
+                  this.Birthday || user.Birthday
+                )
+              }
+            >
+              <Form.Group className="mb-3" controlId="formName">
+                <Form.Label className="form-label">Name:</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={user.Name}
+                  onChange={(e) => this.setName(e.target.value)}
+                />
+              </Form.Group>
 
-        <Form
-          noValidate
-          validated={validated}
-          className="update-form"
-          onSubmit={(e) =>
-            this.handleUpdate(
-              e,
-              this.Name || user.Name,
-              this.Username || user.Username,
-              this.Email || user.Email,
-              this.Password || user.Password,
-              this.Birthday || user.Birthday
-            )
-          }
-        >
-          <Form.Group controlId="formName">
-            <Form.Label className="form-label">Name:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder={user.Name}
-              onChange={(e) => this.setName(e.target.value)}
-            />
-          </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicUsername">
+                <Form.Label className="form-label">Username:</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={user.Username}
+                  onChange={(e) => this.setUsername(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="formBasicUsername">
-            <Form.Label className="form-label">Username:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder={user.Username}
-              onChange={(e) => this.setUsername(e.target.value)}
-            />
-          </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label className="form-label">Email:</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder={user.Email}
+                  onChange={(e) => this.setEmail(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label className="form-label">Email:</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder={user.Email}
-              onChange={(e) => this.setEmail(e.target.value)}
-            />
-          </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label className="form-label">Password:</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="New Password"
+                  onChange={(e) => this.setPassword(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label className="form-label">Password:</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="New Password"
-              onChange={(e) => this.setPassword(e.target.value)}
-            />
-          </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicDate">
+                <Form.Label className="form-label">
+                  Birthday: ({user.Birthday.slice(0, 10)})
+                </Form.Label>
+                <Form.Control
+                  type="date"
+                  placeholder="Change Birthday"
+                  onChange={(e) => this.setBirthday(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="formBasicDate">
-            <Form.Label className="form-label">
-              Birthday: ({user.Birthday.slice(0, 10)})
-            </Form.Label>
-            <Form.Control
-              type="date"
-              placeholder="Change Birthday"
-              onChange={(e) => this.setBirthday(e.target.value)}
-            />
-          </Form.Group>
-        </Form>
-
-        <Button
-          variant="outline-primary"
-          onClick={(e) =>
-            this.handleUpdate(
-              e,
-              this.Name || user.Name,
-              this.Username || user.Username,
-              this.Email || user.Email,
-              this.Password || user.Password,
-              this.Birthday || user.Birthday
-            )
-          }
-          type="submit"
-          className="update_btn"
-        >
-          Update Information
-        </Button>
+              <Button
+                variant="primary"
+                onClick={(e) =>
+                  this.handleUpdate(
+                    e,
+                    this.Name || user.Name,
+                    this.Username || user.Username,
+                    this.Email || user.Email,
+                    this.Password || user.Password,
+                    this.Birthday || user.Birthday
+                  )
+                }
+                type="submit"
+                className="update_btn"
+              >
+                Update Information
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
 
         {["danger"].map((variant, idx) => (
-          <Alert key={idx} variant={variant}>
-            <h5>Delete your Account</h5>
+          <Alert
+            key={idx}
+            variant={variant}
+            className="delete-alert alert-align"
+          >
+            <h5 className="no-bottom-margin">Danger Zone:</h5>
+            <Button
+              className="delete-btn"
+              variant="danger"
+              onClick={(e) => this.handleDeleteUser(e)}
+            >
+              Delete Account
+            </Button>
           </Alert>
         ))}
-
-        <Button
-          className="delete_btn"
-          variant="danger"
-          onClick={(e) => this.handleDeleteUser(e)}
-        >
-          Delete Account
-        </Button>
       </div>
     );
   }
