@@ -23420,22 +23420,19 @@ function ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
     if (Object.getOwnPropertySymbols) {
         var symbols = Object.getOwnPropertySymbols(object);
-        if (enumerableOnly) symbols = symbols.filter(function(sym) {
+        enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-        });
-        keys.push.apply(keys, symbols);
+        })), keys.push.apply(keys, symbols);
     }
     return keys;
 }
 function _objectSpread2(target) {
     for(var i = 1; i < arguments.length; i++){
-        var source = arguments[i] != null ? arguments[i] : {
+        var source = null != arguments[i] ? arguments[i] : {
         };
-        if (i % 2) ownKeys(Object(source), true).forEach(function(key) {
+        i % 2 ? ownKeys(Object(source), !0).forEach(function(key) {
             _definePropertyJsDefault.default(target, key, source[key]);
-        });
-        else if (Object.getOwnPropertyDescriptors) Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-        else ownKeys(Object(source)).forEach(function(key) {
+        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
             Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
         });
     }
@@ -23739,8 +23736,8 @@ module.exports = require('./cjs/react-is.development.js');
 var ReactIs = require('react-is');
 var assign = require('object-assign');
 var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
+var has = require('./lib/has');
 var checkPropTypes = require('./checkPropTypes');
-var has = Function.call.bind(Object.prototype.hasOwnProperty);
 var printWarning = function() {
 };
 printWarning = function(text) {
@@ -23827,6 +23824,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
     // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
     var ReactPropTypes = {
         array: createPrimitiveTypeChecker('array'),
+        bigint: createPrimitiveTypeChecker('bigint'),
         bool: createPrimitiveTypeChecker('boolean'),
         func: createPrimitiveTypeChecker('function'),
         number: createPrimitiveTypeChecker('number'),
@@ -23862,8 +23860,10 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
    * Errors anymore. We don't inspect their stack anyway, and creating them
    * is prohibitively expensive if they are created too often, such as what
    * happens in oneOfType() for any type before the one that matched.
-   */ function PropTypeError(message) {
+   */ function PropTypeError(message, data) {
         this.message = message;
+        this.data = data && typeof data === 'object' ? data : {
+        };
         this.stack = '';
     }
     // Make `instanceof Error` still work for returned errors.
@@ -23913,7 +23913,9 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
                 // check, but we can offer a more precise error message here rather than
                 // 'of type `object`'.
                 var preciseType = getPreciseType(propValue);
-                return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+                return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'), {
+                    expectedType: expectedType
+                });
             }
             return null;
         }
@@ -24020,11 +24022,15 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
             }
         }
         function validate(props, propName, componentName, location, propFullName) {
+            var expectedTypes = [];
             for(var i = 0; i < arrayOfTypeCheckers.length; i++){
                 var checker = arrayOfTypeCheckers[i];
-                if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) return null;
+                var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
+                if (checkerResult == null) return null;
+                if (checkerResult.data && has(checkerResult.data, 'expectedType')) expectedTypes.push(checkerResult.data.expectedType);
             }
-            return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+            var expectedTypesMessage = expectedTypes.length > 0 ? ', expected one of type [' + expectedTypes.join(', ') + ']' : '';
+            return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`' + expectedTypesMessage + '.'));
         }
         return createChainableTypeChecker(validate);
     }
@@ -24035,6 +24041,9 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
         }
         return createChainableTypeChecker(validate);
     }
+    function invalidValidatorError(componentName, location, propFullName, key, type) {
+        return new PropTypeError((componentName || 'React class') + ': ' + location + ' type `' + propFullName + '.' + key + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + type + '`.');
+    }
     function createShapeTypeChecker(shapeTypes) {
         function validate(props, propName, componentName, location, propFullName) {
             var propValue = props[propName];
@@ -24042,7 +24051,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
             if (propType !== 'object') return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
             for(var key in shapeTypes){
                 var checker = shapeTypes[key];
-                if (!checker) continue;
+                if (typeof checker !== 'function') return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
                 var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
                 if (error) return error;
             }
@@ -24055,12 +24064,12 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
             var propValue = props[propName];
             var propType = getPropType(propValue);
             if (propType !== 'object') return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-            // We need to check all keys in case some are required but missing from
-            // props.
+            // We need to check all keys in case some are required but missing from props.
             var allKeys = assign({
             }, props[propName], shapeTypes);
             for(var key in allKeys){
                 var checker = shapeTypes[key];
+                if (has(shapeTypes, key) && typeof checker !== 'function') return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
                 if (!checker) return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' + '\nBad object: ' + JSON.stringify(props[propName], null, '  ') + '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  '));
                 var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
                 if (error) return error;
@@ -24160,7 +24169,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
     return ReactPropTypes;
 };
 
-},{"react-is":"5KyfE","object-assign":"iUUFa","./lib/ReactPropTypesSecret":"bQ0BL","./checkPropTypes":"aGXhS"}],"bQ0BL":[function(require,module,exports) {
+},{"react-is":"5KyfE","object-assign":"iUUFa","./lib/ReactPropTypesSecret":"bQ0BL","./lib/has":"fM5kX","./checkPropTypes":"aGXhS"}],"bQ0BL":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -24169,6 +24178,9 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
  */ 'use strict';
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
+
+},{}],"fM5kX":[function(require,module,exports) {
+module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
 
 },{}],"aGXhS":[function(require,module,exports) {
 /**
@@ -24182,7 +24194,7 @@ var printWarning = function() {
 var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
 var loggedTypeFailures = {
 };
-var has = Function.call.bind(Object.prototype.hasOwnProperty);
+var has = require('./lib/has');
 printWarning = function(text) {
     var message = 'Warning: ' + text;
     if (typeof console !== 'undefined') console.error(message);
@@ -24214,7 +24226,7 @@ printWarning = function(text) {
             // This is intentionally an invariant that gets caught. It's the same
             // behavior as without this statement except with a better message.
             if (typeof typeSpecs[typeSpecName] !== 'function') {
-                var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.');
+                var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.' + 'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.');
                 err.name = 'Invariant Violation';
                 throw err;
             }
@@ -24242,7 +24254,7 @@ printWarning = function(text) {
 };
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":"bQ0BL"}],"aaKgS":[function(require,module,exports) {
+},{"./lib/ReactPropTypesSecret":"bQ0BL","./lib/has":"fM5kX"}],"aaKgS":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ReactReduxContext", ()=>ReactReduxContext
@@ -43599,7 +43611,6 @@ var _accountCircleFILL0Wght400GRAD0Opsz48SvgDefault = parcelHelpers.interopDefau
 var _logoutFILL0Wght400GRAD0Opsz48Svg = require("../../img/logout_FILL0_wght400_GRAD0_opsz48.svg");
 var _logoutFILL0Wght400GRAD0Opsz48SvgDefault = parcelHelpers.interopDefault(_logoutFILL0Wght400GRAD0Opsz48Svg);
 var _navbarViewScss = require("./navbar-view.scss");
-var _reactBootstrap = require("react-bootstrap");
 class NavbarView extends _reactDefault.default.Component {
     constructor(){
         super();
@@ -43625,13 +43636,13 @@ class NavbarView extends _reactDefault.default.Component {
             variant: "light",
             __source: {
                 fileName: "src/components/navbar-view/navbar-view.jsx",
-                lineNumber: 40
+                lineNumber: 39
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_containerDefault.default, {
                 __source: {
                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                    lineNumber: 41
+                    lineNumber: 40
                 },
                 __self: this,
                 children: [
@@ -43639,24 +43650,24 @@ class NavbarView extends _reactDefault.default.Component {
                         to: `/`,
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 42
+                            lineNumber: 41
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Brand, {
                             className: "nav-link",
                             __source: {
                                 fileName: "src/components/navbar-view/navbar-view.jsx",
-                                lineNumber: 43
+                                lineNumber: 42
                             },
                             __self: this,
                             children: "myFilms"
                         })
                     }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Nav, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_navDefault.default, {
                         className: "me-auto",
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 46
+                            lineNumber: 45
                         },
                         __self: this,
                         children: [
@@ -43666,7 +43677,7 @@ class NavbarView extends _reactDefault.default.Component {
                                 className: "nav-link",
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 47
+                                    lineNumber: 46
                                 },
                                 __self: this,
                                 children: [
@@ -43676,7 +43687,7 @@ class NavbarView extends _reactDefault.default.Component {
                                         className: "nav-img",
                                         __source: {
                                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                                            lineNumber: 48
+                                            lineNumber: 47
                                         },
                                         __self: this
                                     }),
@@ -43689,7 +43700,7 @@ class NavbarView extends _reactDefault.default.Component {
                                 className: "nav-link",
                                 __source: {
                                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                                    lineNumber: 51
+                                    lineNumber: 50
                                 },
                                 __self: this,
                                 children: [
@@ -43699,7 +43710,7 @@ class NavbarView extends _reactDefault.default.Component {
                                         className: "nav-img",
                                         __source: {
                                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                                            lineNumber: 52
+                                            lineNumber: 51
                                         },
                                         __self: this
                                     }),
@@ -43720,7 +43731,7 @@ exports.default = NavbarView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap/Navbar":"6tJ6F","react-bootstrap/Container":"gFkXb","react-router-dom":"etVME","./navbar-view.scss":"2VsN7","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react-bootstrap":"9qMdX","react-bootstrap/Nav":"3TTuV","../../img/account_circle_FILL0_wght400_GRAD0_opsz48.svg":"6NsP2","../../img/logout_FILL0_wght400_GRAD0_opsz48.svg":"3Wgib"}],"2VsN7":[function() {},{}],"6NsP2":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap/Navbar":"6tJ6F","react-bootstrap/Container":"gFkXb","react-router-dom":"etVME","./navbar-view.scss":"2VsN7","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","react-bootstrap/Nav":"3TTuV","../../img/account_circle_FILL0_wght400_GRAD0_opsz48.svg":"6NsP2","../../img/logout_FILL0_wght400_GRAD0_opsz48.svg":"3Wgib"}],"2VsN7":[function() {},{}],"6NsP2":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('a8mfF') + "account_circle_FILL0_wght400_GRAD0_opsz48.eab14bda.svg" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"chiK4"}],"chiK4":[function(require,module,exports) {

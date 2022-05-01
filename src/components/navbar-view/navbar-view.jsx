@@ -7,7 +7,6 @@ import account from "../../img/account_circle_FILL0_wght400_GRAD0_opsz48.svg";
 import logout from "../../img/logout_FILL0_wght400_GRAD0_opsz48.svg";
 
 import "./navbar-view.scss";
-import { Nav } from "react-bootstrap";
 
 export class NavbarView extends React.Component {
   constructor() {
