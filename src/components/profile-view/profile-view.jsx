@@ -12,6 +12,9 @@ import {
   Container,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 import "./profile-view.scss";
 
@@ -190,13 +193,13 @@ export class ProfileView extends React.Component {
     const imgLink = "https://my-films-db.herokuapp.com/";
 
     return (
-      <div>
-        <h2 style={{ textAlign: "center" }}>
+      <div className="profile-container">
+        <h2 style={{ textAlign: "center", color: "white", margin: "2em 0" }}>
           Hello {user.Username}, welcome back!
         </h2>
 
         {["primary"].map((variant, idx) => (
-          <Alert key={idx} variant={variant}>
+          <Alert key={idx} variant={variant} className="no-bottom-margin">
             <h5>Favourites Movies</h5>
           </Alert>
         ))}
@@ -206,27 +209,30 @@ export class ProfileView extends React.Component {
         )}
 
         {user.FavouriteMovies.length > 0 && (
-          <CardGroup>
+          <CardGroup className="card-group">
             {user.FavouriteMovies.map((movieId) => {
               const movie = movies.find((m) => movieId === m._id);
               return (
-                <Card style={{ width: "18rem" }} key={movie._id}>
-                  <Card.Img variant="top" src={imgLink + movie.ImagePath} />
-                  <Card.Body>
-                    <Card.Title className="movie-card-title">
-                      <Link to={`/movies/${movie._id}`}>{movie.Title}</Link>
-                    </Card.Title>
-
-                    <Button
-                      size="sm"
-                      variant="danger"
-                      value={movie._id}
-                      onClick={(e) => this.removeFavouriteMovie(e, movie)}
-                    >
-                      Remove
-                    </Button>
-                  </Card.Body>
-                </Card>
+                <Col sm={5} md={4} lg={3}>
+                  <Card className="fav-card" key={movie._id}>
+                    <Card.Img variant="top" src={imgLink + movie.ImagePath} />
+                    <Card.Body>
+                      <Card.Title className="movie-card-title">
+                        <Link to={`/movies/${movie._id}`}>{movie.Title}</Link>
+                      </Card.Title>
+                    </Card.Body>
+                    <Card.Footer>
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        value={movie._id}
+                        onClick={(e) => this.removeFavouriteMovie(e, movie)}
+                      >
+                        Remove
+                      </Button>
+                    </Card.Footer>
+                  </Card>
+                </Col>
               );
             })}
           </CardGroup>
