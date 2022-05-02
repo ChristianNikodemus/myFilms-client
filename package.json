@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.0",
-    "parcel": "latest"
+    "parcel": "^2.0.0-rc.0"
   },
   "browserslist": {
     "production": [
