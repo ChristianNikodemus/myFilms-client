@@ -35753,6 +35753,28 @@ function LoginView(props) {
                             lineNumber: 107,
                             columnNumber: 11
                         }, this),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                            className: "login-text",
+                            children: [
+                                "You can also use these credentials If you don't want to register:",
+                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
+                                    fileName: "src/components/login-view/login-view.jsx",
+                                    lineNumber: 114,
+                                    columnNumber: 13
+                                }, this),
+                                "Username: ChrisNiko1062",
+                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("br", {}, void 0, false, {
+                                    fileName: "src/components/login-view/login-view.jsx",
+                                    lineNumber: 116,
+                                    columnNumber: 13
+                                }, this),
+                                "Password: Ilovecoding"
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/login-view/login-view.jsx",
+                            lineNumber: 112,
+                            columnNumber: 11
+                        }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                             className: "block_btn d-grid gap-2",
                             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Link, {
@@ -35762,17 +35784,17 @@ function LoginView(props) {
                                     children: "Register"
                                 }, void 0, false, {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 115,
+                                    lineNumber: 122,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 114,
+                                lineNumber: 121,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 113,
+                            lineNumber: 120,
                             columnNumber: 11
                         }, this)
                     ]

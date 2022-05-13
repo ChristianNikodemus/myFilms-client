@@ -109,6 +109,13 @@ export function LoginView(props) {
               Login
             </Button>
           </div>
+          <p className="login-text">
+            You can also use these credentials If you don't want to register:
+            <br />
+            Username: ChrisNiko1062
+            <br />
+            Password: Ilovecoding
+          </p>
 
           <div className="block_btn d-grid gap-2">
             <Link to={`/register`}>
