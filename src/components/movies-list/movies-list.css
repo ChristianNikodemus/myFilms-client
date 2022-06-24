@@ -1,13 +1,10 @@
-body {
-  background-color: var(--background-third-color) !important;
-}
-
 .search-bar {
   padding: 1em 0;
 }
 
 .movie-cards .row {
-  margin: 0 !important;
+  margin: 0 auto !important;
+  max-width: 1200px;
 }
 
 .row {

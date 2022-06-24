@@ -6,7 +6,7 @@ Welcome to the front end of myFilms Application. This project uses the front end
 
 Using React, build the client-side for an application called myFlims based on its existing server-side code (REST API and database).
 
-### Technical Features
+## Technical Features
 
 - The application is a single-page application (SPA)
 - Uses state routing to navigate between views and share URLs
@@ -19,17 +19,26 @@ Using React, build the client-side for an application called myFlims based on it
 - Contains a mix of class components and function components
 - Hosted online
 
-### How to Start
+## How to Start
 
 First clone this repository to your machine locally.
 
 Then, to start the project simply navigate to the project in terminal and run:
 
- npm install
+`npm install`
 
 This installs all the dependencies to run the program, then run:
 
- npm start
+`npm start`
 
-This starts the program, your terminal will prompt you that the server is running at a url such as 'http://localhost:1234' for example. You can then go to your browser and enter this url in the address bar to see the project in action!
+This starts the program, your terminal will prompt you that the server is running at a url such as `http://localhost:1234` for example. You can then go to your browser and enter this url in the address bar to see the project in action!
 
+## JSDoc Documentation
+
+### View JSDoc Documentation
+
+To open the JSDoc documentation, simply navigate to folder called "docs" at the first level of this project, then find the "index.html" file and open it within your internet browser.
+
+### Build JSDoc Documentation
+
+You may want to re-build the documentation, which is a benefit for if say for example, if another contributor adds additional JSDoc comments. First, ensure you are navigated to the top level this projects folder structure within terminal. Then, enter the command `npm run docs`. This will rebuild the JSDoc documentation.

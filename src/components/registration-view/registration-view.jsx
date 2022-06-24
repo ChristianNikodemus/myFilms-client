@@ -10,6 +10,11 @@ import { Link } from "react-router-dom";
 
 import "./registration-view.scss";
 
+/**
+ * @function RegistrationView
+ * @param props
+ * @returns A form where the user is able to input their registration credentials
+ */
 export function RegistrationView(props) {
   const [validated, setValidated] = useState(false);
 
@@ -27,6 +32,11 @@ export function RegistrationView(props) {
 
   const [usernameUsed, setUsernameUsed] = useState(false);
 
+  /**
+   * @function handleSubmit
+   * @param e
+   * @description Enters the users registration inputs to the database
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     let setisValid = formValidation();
@@ -56,6 +66,11 @@ export function RegistrationView(props) {
     }
   };
 
+  /**
+   * @function formValidation
+   * @returns a boolean variable the sets the state to 'isValid'
+   * @description Checks to makes sure the users inputs are usable credentials
+   */
   const formValidation = () => {
     let nameError = {};
     let usernameError = {};

@@ -7,6 +7,12 @@ import { setFilter } from "../../actions/actions";
 
 import "./visibility-filter-input.scss";
 
+/**
+ * @function VisibilityFilterInput
+ * @param props
+ * @returns a search bar
+ * @description This allows the user to search for any movies
+ */
 function VisibilityFilterInput(props) {
   return (
     <Form.Control

@@ -1,11 +1,14 @@
 @import "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&display=swap";
 .searchbar {
+  padding-left: 1em !important;
   margin: 0 auto;
-  width: 60% !important;
+  width: 500px !important;
 }
 
-body {
-  background-color: var(--background-third-color) !important;
+@media only screen and (max-width: 600px) {
+  .searchbar {
+    width: 80% !important;
+  }
 }
 
 .search-bar {
@@ -13,7 +16,8 @@ body {
 }
 
 .movie-cards .row {
-  margin: 0 !important;
+  margin: 0 auto !important;
+  max-width: 1200px;
 }
 
 .row {
@@ -29,17 +33,21 @@ body {
 .movie-director span.value:not(:last-child):after {
   content: ", ";
 }
-:root {
-  --text-primary-color: #ffffff;
-  --text-secondary-color: #828d99;
-  --text-third-color: #bec2cc;
-  --background-color: #0376e3;
-  --background-secondary-color: #1e2127;
-  --background-third-color: #1b1d24;
+
+.card-img-description {
+  display: inline-flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .card-img-description {
+    display: block;
+    text-align: center;
+  }
 }
 .background {
   background-color: var(--background-color);
 }
+
 .form {
   padding: 2em 2.7em;
   width: 430px;
@@ -47,6 +55,7 @@ body {
   border-radius: 2px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
+
 .welcome-text {
   font-family: "Archivo", sans-serif;
   text-align: center;
@@ -56,6 +65,7 @@ body {
   line-height: 1.316;
   color: var(--text-primary-color);
 }
+
 .login-text {
   font-family: "Archivo", sans-serif;
   text-align: center;
@@ -65,6 +75,7 @@ body {
   line-height: 1.6;
   color: var(--text-secondary-color);
 }
+
 .label {
   font-family: "Archivo", sans-serif;
   font-weight: 400;
@@ -73,6 +84,7 @@ body {
   line-height: 1.6;
   color: var(--text-third-color);
 }
+
 .small_btn {
   width: 108px;
   font-family: "Archivo", sans-serif;
@@ -83,6 +95,7 @@ body {
   color: var(--text-primary-color);
   margin: 2em 0;
 }
+
 .block_btn {
   border-top: 1px solid #30333a;
   padding-top: 2em;
@@ -97,22 +110,71 @@ body {
 }
 
 
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.card-group {
+  justify-content: center;
+}
+
+.fav-card {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
 .update_btn {
   margin-bottom: 1rem;
 }
 
-.delete_btn {
-  margin-bottom: 1rem;
+.no-bottom-margin {
+  margin-bottom: 0 !important;
 }
 
+.alert-align {
+  align-items: baseline;
+}
+
+.delete-alert {
+  display: flex;
+  margin-top: 1em;
+}
+
+.delete-btn {
+  margin-left: 1rem;
+}
+.me-auto {
+  align-items: baseline !important;
+}
+
+.nav-link {
+  color: var(--background-third-color) !important;
+}
+
+.nav-img {
+  max-width: 2em;
+}
 .nopadding {
   padding: 0 !important;
+}
+:root {
+  --text-primary-color: #ffffff;
+  --text-secondary-color: #828d99;
+  --text-third-color: #bec2cc;
+  --background-color: #0376e3;
+  --background-secondary-color: #1e2127;
+  --background-third-color: #1b1d24;
+}
+body {
+  background-color: var(--background-third-color) !important;
 }
 .con_fluid {
   padding-right: 0 !important;
   padding-left: 0 !important;
 }
-
 html.full-page {
   height: 100%;
 }

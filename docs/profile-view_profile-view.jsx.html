@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: profile-view/profile-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: profile-view/profile-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import {
+  Alert,
+  Button,
+  Card,
+  CardGroup,
+  Form,
+  Row,
+  Col,
+  Container,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+import "./profile-view.scss";
+
+/**
+ * @class
+ * @description Creates a profile page where the user is able to edit their information, favourite movies, and delete their account
+ */
+export class ProfileView extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      Name: null,
+      Username: null,
+      Email: null,
+      Password: null,
+      Birthday: null,
+      FavouriteMovies: [],
+      validated: null,
+    };
+  }
+
+  /**
+   * @param e
+   * @param movie
+   * @function removeFavouriteMovie
+   * @description Removes a users favourited movie from their list
+   */
+  removeFavouriteMovie(e, movie) {
+    const { onSubmit } = this.props;
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("user");
+
+    axios
+      .delete(
+        `https://my-films-db.herokuapp.com/users/${username}/movies/${movie._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        alert("Movie was removed");
+        onSubmit(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  /**
+   * @param e
+   * @param newName
+   * @param newUsername
+   * @param newEmail
+   * @param newPassword
+   * @param newBirthday
+   * @returns the updated users information if it is valid
+   * @description Takes the updated profile information and sets it as the new value
+   */
+  handleUpdate(e, newName, newUsername, newEmail, newPassword, newBirthday) {
+    const { onSubmit } = this.props;
+    this.setState({
+      validated: null,
+    });
+
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.setState({
+        validated: true,
+      });
+      return;
+    }
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("user");
+
+    axios
+      .put(
+        `https://my-films-db.herokuapp.com/users/${username}`,
+        {
+          Name: newName,
+          Username: newUsername,
+          Email: newEmail,
+          Password: newPassword,
+          Birthday: newBirthday,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        alert("Saved Changes");
+        onSubmit(response.data);
+        localStorage.setItem("user", response.data.Username);
+        //window.open(`/users/${username}`, "_self");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  /**
+   * @param input
+   * @description Allows the user to change their profile Name
+   */
+  setName(input) {
+    this.Name = input;
+  }
+
+  /**
+   * @param input
+   * @description Allows the user to change their profile Username
+   */
+  setUsername(input) {
+    this.Username = input;
+  }
+
+  /**
+   * @param input
+   * @description Allows the user to change their profile Email
+   */
+  setEmail(input) {
+    this.Email = input;
+  }
+
+  /**
+   * @param input
+   * @description Allows the user to change their profile Password
+   */
+  setPassword(input) {
+    this.Password = input;
+  }
+
+  /**
+   * @param input
+   * @description Allows the user to change their profile Birthday
+   */
+  setBirthday(input) {
+    this.Birthday = input;
+  }
+
+  /**
+   * @param e
+   * @description Deletes the users profile information from the database completely
+   */
+  handleDeleteUser(e) {
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("user");
+
+    axios
+      .delete(`https://my-films-db.herokuapp.com/users/${username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        alert("Your account has been deleted.");
+        window.open(`/`, "_self");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  /**
+   * @returns The profile page in HTML
+   * @description Renders the users profile page where they can edit their profile information, remove favourite movies, and delete their account
+   */
+  render() {
+    const { validated } = this.state;
+    const { movies, user } = this.props;
+
+    const imgLink = "https://my-films-db.herokuapp.com/";
+
+    return (
+      &lt;div>
+        &lt;h2 style={{ textAlign: "center" }}>
+          Hello {user.Username}, welcome back!
+        &lt;/h2>
+
+        {["primary"].map((variant, idx) => (
+          &lt;Alert key={idx} variant={variant}>
+            &lt;h5>Favourites Movies&lt;/h5>
+          &lt;/Alert>
+        ))}
+
+        {user.FavouriteMovies.length === 0 &amp;&amp; (
+          &lt;div className="text-center">No Saved Movies.&lt;/div>
+        )}
+
+        {user.FavouriteMovies.length > 0 &amp;&amp; (
+          &lt;CardGroup>
+            {user.FavouriteMovies.map((movieId) => {
+              const movie = movies.find((m) => movieId === m._id);
+              return (
+                &lt;Card style={{ width: "18rem" }} key={movie._id}>
+                  &lt;Card.Img variant="top" src={imgLink + movie.ImagePath} />
+                  &lt;Card.Body>
+                    &lt;Card.Title className="movie-card-title">
+                      &lt;Link to={`/movies/${movie._id}`}>{movie.Title}&lt;/Link>
+                    &lt;/Card.Title>
+
+                    &lt;Button
+                      size="sm"
+                      variant="danger"
+                      value={movie._id}
+                      onClick={(e) => this.removeFavouriteMovie(e, movie)}
+                    >
+                      Remove
+                    &lt;/Button>
+                  &lt;/Card.Body>
+                &lt;/Card>
+              );
+            })}
+          &lt;/CardGroup>
+        )}
+
+        {["info"].map((variant, idx) => (
+          &lt;Alert key={idx} variant={variant}>
+            &lt;h5 className="section">Update Profile Information&lt;/h5>
+          &lt;/Alert>
+        ))}
+
+        &lt;Form
+          noValidate
+          validated={validated}
+          className="update-form"
+          onSubmit={(e) =>
+            this.handleUpdate(
+              e,
+              this.Name || user.Name,
+              this.Username || user.Username,
+              this.Email || user.Email,
+              this.Password || user.Password,
+              this.Birthday || user.Birthday
+            )
+          }
+        >
+          &lt;Form.Group controlId="formName">
+            &lt;Form.Label className="form-label">Name:&lt;/Form.Label>
+            &lt;Form.Control
+              type="text"
+              placeholder={user.Name}
+              onChange={(e) => this.setName(e.target.value)}
+            />
+          &lt;/Form.Group>
+
+          &lt;Form.Group controlId="formBasicUsername">
+            &lt;Form.Label className="form-label">Username:&lt;/Form.Label>
+            &lt;Form.Control
+              type="text"
+              placeholder={user.Username}
+              onChange={(e) => this.setUsername(e.target.value)}
+            />
+          &lt;/Form.Group>
+
+          &lt;Form.Group controlId="formBasicEmail">
+            &lt;Form.Label className="form-label">Email:&lt;/Form.Label>
+            &lt;Form.Control
+              type="email"
+              placeholder={user.Email}
+              onChange={(e) => this.setEmail(e.target.value)}
+            />
+          &lt;/Form.Group>
+
+          &lt;Form.Group controlId="formBasicPassword">
+            &lt;Form.Label className="form-label">Password:&lt;/Form.Label>
+            &lt;Form.Control
+              type="password"
+              placeholder="New Password"
+              onChange={(e) => this.setPassword(e.target.value)}
+            />
+          &lt;/Form.Group>
+
+          &lt;Form.Group controlId="formBasicDate">
+            &lt;Form.Label className="form-label">
+              Birthday: ({user.Birthday.slice(0, 10)})
+            &lt;/Form.Label>
+            &lt;Form.Control
+              type="date"
+              placeholder="Change Birthday"
+              onChange={(e) => this.setBirthday(e.target.value)}
+            />
+          &lt;/Form.Group>
+        &lt;/Form>
+
+        &lt;Button
+          variant="outline-primary"
+          onClick={(e) =>
+            this.handleUpdate(
+              e,
+              this.Name || user.Name,
+              this.Username || user.Username,
+              this.Email || user.Email,
+              this.Password || user.Password,
+              this.Birthday || user.Birthday
+            )
+          }
+          type="submit"
+          className="update_btn"
+        >
+          Update Information
+        &lt;/Button>
+
+        {["danger"].map((variant, idx) => (
+          &lt;Alert key={idx} variant={variant}>
+            &lt;h5>Delete your Account&lt;/h5>
+          &lt;/Alert>
+        ))}
+
+        &lt;Button
+          className="delete_btn"
+          variant="danger"
+          onClick={(e) => this.handleDeleteUser(e)}
+        >
+          Delete Account
+        &lt;/Button>
+      &lt;/div>
+    );
+  }
+}
+
+//export default ProfileView;
+
+ProfileView.propTypes = {
+  user: PropTypes.shape({
+    FavouriteMovies: PropTypes.arrayOf(PropTypes.string),
+    Username: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    Birthday: PropTypes.string,
+  }),
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#formValidation">formValidation</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleSumbit">handleSumbit</a></li><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#mapStateToProps">mapStateToProps</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li><li><a href="global.html#RegistrationView">RegistrationView</a></li><li><a href="global.html#removeFavouriteMovie">removeFavouriteMovie</a></li><li><a href="global.html#VisibilityFilterInput">VisibilityFilterInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sat Apr 23 2022 18:38:43 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

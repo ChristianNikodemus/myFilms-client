@@ -1,34 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 import "./genre-view.scss";
+import CardHeader from "react-bootstrap/esm/CardHeader";
 
 export class GenreView extends React.Component {
+  /**
+   * @returns
+   * @description Renders the view of the genre information
+   */
   render() {
     const { genre, onBackClick } = this.props;
     console.log("The genre is: ", genre);
 
     return (
-      <div className="genre-view">
-        <div className="genre-name">
-          <h1>
-            <span className="value">{genre.Title}</span>
-          </h1>
-        </div>
-        <div className="genre-description">
-          <span className="value">{genre.Description}</span>
-        </div>
-
-        <Button
-          variant="link"
-          onClick={() => {
-            onBackClick();
-          }}
-        >
-          Back
-        </Button>
-      </div>
+      <Card>
+        <CardHeader as="h3">{genre.Title}</CardHeader>
+        <Card.Body>
+          <Card.Text>{genre.Description}</Card.Text>
+          <Button
+            variant="link"
+            onClick={() => {
+              onBackClick();
+            }}
+          >
+            Back
+          </Button>
+        </Card.Body>
+      </Card>
     );
   }
 }

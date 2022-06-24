@@ -7,6 +7,12 @@ import { MovieCard } from "../movie-card/movie-card";
 
 import "./movies-list.scss";
 
+/**
+ * @function mapStateToProps
+ * @param state
+ * @returns The VisibilityFilterInput component and then the movie cards in a grid
+ * @description The VisibilityFilterInput component first determines which cards to display in the grid
+ */
 const mapStateToProps = (state) => {
   const { movies, visibilityFilter } = state;
   return { movies, visibilityFilter };
@@ -32,7 +38,7 @@ function MoviesList(props) {
         </Col>
         <Row>
           {filteredMovies.map((m) => (
-            <Col md={3} sm={4} key={m._id}>
+            <Col lg={3} md={4} sm={6} key={m._id}>
               <MovieCard movie={m} />
             </Col>
           ))}

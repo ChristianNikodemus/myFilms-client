@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { setMovies, setUser } from "../../actions/actions";
 
-// haven't written this yet
 import MoviesList from "../movies-list/movies-list";
 
 //import { MovieCard } from "../movie-card/movie-card";
@@ -33,6 +32,11 @@ class MainView extends React.Component {
     }
   }
 
+  /**
+   * @param token
+   * @param username
+   * @description Calls API endpoint to retrieve the Users information saved to the database
+   */
   getUser(token, username) {
     axios
       .get(`https://my-films-db.herokuapp.com/users/${username}`, {
@@ -47,7 +51,10 @@ class MainView extends React.Component {
       });
   }
 
-  //   Get all movies in DB
+  /**
+   * @param token
+   * @description Retreives all movies from database so it can be utulized in the movie cards
+   */
   getMovies(token) {
     axios
       .get("https://my-films-db.herokuapp.com/movies", {
@@ -62,6 +69,10 @@ class MainView extends React.Component {
       });
   }
 
+  /**
+   * @param authData
+   * @description Sends the users authorization data to the backend
+   */
   onLoggedIn(authData) {
     console.log(authData);
     this.props.setUser(authData.user);
@@ -71,12 +82,19 @@ class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  /**
+   * @description Discards the users login token and user data from the network
+   */
   onLoggedOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     this.props.setUser(null);
   }
 
+  /**
+   * @returns the different rendered views through the <Router>
+   * @description Renders the main view through a series of different routes
+   */
   render() {
     let { movies, user } = this.props;
 
@@ -122,7 +140,14 @@ class MainView extends React.Component {
             render={({ match, history }) => {
               const movie = movies.find((m) => m._id === match.params.movieId);
               return (
-                <Col md={8}>
+                <Col
+                  md={8}
+                  style={{
+                    margin: "0 auto",
+                    paddingTop: "1em",
+                    paddingBottom: "1em",
+                  }}
+                >
                   <MovieView
                     movie={movie}
                     onBackClick={() => history.goBack()}
@@ -149,7 +174,14 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col md={8} className="nopadding">
+                <Col
+                  md={8}
+                  style={{
+                    margin: "0 auto",
+                    paddingTop: "1em",
+                    paddingBottom: "1em",
+                  }}
+                >
                   <DirectorView
                     director={movies.reduce(
                       (director, m) =>
@@ -166,7 +198,6 @@ class MainView extends React.Component {
               );
             }}
           />
-
           <Route
             path="/genres/:genreId"
             render={({ match, history }) => {
@@ -178,7 +209,14 @@ class MainView extends React.Component {
                 );
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col md={8} className="nopadding">
+                <Col
+                  md={8}
+                  style={{
+                    margin: "0 auto",
+                    paddingTop: "1em",
+                    paddingBottom: "1em",
+                  }}
+                >
                   <GenreView
                     genre={movies.reduce(
                       (genre, m) =>
@@ -221,6 +259,12 @@ class MainView extends React.Component {
   }
 }
 
+/**
+ * @function mapStateToProps
+ * @param state
+ * @returns movies and user objects with the state
+ * @description Takes the state of the movies and user and returns it to be used in the props
+ */
 let mapStateToProps = (state) => {
   return { movies: state.movies, user: state.user };
 };

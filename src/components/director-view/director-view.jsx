@@ -1,41 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 import "./director-view.scss";
+import CardHeader from "react-bootstrap/esm/CardHeader";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
 
 export class DirectorView extends React.Component {
+  /**
+   * @returns
+   * @description Renders the view of the directors information
+   */
   render() {
     const { director, onBackClick } = this.props;
 
     return (
-      <div className="director-view">
-        <div className="director-name">
-          <h1>
-            <span className="value">{director.Name}</span>
-          </h1>
-        </div>
-        <div className="director-bio">
-          <span className="value">{director.Bio}</span>
-        </div>
-        <br />
-        <div className="director-birthyear">
-          <span className="value">Born: {director.Birthyear}</span>
-        </div>
-        <br />
-        <div className="director-deathyear">
-          <span className="value">Past away: {director.Deathyear}</span>
-        </div>
-
-        <Button
-          variant="link"
-          onClick={() => {
-            onBackClick();
-          }}
-        >
-          Back
-        </Button>
-      </div>
+      <Card>
+        <CardHeader as="h3">{director.Name}</CardHeader>
+        <Card.Body>
+          <Card.Text>{director.Bio}</Card.Text>
+        </Card.Body>
+        <ListGroup variant="flush">
+          <ListGroupItem>
+            Life: {director.Birthyear} until {director.Deathyear}
+          </ListGroupItem>
+        </ListGroup>
+        <Card.Body>
+          <Button
+            variant="link"
+            onClick={() => {
+              onBackClick();
+            }}
+          >
+            Back
+          </Button>
+        </Card.Body>
+      </Card>
     );
   }
 }

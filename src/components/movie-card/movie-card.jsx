@@ -8,6 +8,10 @@ import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
 export class MovieCard extends React.Component {
+  /**
+   * @returns A card with the movie's information displayed
+   * @description Takes the movie information through the props and displays it through a movie card
+   */
   render() {
     const { movie } = this.props;
 
